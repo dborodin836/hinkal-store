@@ -3,12 +3,44 @@ from rest_framework.permissions import IsAdminUser
 
 from goods.models import Dish
 from contact.models import Contact
+from orders.models import Order, OrderItem, Discount
+
 from .serializers import (
     DishListSerializer,
     DishDetailSerializer,
     ContactListSerializer,
-    ContactDetailSerializer
+    ContactDetailSerializer,
+    DiscountDetailSerializer,
+    OrderItemDetailSerializer,
+    OrderDetailSerializer
 )
+
+
+class OrderViewSet(viewsets.ModelViewSet):
+    """List of all Orders"""
+
+    queryset = Order.objects.all()
+    permission_classes = (IsAdminUser,)
+
+    serializer_class = OrderDetailSerializer
+
+
+class OrderItemViewSet(viewsets.ModelViewSet):
+    """List of all OrdersItems"""
+
+    queryset = OrderItem.objects.all()
+    permission_classes = (IsAdminUser,)
+
+    serializer_class = OrderItemDetailSerializer
+
+
+class DiscountViewSet(viewsets.ModelViewSet):
+    """List of all Discounts"""
+
+    queryset = Discount.objects.all()
+    permission_classes = (IsAdminUser,)
+
+    serializer_class = DiscountDetailSerializer
 
 
 class DishViewSet(viewsets.ModelViewSet):

@@ -1,8 +1,8 @@
-from django.contrib.auth.models import User
 from rest_framework import serializers
 
 from goods.models import Dish
 from contact.models import Contact
+from orders.models import Discount, Order, OrderItem
 
 
 class DishListSerializer(serializers.ModelSerializer):
@@ -13,7 +13,7 @@ class DishListSerializer(serializers.ModelSerializer):
         model = Dish
         exclude = (
             'added_date',
-            )
+        )
 
 
 class DishDetailSerializer(serializers.ModelSerializer):
@@ -38,4 +38,28 @@ class ContactDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Contact
+        fields = '__all__'
+
+
+class DiscountDetailSerializer(serializers.ModelSerializer):
+    """Detailed Discount"""
+
+    class Meta:
+        model = Discount
+        fields = '__all__'
+
+
+class OrderItemDetailSerializer(serializers.ModelSerializer):
+    """Detailed OrderItem"""
+
+    class Meta:
+        model = OrderItem
+        fields = '__all__'
+
+
+class OrderDetailSerializer(serializers.ModelSerializer):
+    """Detailed Order"""
+
+    class Meta:
+        model = Order
         fields = '__all__'
