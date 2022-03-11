@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     # Third-Party Apps
     'rest_framework',
     'corsheaders',
+    'drf_yasg',
 
     # Local Apps
     'goods',
