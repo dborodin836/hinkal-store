@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings
 
 from datetime import datetime as dt
 
@@ -36,7 +37,7 @@ class OrderModifier(models.Model):
 
 class Order(models.Model):
     """Contains order from user"""
-    ordered_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    ordered_by = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
     items = models.ManyToManyField(OrderItem, blank=True)
     comment = models.TextField()
     ordered_date = models.DateTimeField(default=dt.now())

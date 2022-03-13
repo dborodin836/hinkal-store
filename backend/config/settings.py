@@ -57,6 +57,10 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'config.urls'
 
+# Custom user model settings
+AUTH_USER_MODEL = 'user.CustomUser'
+DEFAULT_USER_PHOTO = 'photos/2022/03/09/Black-Play-Button-PNG-Picture.png'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
