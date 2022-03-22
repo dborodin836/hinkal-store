@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.conf import settings
 
@@ -21,7 +22,7 @@ class Discount(models.Model):
     description = models.CharField(max_length=255)
     discount_word = models.CharField(max_length=100)
     discount_amount = models.PositiveIntegerField()
-    added_by = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    added_by = models.ForeignKey(User, on_delete=models.CASCADE)
     is_active = models.BooleanField(default=False)
 
     def __str__(self):
@@ -46,7 +47,7 @@ class Order(models.Model):
         ('finished', 'finished order')
     )
 
-    ordered_by = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
+    ordered_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     items = models.ManyToManyField(OrderItem, blank=True)
     comment = models.TextField()
     ordered_date = models.DateTimeField(default=dt.now())
