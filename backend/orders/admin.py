@@ -14,6 +14,7 @@ class OrderItemAdmin(admin.ModelAdmin):
 
 
 class OrderItemInline(admin.TabularInline):
+    """Inline class for easier adding a products"""
     model = OrderItem
     extra = 3
 
