@@ -1,19 +1,9 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.conf import settings
 
 from datetime import datetime as dt
 
 from goods.models import Dish
-
-
-class OrderItem(models.Model):
-    """Contains order items"""
-    item = models.ForeignKey(Dish, on_delete=models.CASCADE, null=True)
-    amount = models.PositiveIntegerField(default=1)
-
-    def __str__(self):
-        return f'{self.item.title} ({self.amount})'
 
 
 class Discount(models.Model):
@@ -48,7 +38,6 @@ class Order(models.Model):
     )
 
     ordered_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    items = models.ManyToManyField(OrderItem, blank=True)
     comment = models.TextField()
     ordered_date = models.DateTimeField(default=dt.now())
     discount = models.ForeignKey(Discount, on_delete=models.SET_NULL, null=True)
@@ -57,3 +46,13 @@ class Order(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+
+class OrderItem(models.Model):
+    """Contains order items"""
+    item = models.ForeignKey(Dish, on_delete=models.CASCADE, null=True)
+    amount = models.PositiveIntegerField(default=1)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.item.title} ({self.amount})'

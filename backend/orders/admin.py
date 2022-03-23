@@ -3,16 +3,6 @@ from django.contrib import admin
 from .models import Order, OrderItem, Discount, OrderModifier
 
 
-class OrderAdmin(admin.ModelAdmin):
-    """Order representation in django admin panel"""
-
-    list_display = (
-        'id',
-        'ordered_by',
-        'ordered_date',
-    )
-
-
 class OrderItemAdmin(admin.ModelAdmin):
     """Order item representation in django admin panel"""
 
@@ -21,6 +11,22 @@ class OrderItemAdmin(admin.ModelAdmin):
         'item',
         'amount'
     )
+
+
+class OrderItemInline(admin.TabularInline):
+    model = OrderItem
+    extra = 3
+
+
+class OrderAdmin(admin.ModelAdmin):
+    """Order representation in django admin panel"""
+
+    list_display = (
+        'id',
+        'ordered_by',
+        'ordered_date',
+    )
+    inlines = (OrderItemInline,)
 
 
 class DiscountAdmin(admin.ModelAdmin):
