@@ -1,6 +1,7 @@
 from django.db import models
-from django.conf import settings
 from datetime import datetime as dt
+
+from user.models import Vendor
 
 
 class Dish(models.Model):
@@ -9,7 +10,7 @@ class Dish(models.Model):
     description = models.TextField(verbose_name='Description')
     image = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Image')
     added_date = models.DateTimeField(default=dt.now(), verbose_name='Added')
-    added_by = models.ForeignKey(to=settings.AUTH_USER_MODEL, null=True, on_delete=models.CASCADE, verbose_name='Vendor')
+    added_by = models.ForeignKey(Vendor, null=True, on_delete=models.CASCADE, verbose_name='Vendor')
     price = models.DecimalField(max_digits=8, decimal_places=2, verbose_name='Price')
     is_active = models.BooleanField(default=True, verbose_name='Showed to user')
 
