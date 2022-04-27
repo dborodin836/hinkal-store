@@ -2,6 +2,8 @@ from django.core.management.base import BaseCommand, CommandError
 
 from goods.models import Dish
 from user.models import Customer, Vendor
+from contact.models import Contact
+from orders.models import Discount, Order, OrderItem, OrderModifier
 
 
 class Command(BaseCommand):
@@ -9,7 +11,7 @@ class Command(BaseCommand):
 
     @staticmethod
     def _clear_db(model=None) -> None:
-        models = model or (Customer, Vendor, Dish)
+        models = model or (Customer, Vendor, Dish, Contact, Discount, Order, OrderItem, OrderModifier)
         models = list(models)
         for model in models:
             model.objects.all().delete()
