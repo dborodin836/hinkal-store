@@ -34,11 +34,6 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
 
     # Local Apps
-    # 'backend.goods.apps.GoodsConfig',
-    # 'backend.api.apps.ApiConfig',
-    # 'backend.contact.apps.ContactConfig',
-    # 'backend.orders.apps.OrdersConfig',
-    # 'backend.user.apps.UserConfig',
     'user',
     'goods',
     'orders',
@@ -62,10 +57,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'config.urls'
-
-# Custom user model settings
-# AUTH_USER_MODEL = 'user.CustomUser'
-DEFAULT_USER_PHOTO = 'photos/2022/03/09/Black-Play-Button-PNG-Picture.png'
 
 TEMPLATES = [
     {
@@ -116,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
-USE_TZ = True
+USE_TZ = False  # TODO: Should be TRUE
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = 'static/'
