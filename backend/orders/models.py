@@ -4,6 +4,7 @@ from django.db import models
 from datetime import datetime as dt
 
 from goods.models import Dish
+from user.models import Vendor, Customer
 
 
 class Discount(models.Model):
@@ -12,7 +13,8 @@ class Discount(models.Model):
     description = models.CharField(max_length=255)
     discount_word = models.CharField(max_length=100)
     discount_amount = models.PositiveIntegerField()
-    added_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    # Admin should also add Discounts
+    added_by = models.ForeignKey(Vendor, on_delete=models.CASCADE)
     is_active = models.BooleanField(default=False)
 
     def __str__(self):
@@ -37,12 +39,12 @@ class Order(models.Model):
         ('finished', 'finished order')
     )
 
-    ordered_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    comment = models.TextField()
+    ordered_by = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+    comment = models.TextField(default='')
     ordered_date = models.DateTimeField(default=dt.now())
     discount = models.ForeignKey(Discount, on_delete=models.SET_NULL, null=True)
     modifier = models.ManyToManyField(OrderModifier)
-    status = models.CharField(choices=STATUS, default='new', max_length=10)
+    status = models.CharField(choices=STATUS, default='new', max_length=200)
 
     def __str__(self):
         return str(self.id)

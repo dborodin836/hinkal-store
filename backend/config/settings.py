@@ -34,11 +34,17 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
 
     # Local Apps
-    'goods',
-    'api',
-    'contact',
-    'orders',
+    # 'backend.goods.apps.GoodsConfig',
+    # 'backend.api.apps.ApiConfig',
+    # 'backend.contact.apps.ContactConfig',
+    # 'backend.orders.apps.OrdersConfig',
+    # 'backend.user.apps.UserConfig',
     'user',
+    'goods',
+    'orders',
+    'contact',
+    'api',
+    'core',
 ]
 
 MIDDLEWARE = [
