@@ -118,8 +118,10 @@ class Command(BaseCommand):
             username = Command._get_username(full_name)
             email = username + '@email.com'
             try:
-                Customer.objects.create(username=username, password=password, email=email, first_name=name,
-                                        last_name=last_name, date_joined=Command._get_random_date())
+                customer = Customer.objects.create(username=username, email=email, first_name=name,
+                                                   last_name=last_name, date_joined=Command._get_random_date())
+                customer.set_password(password)
+                customer.save()
                 print(f'User "{username}" created successfully!')
             except Exception as e:
                 print('Collision happened!')
@@ -140,8 +142,10 @@ class Command(BaseCommand):
             email = username + '@email.com'
             company = choice(Command.COMPANY_NAME_SAMPLES)
             try:
-                Vendor.objects.create(username=username, password=password, email=email, first_name=name,
+                vendor = Vendor.objects.create(username=username, email=email, first_name=name,
                                       last_name=last_name, company_name=company, date_joined=Command._get_random_date())
+                vendor.set_password(password)
+                vendor.save()
                 print(f'User "{username}" created successfully!')
             except Exception as e:
                 print('Collision happened!')
@@ -238,4 +242,3 @@ class Command(BaseCommand):
             self.stdout.write(get_success_message(func.__name__.split('_')[-1]))
         print(f'Time elapsed: {datetime.now() - start}')
         # print(f'Rows created: {1300} < ')
-
