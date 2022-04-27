@@ -232,7 +232,10 @@ class Command(BaseCommand):
             result += '=' * wide
             return result
 
+        start = datetime.now()
         for func in funcs:
             func()
             self.stdout.write(get_success_message(func.__name__.split('_')[-1]))
+        print(f'Time elapsed: {datetime.now() - start}')
+        # print(f'Rows created: {1300} < ')
 
