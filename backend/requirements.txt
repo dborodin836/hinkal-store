@@ -9,3 +9,5 @@ pytz==2022.1
 sqlparse==0.4.2
 tzdata==2022.1
 drf-yasg==1.20.0
+pytest==7.1.2
+setuptools==62.1.0
