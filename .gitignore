@@ -1,2 +1,22 @@
-# IDE
+### IDE
 .idea
+.vscode
+
+# Visual Studio Code
+/frontend/.vscode/
+
+
+# Chaches
+__pycache__
+.mypy_cache
+.angular
+.pytest_cache
+
+# Enviroment files
+.env
+
+# Node modules
+node_modules
+
+# Docker
+data
