@@ -6,7 +6,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -17,7 +16,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Discount',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False,
+                                           verbose_name='ID')),
                 ('name', models.CharField(max_length=50)),
                 ('description', models.CharField(max_length=255)),
                 ('discount_word', models.CharField(max_length=100)),
@@ -28,17 +28,24 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Order',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False,
+                                           verbose_name='ID')),
                 ('comment', models.TextField(default='')),
-                ('ordered_date', models.DateTimeField(default=datetime.datetime(2022, 4, 28, 0, 53, 43, 350999))),
-                ('status', models.CharField(choices=[('new', 'new order'), ('pending', 'pending order'), ('finished', 'finished order')], default='new', max_length=200)),
-                ('discount', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='orders.discount')),
+                ('ordered_date',
+                 models.DateTimeField(default=datetime.datetime(2022, 4, 28, 0, 53, 43, 350999))),
+                ('status', models.CharField(
+                    choices=[('new', 'new order'), ('pending', 'pending order'),
+                             ('finished', 'finished order')], default='new', max_length=200)),
+                ('discount',
+                 models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL,
+                                   to='orders.discount')),
             ],
         ),
         migrations.CreateModel(
             name='OrderModifier',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False,
+                                           verbose_name='ID')),
                 ('title', models.CharField(max_length=100)),
                 ('descriptions', models.CharField(max_length=255)),
             ],
@@ -46,10 +53,13 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='OrderItem',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False,
+                                           verbose_name='ID')),
                 ('amount', models.PositiveIntegerField(default=1)),
-                ('item', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='goods.dish')),
-                ('order', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='orders.order')),
+                ('item', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE,
+                                           to='goods.dish')),
+                ('order', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                                            to='orders.order')),
             ],
         ),
         migrations.AddField(

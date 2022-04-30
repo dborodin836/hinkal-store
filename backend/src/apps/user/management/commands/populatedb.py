@@ -106,7 +106,9 @@ class Command(BaseCommand):
     @staticmethod
     @generate
     def _create_customers(amount: int = 200,
-                          customer_names=None, customer_surnames: Sequence = None, static_password: str = None) -> None:
+                          customer_names=None,
+                          customer_surnames: Sequence = None,
+                          static_password: str = None) -> None:
         names = customer_names or Command.CUSTOMERS_NAME_SAMPLES
         surnames = customer_surnames or Command.CUSTOMERS_SURNAME_SAMPLES
         password = static_password or 'customerpass'
@@ -118,17 +120,22 @@ class Command(BaseCommand):
             username = Command._get_username(full_name)
             email = username + '@email.com'
             try:
-                customer = Customer.objects.create(username=username, email=email, first_name=name,
-                                                   last_name=last_name, date_joined=Command._get_random_date())
+                customer = Customer.objects.create(username=username,
+                                                   email=email,
+                                                   first_name=name,
+                                                   last_name=last_name,
+                                                   date_joined=Command._get_random_date())
                 customer.set_password(password)
                 customer.save()
                 print(f'User "{username}" created successfully!')
-            except Exception as e:
+            except Exception:
                 print('Collision happened!')
 
     @staticmethod
     @generate
-    def _create_vendors(amount: int = 40, customer_names: Sequence = None, customer_surnames: Sequence = None,
+    def _create_vendors(amount: int = 40,
+                        customer_names: Sequence = None,
+                        customer_surnames: Sequence = None,
                         static_password: str = None) -> None:
         names = customer_names or Command.CUSTOMERS_NAME_SAMPLES
         surnames = customer_surnames or Command.CUSTOMERS_SURNAME_SAMPLES
@@ -142,12 +149,16 @@ class Command(BaseCommand):
             email = username + '@email.com'
             company = choice(Command.COMPANY_NAME_SAMPLES)
             try:
-                vendor = Vendor.objects.create(username=username, email=email, first_name=name,
-                                      last_name=last_name, company_name=company, date_joined=Command._get_random_date())
+                vendor = Vendor.objects.create(username=username,
+                                               email=email,
+                                               first_name=name,
+                                               last_name=last_name,
+                                               company_name=company,
+                                               date_joined=Command._get_random_date())
                 vendor.set_password(password)
                 vendor.save()
                 print(f'User "{username}" created successfully!')
-            except Exception as e:
+            except Exception:
                 print('Collision happened!')
 
     @staticmethod
@@ -159,11 +170,14 @@ class Command(BaseCommand):
             vendors = Vendor.objects.all()
             rng_vendor = choice(vendors)
             try:
-                Dish.objects.create(title=title, description='Blah-blah...',
-                                    price=price, added_by=rng_vendor, image='default/not-found.png',
+                Dish.objects.create(title=title,
+                                    description='Blah-blah...',
+                                    price=price,
+                                    added_by=rng_vendor,
+                                    image='default/not-found.png',
                                     added_date=Command._get_random_date())
                 print(f'Dish "{title}" created successfully!')
-            except Exception as e:
+            except Exception:
                 print('Collision happened!')
 
     @staticmethod
@@ -178,7 +192,7 @@ class Command(BaseCommand):
                 Contact.objects.create(subject='I NEED HELP, YOU F*CKERS!!!', email=sender,
                                        name=name, added_date=date, message=message)
                 print(f'Contact from "{name}" created successfully!')
-            except Exception as e:
+            except Exception:
                 print('Collision happened!')
 
     @staticmethod
@@ -192,10 +206,14 @@ class Command(BaseCommand):
             status = choice([True, False])
             discount_amount = randint(5, 30)
             try:
-                Discount.objects.create(name=name, description=word, discount_word=word, added_by=rng_vendor,
-                                        is_active=status, discount_amount=discount_amount)
+                Discount.objects.create(name=name,
+                                        description=word,
+                                        discount_word=word,
+                                        added_by=rng_vendor,
+                                        is_active=status,
+                                        discount_amount=discount_amount)
                 print(f'Discount "{word}" created successfully!')
-            except Exception as e:
+            except Exception:
                 print('Collision happened!')
 
     @staticmethod
@@ -210,15 +228,18 @@ class Command(BaseCommand):
             user = choice(all_users)
             date = Command._get_random_date()
             try:
-                order = Order.objects.create(ordered_by=user, comment='Some comment', ordered_date=date,
-                                             discount=discount, status=status)
+                order = Order.objects.create(ordered_by=user,
+                                             comment='Some comment',
+                                             ordered_date=date,
+                                             discount=discount,
+                                             status=status)  # type: ignore
                 all_dishes = Dish.objects.all()
                 for _ in range(randint(1, 10)):
                     try:
                         dish = choice(all_dishes)
                         amount = randint(1, 10)
                         OrderItem.objects.create(amount=amount, item=dish, order=order)
-                    except Exception as e:
+                    except Exception:
                         pass
             except Exception as e:
                 print('Collision happened!', e)

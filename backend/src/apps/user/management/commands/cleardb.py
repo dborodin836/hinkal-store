@@ -11,7 +11,8 @@ class Command(BaseCommand):
 
     @staticmethod
     def _clear_db(model=None) -> None:
-        models = model or (Customer, Vendor, Dish, Contact, Discount, Order, OrderItem, OrderModifier)
+        all_models = (Customer, Vendor, Dish, Contact, Discount, Order, OrderItem, OrderModifier)
+        models = model or all_models
         models = list(models)
         for model in models:
             model.objects.all().delete()
