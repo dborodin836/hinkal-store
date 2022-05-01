@@ -1,0 +1,11 @@
+.letter-text {
+  color: white;
+  width: 40%;
+  font-family: 'Tapestry', cursive;
+  font-size: x-large;
+  padding: 1.5em;
+}
+
+.pa-1 {
+  padding: 3em;
+}

@@ -10,6 +10,9 @@ import { AboutComponent } from './about/about.component';
 import { StoreComponent } from "./store/store.component";
 import { HttpClientModule } from "@angular/common/http";
 import {DishDetailComponent} from "./dish-detail/dish-detail.component";
+import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 const appRoutes: Routes =[
   { path: '', component: HomeComponent},
@@ -25,7 +28,10 @@ const appRoutes: Routes =[
     NotFoundComponent,
     AboutComponent,
     StoreComponent,
-    DishDetailComponent
+    DishDetailComponent,
+    FooterComponent,
+    HeaderComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
