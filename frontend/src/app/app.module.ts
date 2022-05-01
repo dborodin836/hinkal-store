@@ -7,11 +7,15 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AboutComponent } from './about/about.component';
+import { StoreComponent } from "./store/store.component";
+import { HttpClientModule } from "@angular/common/http";
+import {DishDetailComponent} from "./dish-detail/dish-detail.component";
 
 const appRoutes: Routes =[
   { path: '', component: HomeComponent},
   { path: 'about', component: AboutComponent},
-  { path: '**', component: NotFoundComponent }
+  { path: 'store', component: StoreComponent},
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
@@ -19,11 +23,14 @@ const appRoutes: Routes =[
     AppComponent,
     HomeComponent,
     NotFoundComponent,
-    AboutComponent
+    AboutComponent,
+    StoreComponent,
+    DishDetailComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
