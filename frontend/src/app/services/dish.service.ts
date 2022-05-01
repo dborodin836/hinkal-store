@@ -9,7 +9,7 @@ const headers = new HttpHeaders({'Authorization': 'Token f8893cfcd3b0e4b4be269bb
 @Injectable({
   providedIn: 'root'
 })
-export class DishServiceService {
+export class DishService {
   constructor(private http: HttpClient) {
   }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {DishServiceService} from "../services/dish-service.service";
+import {DishService} from "../services/dish.service";
 import {DishModel} from "../models/dish.model";
 import {HttpResponse} from "@angular/common/http";
 
@@ -11,7 +11,7 @@ import {HttpResponse} from "@angular/common/http";
 })
 export class StoreComponent implements OnInit {
 
-  constructor(private dishService: DishServiceService) { }
+  constructor(private dishService: DishService) { }
 
   dishes?: DishModel[]
 
