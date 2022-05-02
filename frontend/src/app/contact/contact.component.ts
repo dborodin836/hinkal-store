@@ -23,7 +23,6 @@ export class ContactComponent implements OnInit {
     console.log('submit')
     console.log(this.contactForm.value)
     this.contactService.sendPost(this.contactForm.value)
-
   }
 
   ngOnInit(): void {

@@ -15,6 +15,8 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ContactComponent } from './contact/contact.component';
+import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 const appRoutes: Routes =[
@@ -22,6 +24,8 @@ const appRoutes: Routes =[
   { path: 'about', component: AboutComponent},
   { path: 'store', component: StoreComponent},
   { path: 'contact', component: ContactComponent},
+  { path: 'login', component: LoginComponent},
+  { path: 'dashboard', component: DashboardComponent},
   { path: '**', component: NotFoundComponent },
 ];
 
@@ -36,7 +40,9 @@ const appRoutes: Routes =[
     FooterComponent,
     HeaderComponent,
     NavbarComponent,
-    ContactComponent
+    ContactComponent,
+    LoginComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
