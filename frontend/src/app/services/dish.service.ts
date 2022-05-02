@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs";
 
 
-const baseUrl = 'http://localhost:8000/api/dish';
+const baseUrl = 'http://localhost:8000/api/dish/?offset=1000';
 const headers = new HttpHeaders({'Authorization': 'Token f8893cfcd3b0e4b4be269bb647678b1ffaa0c33c'})
 
 @Injectable({

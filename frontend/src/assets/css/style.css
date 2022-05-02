@@ -3722,7 +3722,7 @@ input[type="button"].btn-block {
   color: #fff); }
 
 .navbar-light .navbar-toggler {
-  color: rgba(0, 0, 0, 0.5);
+  color: #e86741;
   border-color: rgba(0, 0, 0, 0.1); }
 
 .navbar-light .navbar-toggler-icon {
@@ -8323,7 +8323,7 @@ h1, h2, h3, h4, h5,
           display: none; } }
   .ftco-navbar-light .navbar-toggler {
     border: none;
-    color: rgba(0, 0, 0, 0.5) !important;
+    color: #fff !important;
     cursor: pointer;
     padding-right: 0;
     text-transform: uppercase;

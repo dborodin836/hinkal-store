@@ -1,11 +1,23 @@
 .letter-text {
-  color: white;
-  width: 40%;
+  color: #95999c;
+  /*width: 40%;*/
   font-family: 'Tapestry', cursive;
   font-size: x-large;
-  padding: 1.5em;
+  padding: 1em;
 }
 
 .pa-1 {
+  padding: 3em;
+}
+
+.letter {
+  box-shadow: 0 4px 8px 0;
+  background-color: #f8e5cc;
+  margin: 1em;
+  /*width: 60%;*/
+}
+
+.center {
+  justify-content: center;
   padding: 3em;
 }
