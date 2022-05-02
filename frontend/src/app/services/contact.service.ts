@@ -23,6 +23,4 @@ export class ContactService {
     })
     return this.response
   }
-
-
 }

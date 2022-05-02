@@ -14,8 +14,7 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   login(data: { username: any; password: any; }) {
-    let _data = {'username': data.username, 'password': data.password}
-    this.http.post<any>(baseUrl, _data, {headers: headers})
+    this.http.post<any>(baseUrl, data, {headers: headers})
       .subscribe(data => {
       this.response = data
     })
