@@ -1,6 +1,5 @@
 .letter-text {
   color: #95999c;
-  /*width: 40%;*/
   font-family: 'Tapestry', cursive;
   font-size: x-large;
   padding: 1em;
@@ -14,7 +13,6 @@
   box-shadow: 0 4px 8px 0;
   background-color: #f8e5cc;
   margin: 1em;
-  /*width: 60%;*/
 }
 
 .center {

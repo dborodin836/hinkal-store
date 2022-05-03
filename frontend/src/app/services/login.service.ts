@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Router} from "@angular/router";
 
-const baseUrl = 'http://localhost:8000/auth/token/login/';
-const headers = new HttpHeaders({'Authorization': 'Token f8893cfcd3b0e4b4be269bb647678b1ffaa0c33c'})
+const baseUrl = 'http://localhost:8000/auth/';
+// let headers = new HttpHeaders({'Authorization': 'Token f8893cfcd3b0e4b4be269bb647678b1ffaa0c33c'})
 
 @Injectable({
   providedIn: 'root'
@@ -10,15 +11,31 @@ const headers = new HttpHeaders({'Authorization': 'Token f8893cfcd3b0e4b4be269bb
 export class LoginService {
 
   private response: any;
+  private token?: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private router: Router) {
+  }
+
+  logout() {
+    // @ts-ignore
+    let headers = new HttpHeaders({'Authorization': 'Token ' + this.token})
+    this.http.post(baseUrl + 'token/logout/', '', {headers: headers})
+    this.token='';
+    this.router.navigate(['success'])
+  }
 
   login(data: { username: any; password: any; }) {
-    this.http.post<any>(baseUrl, data, {headers: headers})
+    this.http.post<any>(baseUrl + 'token/login/', data,)
       .subscribe(data => {
-      this.response = data
-    })
+        console.log(data.auth_token)
+        this.token = data.auth_token
+      })
     console.log(this.response)
     return this.response
+  }
+
+  isAuthorized(): boolean {
+    return this.token != ''
   }
 }

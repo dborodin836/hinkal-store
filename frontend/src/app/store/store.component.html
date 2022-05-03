@@ -1,23 +1,21 @@
-<h1>Store</h1>
-
 <div class="content-box">
 
   <div *ngFor="let dish of dishes" class="product-item">
     <div class="product-img">
       <a href="">
-        <img src="{{dish.image}}">
+        <img src="{{dish.image}}" style="min-height: 200px; max-height: 200px border-radius: 15px; object-position: center; object-fit: cover">
       </a>
     </div>
     <div class="product-list">
       <h3>{{dish.title}}</h3>
       <div class="stars"></div>
-      <span class="price">$ 1999</span>
+      <span class="price">{{dish.price}} UAH</span>
       <div class="actions">
         <div class="add-to-cart">
           <a href="" class="cart-button">В корзину</a>
         </div>
         <div class="add-to-links">
-          <a href="" class="wishlist"></a>
+          <a class="wishlist">&#x2764;</a>
           <a href="" class="compare"></a>
         </div>
       </div>

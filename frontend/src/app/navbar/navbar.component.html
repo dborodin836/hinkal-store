@@ -23,9 +23,26 @@
   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
       <a class="navbar-brand" href="index.html">HINKALI <span>store</span></a>
-      <form action="#" class="order-lg-last">
-        <a routerLink="login/" ><button class="button" style="vertical-align:middle"><span>Login </span></button></a>
-      </form>
+
+        <form *ngIf="!isAuthorized(); else elseBlock" class="order-lg-last">
+          <a routerLink="login/" >
+            <button class="button" style="vertical-align:middle">
+              <span>Login </span>
+            </button>
+          </a>
+        </form>
+
+      <ng-template #elseBlock>
+        <form class="order-lg-last">
+          <a routerLink="" >
+            <button (click)="logout()" class="button" style="vertical-align:middle">
+              <span>Logout </span>
+            </button>
+          </a>
+        </form>
+      </ng-template>
+
+
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="fa fa-bars"></span> Menu
       </button>
