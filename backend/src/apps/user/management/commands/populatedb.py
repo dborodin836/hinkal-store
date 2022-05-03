@@ -2,6 +2,7 @@ from random import choice, randint
 from string import ascii_letters
 from datetime import datetime
 from typing import Sequence
+import pytz
 
 from django.core.management.base import BaseCommand
 
@@ -96,7 +97,7 @@ class Command(BaseCommand):
         day = randint(1, 28)
         hour = randint(0, 23)
         minute = randint(0, 59)
-        return datetime(year, month, day, hour, minute)
+        return datetime(year, month, day, hour, minute, tzinfo=pytz.UTC)
 
     @staticmethod
     def _get_username(full_name: str) -> str:
