@@ -1,28 +1,28 @@
 from rest_framework import serializers
 
-from src.apps.goods.models import Dish
 from src.apps.contact.models import Contact
+from src.apps.goods.models import Dish
 from src.apps.orders.models import Discount, Order, OrderItem
 
 
 class DishListSerializer(serializers.ModelSerializer):
     """List of all dishes"""
+
     added_by = serializers.SlugRelatedField(slug_field="username", read_only=True)  # type: ignore
 
     class Meta:
         model = Dish
-        exclude = (
-            'added_date',
-        )
+        exclude = ("added_date",)
 
 
 class DishDetailSerializer(serializers.ModelSerializer):
     """Detailed dish (all fields)"""
+
     added_by = serializers.SlugRelatedField(slug_field="username", read_only=True)  # type: ignore
 
     class Meta:
         model = Dish
-        fields = '__all__'
+        fields = "__all__"
 
 
 class ContactListSerializer(serializers.ModelSerializer):
@@ -30,7 +30,7 @@ class ContactListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Contact
-        fields = ('id', 'subject', 'message')
+        fields = ("id", "subject", "message")
 
 
 class ContactDetailSerializer(serializers.ModelSerializer):
@@ -38,7 +38,7 @@ class ContactDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Contact
-        fields = '__all__'
+        fields = "__all__"
 
 
 class DiscountDetailSerializer(serializers.ModelSerializer):
@@ -46,7 +46,7 @@ class DiscountDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Discount
-        fields = '__all__'
+        fields = "__all__"
 
 
 class OrderItemDetailSerializer(serializers.ModelSerializer):
@@ -54,7 +54,7 @@ class OrderItemDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = OrderItem
-        fields = '__all__'
+        fields = "__all__"
 
 
 class OrderDetailSerializer(serializers.ModelSerializer):
@@ -62,4 +62,4 @@ class OrderDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = '__all__'
+        fields = "__all__"

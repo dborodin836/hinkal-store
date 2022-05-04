@@ -1,18 +1,18 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAdminUser
 
-from src.apps.goods.models import Dish
 from src.apps.contact.models import Contact
-from src.apps.orders.models import Order, OrderItem, Discount
+from src.apps.goods.models import Dish
+from src.apps.orders.models import Discount, Order, OrderItem
 
 from .serializers import (
-    DishListSerializer,
-    DishDetailSerializer,
-    ContactListSerializer,
     ContactDetailSerializer,
+    ContactListSerializer,
     DiscountDetailSerializer,
+    DishDetailSerializer,
+    DishListSerializer,
+    OrderDetailSerializer,
     OrderItemDetailSerializer,
-    OrderDetailSerializer
 )
 
 
@@ -50,7 +50,7 @@ class DishViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAdminUser,)
 
     def get_serializer_class(self):
-        if self.action == 'list':
+        if self.action == "list":
             return DishListSerializer
         return DishDetailSerializer
 
@@ -62,6 +62,6 @@ class ContactViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAdminUser,)
 
     def get_serializer_class(self):
-        if self.action == 'list':
+        if self.action == "list":
             return ContactListSerializer
         return ContactDetailSerializer

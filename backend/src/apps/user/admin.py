@@ -1,21 +1,24 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
-from .models import Country, UserAddress, Vendor, Customer
+from .models import Country, Customer, UserAddress, Vendor
 
 
 class CountryAdmin(admin.ModelAdmin):
     """Admin representation for Country"""
+
     pass
 
 
 class UserAddressAdmin(admin.ModelAdmin):
     """Admin representation for UserAddresses"""
+
     pass
 
 
 class VendorAdmin(BaseUserAdmin):
     """Admin representation for Vendor"""
+
     fieldsets = (
         (None, {"fields": ("username", "password")}),
         ("Personal info", {"fields": ("company_name", "email")}),
@@ -36,9 +39,13 @@ class VendorAdmin(BaseUserAdmin):
 
 class CustomerAdmin(BaseUserAdmin):
     """Admin representation for Customer"""
+
     fieldsets = (
         (None, {"fields": ("username", "password")}),
-        ("Personal info", {"fields": ("first_name", "last_name", "email")}),
+        (
+            "Personal info",
+            {"fields": ("first_name", "last_name", "email", "phone", "address")},
+        ),
         (
             "Permissions",
             {
