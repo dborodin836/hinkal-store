@@ -11,7 +11,7 @@ class Dish(models.Model):
     image = models.ImageField(upload_to='photos/%Y/%m/%d/',
                               verbose_name='Image',
                               default='default/not-found.png')
-    added_date = models.DateTimeField(default=dt.now(), verbose_name='Added')
+    added_date = models.DateTimeField(default=dt.now, verbose_name='Added')
     added_by = models.ForeignKey(Vendor,
                                  null=True,
                                  on_delete=models.CASCADE,

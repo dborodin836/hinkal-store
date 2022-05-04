@@ -64,7 +64,7 @@ class Order(TemporaryOrder):
     )
 
     comment = models.TextField(blank=True)
-    ordered_date = models.DateTimeField(default=dt.now())
+    ordered_date = models.DateTimeField(default=dt.now)
     discount = models.ForeignKey(Discount, on_delete=models.SET_NULL, null=True)
     modifier = models.ManyToManyField(OrderModifier, blank=True)
     status = models.CharField(choices=STATUS, default='new', max_length=200)
