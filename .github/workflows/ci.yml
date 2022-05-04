@@ -29,6 +29,6 @@ jobs:
     - name: Run flake8
       run: flake8 backend/src --config backend/tox.ini
     - name: Run Mypy
-      run:
+      run: |
         cd backend
         mypy src --config-file setup.cfg --no-incremental
