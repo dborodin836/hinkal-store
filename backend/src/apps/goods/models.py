@@ -1,5 +1,6 @@
-from django.db import models
 from datetime import datetime as dt
+
+from django.db import models
 
 from src.apps.user.models import Vendor
 

@@ -1,4 +1,5 @@
 from django.core.mail import mail_admins
+
 from src.apps.contact.models import Contact
 
 

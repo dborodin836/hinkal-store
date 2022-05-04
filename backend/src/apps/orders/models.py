@@ -3,7 +3,7 @@ from datetime import datetime as dt
 from django.db import models
 
 from src.apps.goods.models import Dish
-from src.apps.user.models import Vendor, Customer
+from src.apps.user.models import Customer, Vendor
 
 
 class Discount(models.Model):

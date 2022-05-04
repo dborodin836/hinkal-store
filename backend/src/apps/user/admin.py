@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
-from .models import Country, UserAddress, Vendor, Customer
+from .models import Country, Customer, UserAddress, Vendor
 
 
 class CountryAdmin(admin.ModelAdmin):

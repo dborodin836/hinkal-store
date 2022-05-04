@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
-from src.apps.goods.models import Dish
 from src.apps.contact.models import Contact
+from src.apps.goods.models import Dish
 from src.apps.orders.models import Discount, Order, OrderItem
 
 

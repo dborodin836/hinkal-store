@@ -1,19 +1,14 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAdminUser
 
-from src.apps.goods.models import Dish
 from src.apps.contact.models import Contact
-from src.apps.orders.models import Order, OrderItem, Discount
+from src.apps.goods.models import Dish
+from src.apps.orders.models import Discount, Order, OrderItem
 
-from .serializers import (
-    DishListSerializer,
-    DishDetailSerializer,
-    ContactListSerializer,
-    ContactDetailSerializer,
-    DiscountDetailSerializer,
-    OrderItemDetailSerializer,
-    OrderDetailSerializer
-)
+from .serializers import (ContactDetailSerializer, ContactListSerializer,
+                          DiscountDetailSerializer, DishDetailSerializer,
+                          DishListSerializer, OrderDetailSerializer,
+                          OrderItemDetailSerializer)
 
 
 class OrderViewSet(viewsets.ModelViewSet):

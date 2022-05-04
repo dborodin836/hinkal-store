@@ -1,15 +1,15 @@
+from datetime import datetime
 from random import choice, randint
 from string import ascii_letters
-from datetime import datetime
 from typing import Sequence
-import pytz
 
+import pytz
 from django.core.management.base import BaseCommand
 
-from src.apps.goods.models import Dish
-from src.apps.user.models import Customer, Vendor, Country
 from src.apps.contact.models import Contact
+from src.apps.goods.models import Dish
 from src.apps.orders.models import Discount, Order, OrderItem
+from src.apps.user.models import Country, Customer, Vendor
 
 # List for the funcs that will be used to generate data
 funcs = []
