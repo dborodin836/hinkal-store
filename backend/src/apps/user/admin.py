@@ -42,7 +42,10 @@ class CustomerAdmin(BaseUserAdmin):
 
     fieldsets = (
         (None, {"fields": ("username", "password")}),
-        ("Personal info", {"fields": ("first_name", "last_name", "email", "phone", "address")}),
+        (
+            "Personal info",
+            {"fields": ("first_name", "last_name", "email", "phone", "address")},
+        ),
         (
             "Permissions",
             {

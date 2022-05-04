@@ -12,6 +12,8 @@ urlpatterns = [
     path("auth/", include("djoser.urls")),
     path("auth/", include("djoser.urls.authtoken")),
     path("auth/", include("djoser.urls.jwt")),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # type: ignore
+] + static(
+    settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
+)  # type: ignore
 
 urlpatterns += docs_urlpatterns

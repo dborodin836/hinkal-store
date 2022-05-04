@@ -105,18 +105,18 @@ class Command(BaseCommand):
     def _get_username(full_name: str) -> str:
         plain_name = "".join(full_name.split())
         return (
-                plain_name[: randint(6, len(plain_name) - 1)]
-                + "_"
-                + str(randint(1000, 9999))
+            plain_name[: randint(6, len(plain_name) - 1)]
+            + "_"
+            + str(randint(1000, 9999))
         )
 
     @staticmethod
     @generate
     def _create_customers(
-            amount: int = 200,
-            customer_names=None,
-            customer_surnames: Sequence = None,
-            static_password: str = None,
+        amount: int = 200,
+        customer_names=None,
+        customer_surnames: Sequence = None,
+        static_password: str = None,
     ) -> None:
         names = customer_names or Command.CUSTOMERS_NAME_SAMPLES
         surnames = customer_surnames or Command.CUSTOMERS_SURNAME_SAMPLES
@@ -145,10 +145,10 @@ class Command(BaseCommand):
     @staticmethod
     @generate
     def _create_vendors(
-            amount: int = 40,
-            customer_names: Sequence = None,
-            customer_surnames: Sequence = None,
-            static_password: str = None,
+        amount: int = 40,
+        customer_names: Sequence = None,
+        customer_surnames: Sequence = None,
+        static_password: str = None,
     ) -> None:
         names = customer_names or Command.CUSTOMERS_NAME_SAMPLES
         surnames = customer_surnames or Command.CUSTOMERS_SURNAME_SAMPLES

@@ -13,4 +13,5 @@ class Command(BaseCommand):
         self.stdout.write(
             """
 Login: admin
-Password: adminpass""")
+Password: adminpass"""
+        )
