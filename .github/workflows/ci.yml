@@ -27,6 +27,6 @@ jobs:
       run:
         black --check backend/src/
     - name: Run flake8
-      run: flake8 backend/src --config backend/src/tox.ini
+      run: flake8 backend/src --config backend/tox.ini
     - name: Run Mypy
-      run: mypy backend/src --config-file setup.cfg --no-incremental
+      run: mypy backend/src --config-file backend/setup.cfg --no-incremental
