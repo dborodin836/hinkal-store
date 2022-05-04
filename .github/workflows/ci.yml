@@ -25,8 +25,8 @@ jobs:
         pip install -r backend/requirements_dev.txt
     - name: Run black
       run:
-        black --check src/
+        black --check backend/src/
     - name: Run flake8
-      run: flake8 src --config tox.ini
+      run: flake8 backend/src --config backend/src/tox.ini
     - name: Run Mypy
-      run: mypy src --config-file setup.cfg --no-incremental
+      run: mypy backend/src --config-file setup.cfg --no-incremental
