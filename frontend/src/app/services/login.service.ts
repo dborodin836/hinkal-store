@@ -17,6 +17,14 @@ export class LoginService {
               private router: Router) {
   }
 
+  getToken(): string | undefined {
+    return this.token
+  }
+
+  getAuthHeader() {
+    return new HttpHeaders({'Authorization': 'Token ' + this.getToken()})
+  }
+
   logout() {
     // @ts-ignore
     let headers = new HttpHeaders({'Authorization': 'Token ' + this.token})

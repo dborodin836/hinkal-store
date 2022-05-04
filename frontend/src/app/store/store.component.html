@@ -21,5 +21,12 @@
       </div>
     </div>
   </div>
-
 </div>
+<mat-paginator #paginator
+               [length]="length"
+               [pageIndex]="pageIndex"
+               [pageSize]="pageSize"
+               [pageSizeOptions]="[5, 10, 25, 100]"
+               (page)="pageEvent = getServerData($event)"
+>
+</mat-paginator>
