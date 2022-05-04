@@ -8,15 +8,19 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('goods', '0001_initial'),
-        ('user', '0001_initial'),
+        ("goods", "0001_initial"),
+        ("user", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='dish',
-            name='added_by',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE,
-                                    to='user.vendor', verbose_name='Vendor'),
+            model_name="dish",
+            name="added_by",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="user.vendor",
+                verbose_name="Vendor",
+            ),
         ),
     ]

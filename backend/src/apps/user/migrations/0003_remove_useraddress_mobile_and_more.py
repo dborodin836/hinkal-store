@@ -6,25 +6,25 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('user', '0002_alter_customer_address'),
+        ("user", "0002_alter_customer_address"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='useraddress',
-            name='mobile',
+            model_name="useraddress",
+            name="mobile",
         ),
         migrations.RemoveField(
-            model_name='useraddress',
-            name='telephone',
+            model_name="useraddress",
+            name="telephone",
         ),
         migrations.RemoveField(
-            model_name='useraddress',
-            name='user_id',
+            model_name="useraddress",
+            name="user_id",
         ),
         migrations.AlterField(
-            model_name='customer',
-            name='phone',
+            model_name="customer",
+            name="phone",
             field=models.CharField(blank=True, max_length=100),
         ),
     ]

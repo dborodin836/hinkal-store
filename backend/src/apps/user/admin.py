@@ -6,16 +6,19 @@ from .models import Country, Customer, UserAddress, Vendor
 
 class CountryAdmin(admin.ModelAdmin):
     """Admin representation for Country"""
+
     pass
 
 
 class UserAddressAdmin(admin.ModelAdmin):
     """Admin representation for UserAddresses"""
+
     pass
 
 
 class VendorAdmin(BaseUserAdmin):
     """Admin representation for Vendor"""
+
     fieldsets = (
         (None, {"fields": ("username", "password")}),
         ("Personal info", {"fields": ("company_name", "email")}),
@@ -36,6 +39,7 @@ class VendorAdmin(BaseUserAdmin):
 
 class CustomerAdmin(BaseUserAdmin):
     """Admin representation for Customer"""
+
     fieldsets = (
         (None, {"fields": ("username", "password")}),
         ("Personal info", {"fields": ("first_name", "last_name", "email", "phone", "address")}),

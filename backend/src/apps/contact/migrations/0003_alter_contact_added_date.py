@@ -8,13 +8,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('contact', '0002_alter_contact_added_date'),
+        ("contact", "0002_alter_contact_added_date"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='contact',
-            name='added_date',
-            field=models.DateTimeField(default=datetime.datetime(2022, 4, 29, 1, 5, 11, 293337)),
+            model_name="contact",
+            name="added_date",
+            field=models.DateTimeField(
+                default=datetime.datetime(2022, 4, 29, 1, 5, 11, 293337)
+            ),
         ),
     ]

@@ -7,14 +7,16 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('goods', '0002_initial'),
+        ("goods", "0002_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='dish',
-            name='added_date',
-            field=models.DateTimeField(default=datetime.datetime(2022, 4, 29, 1, 4, 56, 374543),
-                                       verbose_name='Added'),
+            model_name="dish",
+            name="added_date",
+            field=models.DateTimeField(
+                default=datetime.datetime(2022, 4, 29, 1, 4, 56, 374543),
+                verbose_name="Added",
+            ),
         ),
     ]

@@ -5,10 +5,15 @@ from src.apps.contact.models import Contact
 from src.apps.goods.models import Dish
 from src.apps.orders.models import Discount, Order, OrderItem
 
-from .serializers import (ContactDetailSerializer, ContactListSerializer,
-                          DiscountDetailSerializer, DishDetailSerializer,
-                          DishListSerializer, OrderDetailSerializer,
-                          OrderItemDetailSerializer)
+from .serializers import (
+    ContactDetailSerializer,
+    ContactListSerializer,
+    DiscountDetailSerializer,
+    DishDetailSerializer,
+    DishListSerializer,
+    OrderDetailSerializer,
+    OrderItemDetailSerializer,
+)
 
 
 class OrderViewSet(viewsets.ModelViewSet):
@@ -45,7 +50,7 @@ class DishViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAdminUser,)
 
     def get_serializer_class(self):
-        if self.action == 'list':
+        if self.action == "list":
             return DishListSerializer
         return DishDetailSerializer
 
@@ -57,6 +62,6 @@ class ContactViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAdminUser,)
 
     def get_serializer_class(self):
-        if self.action == 'list':
+        if self.action == "list":
             return ContactListSerializer
         return ContactDetailSerializer

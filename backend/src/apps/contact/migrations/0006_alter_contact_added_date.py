@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('contact', '0005_alter_contact_added_date'),
+        ("contact", "0005_alter_contact_added_date"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='contact',
-            name='added_date',
+            model_name="contact",
+            name="added_date",
             field=models.DateTimeField(default=datetime.datetime.now),
         ),
     ]

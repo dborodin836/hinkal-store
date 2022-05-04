@@ -8,20 +8,25 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('orders', '0001_initial'),
-        ('user', '0001_initial'),
+        ("orders", "0001_initial"),
+        ("user", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='order',
-            name='ordered_by',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL,
-                                    to='user.customer'),
+            model_name="order",
+            name="ordered_by",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                to="user.customer",
+            ),
         ),
         migrations.AddField(
-            model_name='discount',
-            name='added_by',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='user.vendor'),
+            model_name="discount",
+            name="added_by",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="user.vendor"
+            ),
         ),
     ]

@@ -12,6 +12,7 @@ class Discount(models.Model):
 
     It also might be called 'promo codes'.
     """
+
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=255, blank=True)
     discount_word = models.CharField(max_length=100)
@@ -31,6 +32,7 @@ class OrderModifier(models.Model):
     Examples: Fast Delivery
              Personal Support
     """
+
     title = models.CharField(max_length=100)
     descriptions = models.CharField(max_length=255)
 
@@ -46,7 +48,7 @@ class TemporaryOrder(models.Model):
     ordered_by = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-        return f'Temporary order {self.id}'
+        return f"Temporary order {self.id}"
 
 
 class Order(TemporaryOrder):
@@ -57,20 +59,20 @@ class Order(TemporaryOrder):
     """
 
     STATUS = (
-        ('new', 'new order'),
-        ('pending', 'pending order'),
-        ('finished', 'finished order'),
-        ('canceled', 'canceled order')
+        ("new", "new order"),
+        ("pending", "pending order"),
+        ("finished", "finished order"),
+        ("canceled", "canceled order"),
     )
 
     comment = models.TextField(blank=True)
     ordered_date = models.DateTimeField(default=dt.now)
     discount = models.ForeignKey(Discount, on_delete=models.SET_NULL, null=True)
     modifier = models.ManyToManyField(OrderModifier, blank=True)
-    status = models.CharField(choices=STATUS, default='new', max_length=200)
+    status = models.CharField(choices=STATUS, default="new", max_length=200)
 
     def __str__(self):
-        return 'Order ' + str(self.id)
+        return "Order " + str(self.id)
 
 
 class OrderItem(models.Model):
@@ -79,9 +81,10 @@ class OrderItem(models.Model):
 
     Like amount of dish #1 etc.
     """
+
     item = models.ForeignKey(Dish, on_delete=models.CASCADE, null=True)
     amount = models.PositiveIntegerField(default=1)
     order = models.ForeignKey(TemporaryOrder, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.item.title} ({self.amount})'
+        return f"{self.item.title} ({self.amount})"

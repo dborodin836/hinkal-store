@@ -8,13 +8,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('orders', '0009_alter_discount_description_alter_order_ordered_date'),
+        ("orders", "0009_alter_discount_description_alter_order_ordered_date"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='order',
-            name='ordered_date',
-            field=models.DateTimeField(default=datetime.datetime(2022, 5, 4, 12, 34, 50, 255064)),
+            model_name="order",
+            name="ordered_date",
+            field=models.DateTimeField(
+                default=datetime.datetime(2022, 5, 4, 12, 34, 50, 255064)
+            ),
         ),
     ]

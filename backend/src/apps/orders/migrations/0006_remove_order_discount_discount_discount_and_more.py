@@ -9,27 +9,33 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('orders', '0005_remove_order_id_remove_order_ordered_by_and_more'),
+        ("orders", "0005_remove_order_id_remove_order_ordered_by_and_more"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='order',
-            name='discount',
+            model_name="order",
+            name="discount",
         ),
         migrations.AddField(
-            model_name='discount',
-            name='discount',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='orders.order'),
+            model_name="discount",
+            name="discount",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                to="orders.order",
+            ),
         ),
         migrations.AlterField(
-            model_name='order',
-            name='comment',
+            model_name="order",
+            name="comment",
             field=models.TextField(blank=True),
         ),
         migrations.AlterField(
-            model_name='order',
-            name='ordered_date',
-            field=models.DateTimeField(default=datetime.datetime(2022, 5, 4, 12, 5, 53, 94717)),
+            model_name="order",
+            name="ordered_date",
+            field=models.DateTimeField(
+                default=datetime.datetime(2022, 5, 4, 12, 5, 53, 94717)
+            ),
         ),
     ]

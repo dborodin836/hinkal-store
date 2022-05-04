@@ -4,6 +4,7 @@ from django.db import models
 
 class Country(models.Model):
     """Table for countries and their codes"""
+
     fullname = models.CharField(max_length=100)
     code = models.CharField(max_length=4)
 
@@ -11,8 +12,8 @@ class Country(models.Model):
         return self.fullname
 
     class Meta:
-        verbose_name = 'Country'
-        verbose_name_plural = 'Countries'
+        verbose_name = "Country"
+        verbose_name_plural = "Countries"
 
 
 class UserAddress(models.Model):
@@ -30,15 +31,16 @@ class UserAddress(models.Model):
         return self.customer.username + " address"
 
     class Meta:
-        verbose_name = 'User\'s Address'
-        verbose_name_plural = 'User\'s Addresses'
+        verbose_name = "User's Address"
+        verbose_name_plural = "User's Addresses"
 
 
 class Vendor(User):
     """Model for vendors"""
+
     biography = models.TextField(blank=True)
     phone = models.CharField(max_length=100)
-    company_name = models.CharField(max_length=50, default='')
+    company_name = models.CharField(max_length=50, default="")
 
     def __str__(self):
         return self.company_name or self.username
@@ -50,6 +52,7 @@ class Vendor(User):
 
 class Customer(User):
     """Model for regular users"""
+
     phone = models.CharField(max_length=100, blank=True)
     address = models.OneToOneField(UserAddress, on_delete=models.CASCADE, null=True)
 
