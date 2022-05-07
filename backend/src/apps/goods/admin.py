@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 
-from .models import Dish
+from .models import Dish, Comment
 
 
 class DishAdmin(admin.ModelAdmin):
@@ -29,4 +29,14 @@ class DishAdmin(admin.ModelAdmin):
     list_filter = ("added_by",)
 
 
+class CommentAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'dish',
+        'parent',
+        # 'added_date',
+    )
+
+
 admin.site.register(Dish, DishAdmin)
+admin.site.register(Comment, CommentAdmin)
