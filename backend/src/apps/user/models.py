@@ -4,6 +4,7 @@ from django.db import models
 
 class Country(models.Model):
     """Table for countries and their codes"""
+
     fullname = models.CharField(max_length=100)
     code = models.CharField(max_length=4)
 
@@ -11,34 +12,35 @@ class Country(models.Model):
         return self.fullname
 
     class Meta:
-        verbose_name = 'Country'
-        verbose_name_plural = 'Countries'
+        verbose_name = "Country"
+        verbose_name_plural = "Countries"
 
 
 class UserAddress(models.Model):
     """Contains user's addresses"""
-    user_id = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    # Make sense to make another table for streets, cities, house number. Just in case user
+    # has houses in different cities. Or we can change this model to Many-to-One type...
     address_1 = models.CharField(max_length=255)
     address_2 = models.CharField(max_length=255, blank=True)
     city = models.CharField(max_length=50)
     postal_code = models.PositiveIntegerField()
     county = models.ForeignKey(Country, on_delete=models.SET_NULL, null=True)
-    telephone = models.CharField(max_length=30)
-    mobile = models.CharField(max_length=30)
 
     def __str__(self):
-        return self.user_id.username
+        return self.customer.username + " address"
 
     class Meta:
-        verbose_name = 'User\'s Address'
-        verbose_name_plural = 'User\'s Addresses'
+        verbose_name = "User's Address"
+        verbose_name_plural = "User's Addresses"
 
 
 class Vendor(User):
     """Model for vendors"""
+
     biography = models.TextField(blank=True)
     phone = models.CharField(max_length=100)
-    company_name = models.CharField(max_length=50, default='')
+    company_name = models.CharField(max_length=50, default="")
 
     def __str__(self):
         return self.company_name or self.username
@@ -50,8 +52,9 @@ class Vendor(User):
 
 class Customer(User):
     """Model for regular users"""
-    phone = models.CharField(max_length=100)
-    address = models.CharField(max_length=100)
+
+    phone = models.CharField(max_length=100, blank=True)
+    address = models.OneToOneField(UserAddress, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.username

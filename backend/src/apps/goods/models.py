@@ -1,29 +1,57 @@
-from django.db import models
 from datetime import datetime as dt
+
+from django.contrib.auth.models import User
+from django.db import models
+from mptt.fields import TreeForeignKey
+from mptt.models import MPTTModel
 
 from src.apps.user.models import Vendor
 
 
 class Dish(models.Model):
-    """Contains dishes"""
-    title = models.CharField(max_length=255, verbose_name='Title')
-    description = models.TextField(verbose_name='Description')
-    image = models.ImageField(upload_to='photos/%Y/%m/%d/',
-                              verbose_name='Image',
-                              default='default/not-found.png')
-    added_date = models.DateTimeField(default=dt.now(), verbose_name='Added')
-    added_by = models.ForeignKey(Vendor,
-                                 null=True,
-                                 on_delete=models.CASCADE,
-                                 verbose_name='Vendor')
-    price = models.DecimalField(max_digits=8,
-                                decimal_places=2,
-                                verbose_name='Price')
-    is_active = models.BooleanField(default=True, verbose_name='Showed to user')
+    """
+    Contains dishes added by Vendors.
+    """
+
+    title = models.CharField(max_length=255, verbose_name="Title")
+    description = models.TextField(verbose_name="Description", blank=True)
+    image = models.ImageField(
+        upload_to="photos/%Y/%m/%d/",
+        verbose_name="Image",
+        default="default/not-found.png",
+    )
+    added_date = models.DateTimeField(default=dt.now, verbose_name="Added")
+    added_by = models.ForeignKey(
+        Vendor, null=True, on_delete=models.CASCADE, verbose_name="Vendor"
+    )
+    price = models.DecimalField(max_digits=8, decimal_places=2, verbose_name="Price")
+    is_active = models.BooleanField(default=True, verbose_name="Available for users?")
 
     def __str__(self):
         return self.title
 
     class Meta:
-        verbose_name = 'Dish'
-        verbose_name_plural = 'Dishes'
+        verbose_name = "Dish"
+        verbose_name_plural = "Dishes"
+
+
+class Comment(MPTTModel):
+    """
+    Reviews for the dish by Users and Vendors(replies).
+
+    - Can be added both by Customer and Vendor (in case vendor's answer to customer's question).
+    - If parent comment gets deleted, reply comments can't be added.
+    - Users can't add replies to dish, only to comments.
+    """
+    comment_text = models.TextField(blank=True, default='')
+    dish = models.ForeignKey(Dish, related_name='comments', on_delete=models.CASCADE, null=True)
+    parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True,
+                            on_delete=models.CASCADE)
+    added_date = models.DateTimeField(auto_now_add=True)
+    added_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+
+    class MPTTMeta:
+        order_insertion_by = ['added_date']
+
+    def __str__(self):
+        return f"Comment id-{self.id}"

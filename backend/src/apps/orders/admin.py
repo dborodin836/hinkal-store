@@ -1,20 +1,17 @@
 from django.contrib import admin
 
-from .models import Order, OrderItem, Discount, OrderModifier
+from .models import Discount, Order, OrderItem, OrderModifier
 
 
 class OrderItemAdmin(admin.ModelAdmin):
     """Order item representation in django admin panel"""
 
-    list_display = (
-        'id',
-        'item',
-        'amount'
-    )
+    list_display = ("id", "item", "amount")
 
 
 class OrderItemInline(admin.TabularInline):
     """Inline class for easier adding a products"""
+
     model = OrderItem
     extra = 3
 
@@ -23,9 +20,9 @@ class OrderAdmin(admin.ModelAdmin):
     """Order representation in django admin panel"""
 
     list_display = (
-        'id',
-        'ordered_by',
-        'ordered_date',
+        "id",
+        "ordered_by",
+        "ordered_date",
     )
     inlines = (OrderItemInline,)
 
@@ -34,8 +31,8 @@ class DiscountAdmin(admin.ModelAdmin):
     """Discount representation in django admin panel"""
 
     list_display = (
-        'discount_word',
-        'discount_amount',
+        "discount_word",
+        "discount_amount",
     )
 
 

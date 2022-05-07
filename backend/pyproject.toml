@@ -3,7 +3,6 @@ requires = ["setuptools>=60.6", "wheel"]
 buld-backend = "setuptools.build_neta"
 
 [pytest]
-DJANGO_SETTINGS_MODULE = "src.settings"
 python_files = "test_*.py *_tests.py tests.py"
 cache_dir = "tmp/.pytest_cache"
 
@@ -11,6 +10,3 @@ cache_dir = "tmp/.pytest_cache"
 cache_dir = "tmp/.mypy_cache"
 plugins = "mypy_django_plugin.main"
 strict_optional = "True"
-
-[mypy.plugins.django-stubs]
-django_settings_module = "src.settings"
