@@ -25,6 +25,7 @@ const appRoutes: Routes =[
   { path: '', component: HomeComponent},
   { path: 'about', component: AboutComponent},
   { path: 'store', component: StoreComponent},
+  { path: 'store/:id', component: DishDetailComponent},
   { path: 'contact', component: ContactComponent},
   { path: 'login', component: LoginComponent},
   { path: 'dashboard', component: DashboardComponent},

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {DishService} from "../services/dish.service";
+import {DishModel} from "../models/dish.model";
+import {Router} from "@angular/router";
+import {HttpResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-dish-detail',
@@ -7,9 +11,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DishDetailComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dishService: DishService,
+              private router: Router) { }
+
+  public id?: string;
+  // @ts-ignore
+  dish: DishModel;
 
   ngOnInit(): void {
+    this.id = this.router.url[this.router.url.length - 1];
+    this.getDetailedData(this.id)
   }
 
+  getDetailedData(id: string) {
+    this.dishService.getDetail(id)
+      .subscribe((data:HttpResponse<any>) => {
+        this.dish = data.body;
+        console.log(this.dish.id)})
+  }
 }

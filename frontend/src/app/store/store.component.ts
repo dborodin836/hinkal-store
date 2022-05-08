@@ -16,7 +16,6 @@ export class StoreComponent implements OnInit {
 
   dishes?: DishModel[]
 
-  pageEvent: PageEvent | undefined;
   pageIndex?:number;
   pageSize?:number;
   length?: number;

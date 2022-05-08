@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
-import {Observable} from "rxjs";
 import {PageEvent} from "@angular/material/paginator";
 
 
@@ -14,11 +13,11 @@ export class DishService {
   constructor(private http: HttpClient) {
   }
 
-  getAll(): Observable<HttpResponse<any>>{
-    return this.http.get<HttpResponse<any>>(baseUrl, {headers: headers, observe: 'response', responseType: 'json'});
+  getDetail(id: string | undefined) {
+    let url = baseUrl + id;
+    return this.http.get<HttpResponse<any>>(url, {headers: headers, observe:"response", responseType:"json"})
   }
 
-  // @ts-ignore
   getPaginated(event: PageEvent | undefined) {
     // @ts-ignore
     let url = baseUrl + '?' + 'offset=' + event.pageSize * event.pageIndex + '&limit=' + event.pageSize
