@@ -1,9 +1,8 @@
 <div class="content-box">
-
   <div *ngFor="let dish of dishes" class="product-item">
     <div class="product-img">
       <a href="">
-        <img src="{{dish.image}}" style="min-height: 200px; max-height: 200px border-radius: 15px; object-position: center; object-fit: cover">
+        <img src="{{dish.image}}" style="min-height: 200px; max-height: 200px; border-radius: 15px; object-position: center; object-fit: cover">
       </a>
     </div>
     <div class="product-list">
@@ -26,7 +25,6 @@
                [length]="length"
                [pageIndex]="pageIndex"
                [pageSize]="pageSize"
-               [pageSizeOptions]="[5, 10, 25, 100]"
-               (page)="pageEvent = getServerData($event)"
->
+               [pageSizeOptions]="[25, 50, 100, 150]"
+               (page)="getServerData($event)">
 </mat-paginator>

@@ -1,9 +1,8 @@
-import {Component, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DishService} from "../services/dish.service";
 import {DishModel} from "../models/dish.model";
 import {HttpResponse} from "@angular/common/http";
 import {PageEvent} from "@angular/material/paginator";
-import {PaginatedResponseModel} from "../models/paginator.model";
 
 
 @Component({
@@ -18,32 +17,21 @@ export class StoreComponent implements OnInit {
   dishes?: DishModel[]
 
   pageEvent: PageEvent | undefined;
-  datasource?: null;
   pageIndex?:number;
   pageSize?:number;
-  length?:number;
+  length?: number;
 
   ngOnInit(): void {
-    this.retrieveDishes();
+    // @ts-ignore
+    this.getServerData({pageIndex: 0, pageSize:25})
   }
 
-  retrieveDishes() {
-    this.dishService.getAll().subscribe((data:HttpResponse<any>) => {
-      console.log(data.body.results);
-      this.dishes = data.body.results
-    })
-      }
-
-
-  public getServerData(event?:PageEvent){
-    let response = this.dishService.getPaginated(event)
-    // @ts-ignore
-    this.datasource = response.results;
-    this.pageIndex = event?.pageIndex;
-    this.pageSize = event?.pageSize;
-    // @ts-ignore
-    this.length = response.count;
+  getServerData(event?:PageEvent){
     console.log(event)
+    this.dishService.getPaginated(event)
+      .subscribe((data:HttpResponse<any>) => {
+        this.dishes = data.body.results;
+        this.length = data.body.count})
     return event
   }
 
