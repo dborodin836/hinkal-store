@@ -21,3 +21,6 @@ node_modules
 
 # Docker
 data
+
+# Frontend
+/frontend/dist/

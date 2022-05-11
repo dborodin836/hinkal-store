@@ -111,7 +111,8 @@ MEDIA_URL = "/media/"
 
 # CORS settings
 CORS_ORIGIN_ALLOW_ALL = False
-CORS_ORIGIN_WHITELIST = ("http://localhost:4200",)
+CORS_ORIGIN_WHITELIST = ("http://localhost:80",
+                         "http://localhost:4200")
 CORS_ALLOW_METHODS = ("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
 
 # Admins emails
