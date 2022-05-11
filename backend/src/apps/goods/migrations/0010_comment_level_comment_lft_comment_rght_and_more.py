@@ -6,32 +6,34 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('goods', '0009_alter_comment_options_remove_comment_added_by_and_more'),
+        ("goods", "0009_alter_comment_options_remove_comment_added_by_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='comment',
-            name='level',
+            model_name="comment",
+            name="level",
             field=models.PositiveIntegerField(default=None, editable=False),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='comment',
-            name='lft',
+            model_name="comment",
+            name="lft",
             field=models.PositiveIntegerField(default=None, editable=False),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='comment',
-            name='rght',
+            model_name="comment",
+            name="rght",
             field=models.PositiveIntegerField(default=None, editable=False),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='comment',
-            name='tree_id',
-            field=models.PositiveIntegerField(db_index=True, default=None, editable=False),
+            model_name="comment",
+            name="tree_id",
+            field=models.PositiveIntegerField(
+                db_index=True, default=None, editable=False
+            ),
             preserve_default=False,
         ),
     ]

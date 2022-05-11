@@ -43,15 +43,24 @@ class Comment(MPTTModel):
     - If parent comment gets deleted, reply comments can't be added.
     - Users can't add replies to dish, only to comments.
     """
-    comment_text = models.TextField(blank=True, default='')
-    dish = models.ForeignKey(Dish, related_name='comments', on_delete=models.CASCADE, null=True)
-    parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True,
-                            on_delete=models.CASCADE)
+
+    comment_text = models.TextField(blank=True, default="")
+    dish = models.ForeignKey(
+        Dish, related_name="comments", on_delete=models.CASCADE, null=True
+    )
+    parent = TreeForeignKey(
+        "self",
+        null=True,
+        blank=True,
+        related_name="children",
+        db_index=True,
+        on_delete=models.CASCADE,
+    )
     added_date = models.DateTimeField(auto_now_add=True)
     added_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
     class MPTTMeta:
-        order_insertion_by = ['added_date']
+        order_insertion_by = ["added_date"]
 
     def __str__(self):
         return f"Comment id-{self.id}"

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 
-from .models import Dish, Comment
+from .models import Comment, Dish
 
 
 class DishAdmin(admin.ModelAdmin):
@@ -31,9 +31,9 @@ class DishAdmin(admin.ModelAdmin):
 
 class CommentAdmin(admin.ModelAdmin):
     list_display = (
-        'id',
-        'dish',
-        'parent',
+        "id",
+        "dish",
+        "parent",
         # 'added_date',
     )
 

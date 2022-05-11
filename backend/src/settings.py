@@ -2,7 +2,6 @@ import os
 from datetime import timedelta
 from pathlib import Path
 
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv("SECRET_KEY")
@@ -111,8 +110,7 @@ MEDIA_URL = "/media/"
 
 # CORS settings
 CORS_ORIGIN_ALLOW_ALL = False
-CORS_ORIGIN_WHITELIST = ("http://localhost:80",
-                         "http://localhost:4200")
+CORS_ORIGIN_WHITELIST = ("http://localhost:80", "http://localhost:4200")
 CORS_ALLOW_METHODS = ("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
 
 # Admins emails
