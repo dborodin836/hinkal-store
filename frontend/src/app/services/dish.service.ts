@@ -4,7 +4,7 @@ import {PageEvent} from "@angular/material/paginator";
 
 
 const baseUrl = 'http://localhost:8000/api/dish/';
-const headers = new HttpHeaders({'Authorization': 'Token 17ebb91980233f271fc7da6109701a72a9ef687d'})
+const headers = new HttpHeaders({'Authorization': 'Token fed08596034ae7fe1ba752a85deeb19a37dae4b2'})
 
 @Injectable({
   providedIn: 'root'
