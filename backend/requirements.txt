@@ -8,6 +8,6 @@ pytz==2022.1
 sqlparse==0.4.2
 tzdata==2022.1
 drf-yasg==1.20.0
-setuptools==62.1.0
+setuptools==62.2.0
 djoser==2.1.0
 django-mptt~=0.13.4
