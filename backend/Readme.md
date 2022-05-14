@@ -3,6 +3,7 @@
 ## Setup
 
 If you don't have [Python](https://www.python.org/downloads/) install it.
+If you don't have [PostgreSQL](https://www.postgresql.org/download/) install it.
 
 Create a virtual environment to install dependencies in and activate it:
 
@@ -23,6 +24,16 @@ Then install the dependencies:
 
 ```sh
 (env)$ pip install -r requirements_dev.txt 
+```
+**Before applying migration you must create `.env` file in `hinkali-store` directory.**
+
+**You can find an example in `hinkali-store/backend/docs/.env_template.md`**
+
+Apply the migration:
+
+```sh
+$ py manage.py makemigrations
+$ py manage.py migrate
 ```
 
 And finally run the django server:
