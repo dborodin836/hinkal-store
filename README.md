@@ -63,6 +63,8 @@ And run simple command.
 $ docker-compose -f backend/docker-compose.yml up
 ```
 
+Alternatively, you can do setup manually following guides in specific folders.
+
 ## Usage
 
 *Screenshots and addition description, usage *
