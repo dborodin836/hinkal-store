@@ -23,7 +23,7 @@
 
 ![Screen Shot](photos/home_screenshot.png)
 
-I wanted to create this project to study how to make a cool Fullstack website. I'm using Angular with Django, featuring REST.
+I wanted to create this project to study how to make a cool Fullstack website. I'm using Angular with Django, featuring REST and other technologies.
 
 Main features:
 
@@ -38,15 +38,34 @@ I hope that site will be awesome soon :smile:
 Frontend: 
 * [Angular](https://angular.io)
 
-
 Backend:
 * [Django](https://www.djangoproject.com)
 * [Django Rest Framework](https://www.django-rest-framework.org)
 * [PostgreSQL](https://www.postgresql.org)
+* [Pgbouncer](https://www.pgbouncer.org)
 
 ## Getting Started
 
-To get a local copy up and running follow these simple example steps.
+The first thing to do is to clone the repository:
+
+```sh
+$ git clone https://github.com/dborodin836/hinkali-store.git
+$ cd hinkali-store
+```
+
+The easiest way to start projct is requires Docker,
+If you don't have Docker [install it](https://docs.docker.com/get-docker/).
+And run simple command.
+
+**This could take a while...**
+
+```sh
+$  docker-compose -f backend/docker-compose.yml -p hinkali-store up
+```
+
+**NOTE:** Due to permanent temporary crutch, if webinkali-store_web_1 container failed to start you need to restart store_web_1 container manually. ~ 1 min
+
+Alternatively, you can do setup manually following guides in specific folders.
 
 ## Usage
 
