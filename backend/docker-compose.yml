@@ -7,10 +7,11 @@ services:
       - POSTGRES_DB=${POSTGRES_NAME}
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
   web:
     build: .
     command: bash -c "python3 manage.py wait_for_db
-                   && python3 manage.py wait_for_db
                    && python3 manage.py migrate
                    && python3 manage.py loaddata data.json
                    && python3 manage.py runserver 0.0.0.0:8000"
@@ -23,6 +24,22 @@ services:
       - POSTGRES_DB=${POSTGRES_NAME}
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    depends_on:
+      - pgbouncer
+  pgbouncer:
+    image: edoburu/pgbouncer
+    environment:
+      - DB_USER=${POSTGRES_USER}
+      - DB_PASSWORD=${POSTGRES_PASSWORD}
+      - DB_HOST=db
+      - DB_NAME=${POSTGRES_NAME}
+      - DB_PORT=5432
+      - LISTEN_PORT=6432
+      - AUTH_TYPE=plain
+      - POOL_MODE=transaction
+      - ADMIN_USERS=postgres,dbuser
+    ports:
+      - "6432:6432"
     depends_on:
       - db
   frontend:

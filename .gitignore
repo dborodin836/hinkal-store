@@ -13,7 +13,6 @@ __pycache__
 .pytest_cache
 
 # Enviroment files
-.env
 /backend/local.env
 
 # Node modules

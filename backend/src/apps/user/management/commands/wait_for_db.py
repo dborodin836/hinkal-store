@@ -13,7 +13,7 @@ class Command(BaseCommand):
         db_conn = None
         while not db_conn:
             try:
-                time.sleep(15)
+                time.sleep(60)
                 # get the database with keyword 'default' from settings.py
                 db_conn = connections["default"]
                 # prints success message in green

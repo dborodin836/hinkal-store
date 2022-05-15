@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, AllowAny
 
 from src.apps.contact.models import Contact
 from src.apps.goods.models import Dish
@@ -47,7 +47,7 @@ class DishViewSet(viewsets.ModelViewSet):
     """List of all dishes"""
 
     queryset = Dish.objects.all()
-    permission_classes = (IsAdminUser,)
+    permission_classes = (AllowAny,)
 
     def get_serializer_class(self):
         if self.action == "list":
