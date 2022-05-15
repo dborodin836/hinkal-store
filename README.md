@@ -23,7 +23,7 @@
 
 ![Screen Shot](photos/home_screenshot.png)
 
-I wanted to create this project to study how to make a cool Fullstack website. I'm using Angular with Django, featuring REST.
+I wanted to create this project to study how to make a cool Fullstack website. I'm using Angular with Django, featuring REST and other technologies.
 
 Main features:
 
@@ -60,8 +60,10 @@ And run simple command.
 **This could take a while...**
 
 ```sh
-$ docker-compose -f backend/docker-compose.yml up
+$  docker-compose -f backend/docker-compose.yml -p hinkali-store up
 ```
+
+**NOTE:** Due to permanent temporary crutch, if webinkali-store_web_1 container failed to start you need to restart store_web_1 container manually. ~ 1 min
 
 Alternatively, you can do setup manually following guides in specific folders.
 
