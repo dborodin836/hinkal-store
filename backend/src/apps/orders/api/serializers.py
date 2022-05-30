@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from src.apps.orders.models import OrderItem, Order, Discount
+from src.apps.orders.models import Discount, Order, OrderItem
 
 
 class OrderItemDetailSerializer(serializers.ModelSerializer):

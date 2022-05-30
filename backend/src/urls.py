@@ -5,7 +5,6 @@ from django.urls import include, path
 
 from .yasg import urlpatterns as docs_urlpatterns
 
-
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include("src.apiurls")),

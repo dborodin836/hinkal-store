@@ -1,7 +1,10 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAdminUser
 
-from src.apps.contact.api.serializers import ContactListSerializer, ContactDetailSerializer
+from src.apps.contact.api.serializers import (
+    ContactDetailSerializer,
+    ContactListSerializer,
+)
 from src.apps.contact.models import Contact
 
 

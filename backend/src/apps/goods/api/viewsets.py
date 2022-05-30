@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
 
-from src.apps.goods.api.serializers import DishListSerializer, DishDetailSerializer
+from src.apps.goods.api.serializers import DishDetailSerializer, DishListSerializer
 from src.apps.goods.models import Dish
 
 

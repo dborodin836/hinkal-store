@@ -1,8 +1,12 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAdminUser
-from src.apps.orders.models import Order, OrderItem, Discount
 
-from src.apps.orders.api.serializers import OrderDetailSerializer, OrderItemDetailSerializer, DiscountDetailSerializer
+from src.apps.orders.api.serializers import (
+    DiscountDetailSerializer,
+    OrderDetailSerializer,
+    OrderItemDetailSerializer,
+)
+from src.apps.orders.models import Discount, Order, OrderItem
 
 
 class OrderViewSet(viewsets.ModelViewSet):
