@@ -1,23 +1,27 @@
 from rest_framework import serializers
 
-from src.apps.goods.models import Dish
+from src.apps.orders.models import OrderItem, Order, Discount
 
 
-class DishListSerializer(serializers.ModelSerializer):
-    """List of all dishes"""
-
-    added_by = serializers.SlugRelatedField(slug_field="username", read_only=True)  # type: ignore
+class OrderItemDetailSerializer(serializers.ModelSerializer):
+    """Detailed OrderItem"""
 
     class Meta:
-        model = Dish
-        exclude = ("added_date",)
+        model = OrderItem
+        fields = "__all__"
 
 
-class DishDetailSerializer(serializers.ModelSerializer):
-    """Detailed dish (all fields)"""
-
-    added_by = serializers.SlugRelatedField(slug_field="username", read_only=True)  # type: ignore
+class OrderDetailSerializer(serializers.ModelSerializer):
+    """Detailed Order"""
 
     class Meta:
-        model = Dish
+        model = Order
+        fields = "__all__"
+
+
+class DiscountDetailSerializer(serializers.ModelSerializer):
+    """Detailed Discount"""
+
+    class Meta:
+        model = Discount
         fields = "__all__"
