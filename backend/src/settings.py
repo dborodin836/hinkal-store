@@ -28,7 +28,6 @@ INSTALLED_APPS = [
     "src.apps.goods",
     "src.apps.orders",
     "src.apps.contact",
-    "src.apps.api",
 ]
 
 MIDDLEWARE = [
