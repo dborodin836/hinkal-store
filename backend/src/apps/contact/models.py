@@ -14,3 +14,6 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.subject
+
+    def __repr__(self):
+        return f'Contact({self.name}, {self.subject}, {self.email}, {self.message}, {self.added_date})'
