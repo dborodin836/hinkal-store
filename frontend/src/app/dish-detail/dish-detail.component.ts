@@ -7,7 +7,7 @@ import {HttpResponse} from "@angular/common/http";
 @Component({
   selector: 'app-dish-detail',
   templateUrl: './dish-detail.component.html',
-  styleUrls: ['./dish-detail.component.css']
+  styleUrls: ['./dish-detail.component.scss']
 })
 export class DishDetailComponent implements OnInit {
 
