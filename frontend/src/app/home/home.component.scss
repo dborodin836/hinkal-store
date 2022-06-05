@@ -37,3 +37,130 @@ p {
   padding-left: 40px;
   padding-right: 30px;
 }
+
+.content-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 3em 1.5em 3em 1.5em;
+}
+.product-item {
+  width: 200px;
+  margin: 0.25em;
+  padding: 10px 10px 5px 10px;
+  border: 1px solid #303030;
+  background: #202020;
+  font-family: "Open Sans", sans-serif;
+  overflow: hidden;
+  transition: .4s linear;
+}
+.product-img {
+  transition: 1s ease-in-out;
+}
+.product-img:hover {
+  transform: scale(1.1);
+}
+.product-img img {
+  display: block;
+  width: 100%;
+}
+.product-list {
+  margin-top: 15px;
+}
+.product-list h3 {
+  font-weight: 700;
+  color: #39404B;
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 14px;
+  line-height: 2;
+}
+.price {
+  color: #E34D38;
+  display: block;
+  margin-bottom: 12px;
+}
+.stars {
+  height: 14px;
+  line-height: 14px;
+  margin: 7px 0;
+}
+.stars:before {
+  content: "\f005\f005\f005\f005\f006";
+  color: #EFB71C;
+  font-size: 14px;
+  font-family: FontAwesome, sans-serif;
+}
+.actions {
+  border-top: 1px solid #eee;
+  padding-top: 4px;
+  font-size: 13px;
+  height: 30px;
+  line-height: 30px;
+}
+.actions:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.add-to-cart, .add-to-links {
+  float: left;
+}
+.cart-button {
+  text-decoration: none;
+  color: #8C877C;
+  padding-right: 20px;
+  border-right: 1px solid #ddd;
+  transition: .4s linear;
+}
+.cart-button:before {
+  content: "\f07a";
+  font-family: FontAwesome, sans-serif;
+  margin-right: 10px;
+}
+.add-to-cart:hover .cart-button, .wishlist:hover, .compare:hover {
+  color: #E34D38;
+}
+.wishlist, .compare {
+  color: #8C877C;
+  padding-left: 17px;
+  transition: .4s linear;
+}
+.wishlist:after, .compare:after {
+  display: inline-block;
+  font-family: FontAwesome, sans-serif;
+}
+.wishlist:after {
+  content: "\f004";
+}
+.compare:after {
+  content: "\f079";
+}
+
+.recommended {
+  text-align: center;
+  color: #E34D38;
+  font-family: Roboto, serif;
+  margin-top: 4em;
+}
+
+.custom-shape-divider-bottom-1654463571 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1654463571 svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 171px;
+}
+
+.custom-shape-divider-bottom-1654463571 .shape-fill {
+  fill: #202020;
+}

@@ -87,13 +87,12 @@
 }
 .wishlist, .compare {
   color: #8C877C;
-  padding-left: 20px;
+  padding-left: 17px;
   transition: .4s linear;
 }
 .wishlist:after, .compare:after {
   display: inline-block;
   font-family: FontAwesome, sans-serif;
-  font-size: 13px;
 }
 .wishlist:after {
   content: "\f004";
