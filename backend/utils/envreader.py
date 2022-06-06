@@ -1,3 +1,7 @@
+import os
+import sys
+
+
 def get_envs_from_file(env_file="local.env") -> None:
     """
     Open file and set the all env variables it contains.
