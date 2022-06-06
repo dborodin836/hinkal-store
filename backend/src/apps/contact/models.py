@@ -16,4 +16,7 @@ class Contact(models.Model):
         return self.subject
 
     def __repr__(self):
-        return f'Contact({self.name}, {self.subject}, {self.email}, {self.message}, {self.added_date})'
+        return (
+            f"Contact({self.name}, {self.subject}, {self.email}, {self.message}, "
+            f"{self.added_date})"
+        )

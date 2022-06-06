@@ -28,7 +28,10 @@ class Dish(models.Model):
     is_active = models.BooleanField(default=True, verbose_name="Available for users?")
 
     def __repr__(self):
-        return f'Dish({self.title}, {self.description}, {self.image}, {self.added_date}, {repr(self.added_by)}, {self.price}, {self.is_active})'
+        return (
+            f"Dish({self.title}, {self.description}, {self.image}, {self.added_date}, "
+            f"{repr(self.added_by)}, {self.price}, {self.is_active})"
+        )
 
     def __str__(self):
         return self.title
@@ -48,9 +51,7 @@ class Comment(MPTTModel):
     """
 
     comment_text = models.TextField(blank=True, default="")
-    dish = models.ForeignKey(
-        Dish, related_name="comments", on_delete=models.CASCADE, null=True
-    )
+    dish = models.ForeignKey(Dish, related_name="comments", on_delete=models.CASCADE, null=True)
     parent = TreeForeignKey(
         "self",
         null=True,
@@ -66,7 +67,10 @@ class Comment(MPTTModel):
         order_insertion_by = ["added_date"]
 
     def __repr__(self):
-        return f'Comment({self.comment_text}, {repr(self.dish)}, {repr(self.parent)}, {self.added_date}, {repr(self.added_by)})'
+        return (
+            f"Comment({self.comment_text}, {repr(self.dish)}, {repr(self.parent)}, "
+            f"{self.added_date}, {repr(self.added_by)}) "
+        )
 
     def __str__(self):
         return f"Comment id-{self.id}"

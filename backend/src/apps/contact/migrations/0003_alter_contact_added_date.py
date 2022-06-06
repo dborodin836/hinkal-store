@@ -15,8 +15,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="contact",
             name="added_date",
-            field=models.DateTimeField(
-                default=datetime.datetime(2022, 4, 29, 1, 5, 11, 293337)
-            ),
+            field=models.DateTimeField(default=datetime.datetime(2022, 4, 29, 1, 5, 11, 293337)),
         ),
     ]
