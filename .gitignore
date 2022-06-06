@@ -23,3 +23,6 @@ data
 
 # Frontend
 /frontend/dist/
+
+# Logs
+*.log
