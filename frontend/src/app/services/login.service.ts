@@ -11,7 +11,7 @@ const baseUrl = 'http://localhost:8000/auth/';
 export class LoginService {
 
   private response: any;
-  private token?: string;
+  private token = "";
 
   constructor(private http: HttpClient,
               private router: Router) {
