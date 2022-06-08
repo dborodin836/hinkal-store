@@ -8,6 +8,9 @@ class Country(models.Model):
     fullname = models.CharField(max_length=100)
     code = models.CharField(max_length=4)
 
+    def __repr__(self):
+        return f"Country({self.fullname}), {self.code}"
+
     def __str__(self):
         return self.fullname
 
@@ -27,6 +30,12 @@ class UserAddress(models.Model):
     postal_code = models.PositiveIntegerField()
     county = models.ForeignKey(Country, on_delete=models.SET_NULL, null=True)
 
+    def __repr__(self):
+        return (
+            f"UserAddress({self.address_1}, {self.address_2}, {self.city}, {self.postal_code}, "
+            f"{repr(self.county)})"
+        )
+
     def __str__(self):
         return self.customer.username + " address"
 
@@ -42,6 +51,9 @@ class Vendor(User):
     phone = models.CharField(max_length=100)
     company_name = models.CharField(max_length=50, default="")
 
+    def __repr__(self):
+        return f"Vendor({self.biography}, {self.phone}, {self.company_name})"
+
     def __str__(self):
         return self.company_name or self.username
 
@@ -55,6 +67,9 @@ class Customer(User):
 
     phone = models.CharField(max_length=100, blank=True)
     address = models.OneToOneField(UserAddress, on_delete=models.CASCADE, null=True)
+
+    def __repr__(self):
+        return f"Customer({self.phone}, {self.address})"
 
     def __str__(self):
         return self.username

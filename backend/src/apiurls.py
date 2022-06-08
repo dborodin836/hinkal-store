@@ -1,13 +1,9 @@
 from django.urls import include, path
 from rest_framework import routers
 
-from .views import (
-    ContactViewSet,
-    DiscountViewSet,
-    DishViewSet,
-    OrderItemViewSet,
-    OrderViewSet,
-)
+from src.apps.contact.api.viewsets import ContactViewSet
+from src.apps.goods.api.viewsets import DishViewSet
+from src.apps.orders.api.viewsets import DiscountViewSet, OrderItemViewSet, OrderViewSet
 
 router = routers.DefaultRouter()
 router.register(r"dish", DishViewSet)
