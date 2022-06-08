@@ -1,7 +1,8 @@
 <div class="content-box">
+
   <div *ngFor="let dish of dishes" class="product-item">
     <div class="product-img">
-      <a routerLink="{{dish.id}}">
+      <a routerLink="store/{{dish.id}}">
         <img src="{{dish.image}}" style="min-height: 200px; max-height: 200px; border-radius: 15px; object-position: center; object-fit: cover">
       </a>
     </div>
@@ -11,15 +12,17 @@
       <span class="price">{{dish.price}} UAH</span>
       <div class="actions">
         <div class="add-to-cart">
+          <i class="fa-solid fa-cart-circle-plus"></i>
           <a href="" class="cart-button">В корзину</a>
         </div>
         <div class="add-to-links">
-          <a class="wishlist">&#x2764;</a>
+          <a class="wishlist"></a>
           <a href="" class="compare"></a>
         </div>
       </div>
     </div>
   </div>
+
 </div>
 <mat-paginator #paginator
                [length]="length"

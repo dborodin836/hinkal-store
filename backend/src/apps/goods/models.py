@@ -5,6 +5,7 @@ from django.db import models
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
 
+from src.apps.goods.managers import DishManager
 from src.apps.user.models import Vendor
 
 
@@ -12,6 +13,8 @@ class Dish(models.Model):
     """
     Contains dishes added by Vendors.
     """
+
+    objects = DishManager()
 
     title = models.CharField(max_length=255, verbose_name="Title")
     description = models.TextField(verbose_name="Description", blank=True)
@@ -26,6 +29,7 @@ class Dish(models.Model):
     )
     price = models.DecimalField(max_digits=8, decimal_places=2, verbose_name="Price")
     is_active = models.BooleanField(default=True, verbose_name="Available for users?")
+    times_bought = models.IntegerField(default=0, verbose_name="Times bought")
 
     def __repr__(self):
         return (

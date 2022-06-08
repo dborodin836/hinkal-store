@@ -22,6 +22,10 @@ export class DishService {
     let url = baseUrl + '?' + 'offset=' + event.pageSize * event.pageIndex + '&limit=' + event.pageSize
     return this.http.get<HttpResponse<any>>(url, {observe:"response", responseType:"json"})
       }
+
+  getBestSelling() {
+    return this.http.get<HttpResponse<any>>(baseUrl, {observe: "response", responseType: "json"})
+  }
 }
 
 
