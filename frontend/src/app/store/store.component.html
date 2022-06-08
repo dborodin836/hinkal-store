@@ -2,7 +2,7 @@
 
   <div *ngFor="let dish of dishes" class="product-item">
     <div class="product-img">
-      <a routerLink="store/{{dish.id}}">
+      <a routerLink="{{dish.id}}">
         <img src="{{dish.image}}" style="min-height: 200px; max-height: 200px; border-radius: 15px; object-position: center; object-fit: cover">
       </a>
     </div>
