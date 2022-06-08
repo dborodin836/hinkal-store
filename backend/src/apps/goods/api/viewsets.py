@@ -28,5 +28,5 @@ class BestSellingDishesViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
 
     def get_queryset(self):
         amount = int(self.request.query_params.get('limit', 10))
-        queryset = Dish.objects.best_selling(amount)
+        queryset = Dish.objects.best_selling_active(amount)
         return queryset
