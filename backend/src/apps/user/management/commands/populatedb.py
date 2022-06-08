@@ -15,8 +15,10 @@ from src.apps.user.models import Country, Customer, Vendor
 funcs = []
 
 
-def generate(func):
-    """Decorator that register function that will be used to generate data"""
+def sample_data_generator(func):
+    """
+    Decorator that register function that will be used to generate data
+    """
     funcs.append(func)
     return func
 
@@ -111,7 +113,7 @@ class Command(BaseCommand):
         )
 
     @staticmethod
-    @generate
+    @sample_data_generator
     def _create_customers(
         amount: int = 200,
         customer_names=None,
@@ -143,7 +145,7 @@ class Command(BaseCommand):
                 print("Collision happened!")
 
     @staticmethod
-    @generate
+    @sample_data_generator
     def _create_vendors(
         amount: int = 40,
         customer_names: Sequence = None,
@@ -177,13 +179,14 @@ class Command(BaseCommand):
                 print("Collision happened!")
 
     @staticmethod
-    @generate
+    @sample_data_generator
     def _create_dishes(amount: int = 500) -> None:
         for _ in range(amount):
             title = choice(Command.DISHES_NAME_SAMPLES)
             price = randint(100, 1000)
             vendors = Vendor.objects.all()
             rng_vendor = choice(vendors)
+            times_bought = randint(0, 10000)
             try:
                 Dish.objects.create(
                     title=title,
@@ -192,13 +195,14 @@ class Command(BaseCommand):
                     added_by=rng_vendor,
                     image="default/not-found.png",
                     added_date=Command._get_random_date(),
+                    times_bought=times_bought
                 )
                 print(f'Dish "{title}" created successfully!')
             except Exception:
                 print("Collision happened!")
 
     @staticmethod
-    @generate
+    @sample_data_generator
     def _create_contacts(amount: int = 100) -> None:
         for _ in range(amount):
             name = choice(Command.CUSTOMERS_NAME_SAMPLES)
@@ -218,7 +222,7 @@ class Command(BaseCommand):
                 print("Collision happened!")
 
     @staticmethod
-    @generate
+    @sample_data_generator
     def _create_discounts(amount: int = 20) -> None:
         for i in range(amount):
             name = f"Discount ({i})"
@@ -241,7 +245,7 @@ class Command(BaseCommand):
                 print("Collision happened!")
 
     @staticmethod
-    @generate
+    @sample_data_generator
     def _create_orders(amount: int = 120) -> None:
         for i in range(amount):
             all_discounts = Discount.objects.all()
