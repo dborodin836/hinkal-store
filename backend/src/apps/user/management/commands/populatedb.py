@@ -195,7 +195,7 @@ class Command(BaseCommand):
                     added_by=rng_vendor,
                     image="default/not-found.png",
                     added_date=Command._get_random_date(),
-                    times_bought=times_bought
+                    times_bought=times_bought,
                 )
                 print(f'Dish "{title}" created successfully!')
             except Exception:
