@@ -60,7 +60,7 @@ And run simple command.
 **This could take a while...**
 
 ```sh
-$  docker-compose -f backend/docker-compose.yml -p hinkali-store up
+$  docker-compose -p hinkali-store --env-file backend/docker.env up
 ```
 
 **NOTE:** Due to permanent temporary crutch, if webinkali-store_web_1 container failed to start you need to restart store_web_1 container manually. ~ 1 min
