@@ -49,9 +49,7 @@ class Comment(MPTTModel):
     """
 
     comment_text = models.TextField(blank=True, default="")
-    dish = models.ForeignKey(
-        Dish, related_name="comments", on_delete=models.CASCADE, null=True
-    )
+    dish = models.ForeignKey(Dish, related_name="comments", on_delete=models.CASCADE, null=True)
     parent = TreeForeignKey(
         "self",
         null=True,

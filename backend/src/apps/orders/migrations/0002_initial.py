@@ -25,8 +25,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="discount",
             name="added_by",
-            field=models.ForeignKey(
-                on_delete=django.db.models.deletion.CASCADE, to="user.vendor"
-            ),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="user.vendor"),
         ),
     ]

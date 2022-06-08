@@ -42,9 +42,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "price",
-                    models.DecimalField(
-                        decimal_places=2, max_digits=8, verbose_name="Price"
-                    ),
+                    models.DecimalField(decimal_places=2, max_digits=8, verbose_name="Price"),
                 ),
                 (
                     "is_active",

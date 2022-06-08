@@ -2,7 +2,7 @@ from django.urls import include, path
 from rest_framework import routers
 
 from src.apps.contact.api.viewsets import ContactViewSet
-from src.apps.goods.api.viewsets import DishViewSet, BestSellingDishesViewSet
+from src.apps.goods.api.viewsets import BestSellingDishesViewSet, DishViewSet
 from src.apps.orders.api.viewsets import DiscountViewSet, OrderItemViewSet, OrderViewSet
 
 router = routers.DefaultRouter()

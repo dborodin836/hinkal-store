@@ -1,4 +1,4 @@
-from rest_framework import viewsets, mixins
+from rest_framework import mixins, viewsets
 from rest_framework.permissions import AllowAny
 
 from src.apps.goods.api.serializers import DishDetailSerializer, DishListSerializer
@@ -23,10 +23,11 @@ class BestSellingDishesViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     """
     Returns best selling dishes.
     """
+
     serializer_class = DishListSerializer
     permission_classes = (AllowAny,)
 
     def get_queryset(self):
-        amount = int(self.request.query_params.get('limit', 10))
+        amount = int(self.request.query_params.get("limit", 10))
         queryset = Dish.objects.best_selling_active(amount)
         return queryset

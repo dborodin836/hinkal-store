@@ -15,8 +15,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="order",
             name="ordered_date",
-            field=models.DateTimeField(
-                default=datetime.datetime(2022, 4, 29, 1, 4, 56, 374543)
-            ),
+            field=models.DateTimeField(default=datetime.datetime(2022, 4, 29, 1, 4, 56, 374543)),
         ),
     ]
