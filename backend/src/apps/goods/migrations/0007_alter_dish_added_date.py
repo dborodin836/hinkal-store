@@ -15,8 +15,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="dish",
             name="added_date",
-            field=models.DateTimeField(
-                default=datetime.datetime.now, verbose_name="Added"
-            ),
+            field=models.DateTimeField(default=datetime.datetime.now, verbose_name="Added"),
         ),
     ]

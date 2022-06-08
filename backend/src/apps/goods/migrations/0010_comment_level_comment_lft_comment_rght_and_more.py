@@ -31,9 +31,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="comment",
             name="tree_id",
-            field=models.PositiveIntegerField(
-                db_index=True, default=None, editable=False
-            ),
+            field=models.PositiveIntegerField(db_index=True, default=None, editable=False),
             preserve_default=False,
         ),
     ]

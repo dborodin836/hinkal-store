@@ -29,9 +29,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "added_date",
-                    models.DateTimeField(
-                        default=datetime.datetime.now, verbose_name="Comments"
-                    ),
+                    models.DateTimeField(default=datetime.datetime.now, verbose_name="Comments"),
                 ),
                 (
                     "added_by",
