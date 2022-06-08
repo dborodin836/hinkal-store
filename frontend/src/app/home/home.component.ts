@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {UserModel} from "../models/user.model";
-import {UserService} from "../services/user.service";
 import {HttpResponse} from "@angular/common/http";
+import {DishModel} from "../models/dish.model";
+import {DishService} from "../services/dish.service";
 
 @Component({
   selector: 'app-home',
@@ -10,18 +10,18 @@ import {HttpResponse} from "@angular/common/http";
 })
 export class HomeComponent implements OnInit {
 
-  users?: UserModel[]
+  bestSellingDishes?: DishModel[]
 
-  constructor(private userService: UserService) { }
+  constructor(private dishService: DishService) { }
 
   ngOnInit(): void {
-    this.retrieveUsers()
+    this.getBestSellingDishes()
   }
 
-  retrieveUsers() {
-    this.userService.getAll().subscribe((data:HttpResponse<any>) => {
-      console.log(data.body.results);
-      this.users = data.body.results
-    })
+  getBestSellingDishes(){
+    this.dishService.getBestSelling()
+      .subscribe((data:HttpResponse<any>)=> {
+        this.bestSellingDishes = data.body.results
+      })
   }
 }
