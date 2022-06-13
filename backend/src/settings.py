@@ -77,33 +77,24 @@ DATABASES = {
     }
 }
 
-logging.config.dictConfig({
-    'version': 1,
-    'disable_existing_loggers': True,
-    'formatters': {
-        "main": {
-            "format": "%(asctime)s - %(levelname)s - %(module)s - %(filename)s - %(message)s"
-        }
-    },
-    'handlers': {
-        "console": {
-            "class": "logging.StreamHandler",
-            "formatter": "main"
+logging.config.dictConfig(
+    {
+        "version": 1,
+        "disable_existing_loggers": True,
+        "formatters": {
+            "main": {
+                "format": "%(asctime)s - %(levelname)s - %(module)s - %(filename)s - %(message)s"
+            }
         },
-        "file": {
-            "class": "logging.FileHandler",
-            "formatter": "main",
-            "filename": "log.log"
-        }
-    },
-    'loggers': {
-        "main": {
-            "handlers": ["console", "file"],
-            "level": "DEBUG",
-            "propagate": True
-        }
-    },
-})
+        "handlers": {
+            "console": {"class": "logging.StreamHandler", "formatter": "main"},
+            "file": {"class": "logging.FileHandler", "formatter": "main", "filename": "log.log"},
+        },
+        "loggers": {
+            "main": {"handlers": ["console", "file"], "level": "DEBUG", "propagate": True}
+        },
+    }
+)
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
