@@ -15,7 +15,6 @@ router.register(r"discount", DiscountViewSet)
 router.register(r"best-selling-dishes", BestSellingDishesViewSet, basename="best-selling-dishes")
 
 urlpatterns = [
-    path(r'auth/users/activate/<uid>/<token>/', ActivateUser.as_view()),
+    path(r"auth/users/activate/<uid>/<token>/", ActivateUser.as_view()),
     path(r"", include(router.urls)),
 ]
-
