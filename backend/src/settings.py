@@ -122,6 +122,7 @@ EMAIL_PORT = os.getenv("EMAIL_PORT")
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS")
+DEFAULT_FROM_EMAIL = "dborodin8362@outlook.com"
 
 # Rest framework settings
 REST_FRAMEWORK = {
@@ -144,7 +145,7 @@ CSRF_HEADER_NAME = "HTTP_X_XSRF_TOKEN"
 DJOSER = {
     "PASSWORD_RESET_CONFIRM_URL": "#/password/reset/confirm/{uid}/{token}",
     "USERNAME_RESET_CONFIRM_URL": "#/username/reset/confirm/{uid}/{token}",
-    "ACTIVATION_URL": "#/activate/{uid}/{token}",
+    "ACTIVATION_URL": "api/auth/users/activate/{uid}/{token}/",
     "SEND_ACTIVATION_EMAIL": True,
     "SERIALIZERS": {},
 }
