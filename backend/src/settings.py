@@ -1,3 +1,4 @@
+import logging.config
 import os
 from datetime import timedelta
 from pathlib import Path
@@ -75,6 +76,25 @@ DATABASES = {
         "PORT": os.getenv("POSTGRES_PORT"),
     }
 }
+
+logging.config.dictConfig(
+    {
+        "version": 1,
+        "disable_existing_loggers": True,
+        "formatters": {
+            "main": {
+                "format": "%(asctime)s - %(levelname)s - %(module)s - %(filename)s - %(message)s"
+            }
+        },
+        "handlers": {
+            "console": {"class": "logging.StreamHandler", "formatter": "main"},
+            "file": {"class": "logging.FileHandler", "formatter": "main", "filename": "log.log"},
+        },
+        "loggers": {
+            "main": {"handlers": ["console", "file"], "level": "DEBUG", "propagate": True}
+        },
+    }
+)
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
