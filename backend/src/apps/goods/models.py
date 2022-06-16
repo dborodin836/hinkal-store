@@ -13,6 +13,7 @@ class Category(models.Model):
     """
     Categories for products.
     """
+
     name = models.CharField(max_length=50)
 
 

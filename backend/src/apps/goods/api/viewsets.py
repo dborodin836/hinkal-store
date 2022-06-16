@@ -24,7 +24,7 @@ class DishViewSet(viewsets.ModelViewSet):
         "popular": "-times_bought",
         "newest": "-added_date",
         "max_price": "-price",
-        "min_price": "price"
+        "min_price": "price",
     }
 
     def get_queryset(self):
@@ -35,7 +35,8 @@ class DishViewSet(viewsets.ModelViewSet):
 
         if self.request.GET.get("filtered_category"):
             queryset = queryset.filter(
-                category__dish__title=self.request.GET.get("filtered_category"))
+                category__dish__title=self.request.GET.get("filtered_category")
+            )
 
         if self.request.GET.get("ordering"):
             queryset = queryset.order_by(self.ORDERING_DICT[self.request.GET.get("ordering")])
