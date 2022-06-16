@@ -19,6 +19,9 @@ export class StoreComponent implements OnInit {
   pageIndex?:number;
   pageSize?:number;
   length?: number;
+  filtered_category = "all";
+  ordering = "popular";
+  keyword = "";
 
   ngOnInit(): void {
     // @ts-ignore
@@ -26,12 +29,33 @@ export class StoreComponent implements OnInit {
   }
 
   getServerData(event?:PageEvent){
-    console.log(event)
-    this.dishService.getPaginated(event)
+    if (typeof(event) == "undefined"){
+      var myevent = {pageIndex: 0, pageSize:25}
+    } else {
+      // @ts-ignore
+      var myevent = event
+    }
+    // @ts-ignore
+    this.dishService.getList(myevent, this.keyword, this.ordering, this.filtered_category)
       .subscribe((data:HttpResponse<any>) => {
         this.dishes = data.body.results;
         this.length = data.body.count})
     return event
   }
 
+  onChangeCategory(event: any) {
+    console.log(event.target.value)
+    this.getServerData()
+  }
+
+  onChangeOrdering(event: any) {
+    console.log(event.target.value)
+    this.getServerData()
+  }
+
+  onChangeText(event: any) {
+    console.log(event.target.value)
+    this.keyword = event.target.value
+    this.getServerData()
+  }
 }

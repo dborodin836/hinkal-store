@@ -6,8 +6,9 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 3em 0 3em 15em;
+  margin: 3em 0 3em 3em;
 }
+
 .product-item {
   width: 200px;
   margin: 0.25em;
@@ -18,19 +19,24 @@
   overflow: hidden;
   transition: .4s linear;
 }
+
 .product-img {
   transition: 1s ease-in-out;
 }
+
 .product-img:hover {
   transform: scale(1.1);
 }
+
 .product-img img {
   display: block;
   width: 100%;
 }
+
 .product-list {
   margin-top: 15px;
 }
+
 .product-list h3 {
   font-weight: 700;
   color: #39404B;
@@ -39,22 +45,26 @@
   font-size: 14px;
   line-height: 2;
 }
+
 .price {
   color: #E34D38;
   display: block;
   margin-bottom: 12px;
 }
+
 .stars {
   height: 14px;
   line-height: 14px;
   margin: 7px 0;
 }
+
 .stars:before {
   content: "\f005\f005\f005\f005\f006";
   color: #EFB71C;
   font-size: 14px;
   font-family: FontAwesome, sans-serif;
 }
+
 .actions {
   border-top: 1px solid #eee;
   padding-top: 4px;
@@ -62,14 +72,17 @@
   height: 30px;
   line-height: 30px;
 }
+
 .actions:after {
   content: "";
   display: table;
   clear: both;
 }
+
 .add-to-cart, .add-to-links {
   float: left;
 }
+
 .cart-button {
   text-decoration: none;
   color: #8C877C;
@@ -77,26 +90,68 @@
   border-right: 1px solid #ddd;
   transition: .4s linear;
 }
+
 .cart-button:before {
   content: "\f07a";
   font-family: FontAwesome, sans-serif;
   margin-right: 10px;
 }
+
 .add-to-cart:hover .cart-button, .wishlist:hover, .compare:hover {
   color: #E34D38;
 }
+
 .wishlist, .compare {
   color: #8C877C;
   padding-left: 17px;
   transition: .4s linear;
 }
+
 .wishlist:after, .compare:after {
   display: inline-block;
   font-family: FontAwesome, sans-serif;
 }
+
 .wishlist:after {
   content: "\f004";
 }
+
 .compare:after {
   content: "\f079";
+}
+
+.labels {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: auto;
+}
+
+.text-field {
+  margin-right: 10px;
+}
+
+.select-field {
+  margin-right: 10px;
+  flex-grow: 1;
+}
+
+.search-field {
+  flex-grow: 0.5;
+}
+
+.btn-submit {
+  width: 100%;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+.container {
+  margin-top: 1.5em;
 }

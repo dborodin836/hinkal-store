@@ -4,6 +4,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule, HttpClientXsrfModule } from "@angular/common/http";
 import {Routes, RouterModule} from '@angular/router';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {FormsModule} from "@angular/forms";
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -56,7 +57,8 @@ const appRoutes: Routes =[
     ReactiveFormsModule,
     HttpClientXsrfModule,
     BrowserAnimationsModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

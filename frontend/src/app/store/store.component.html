@@ -1,3 +1,41 @@
+<form action="">
+  <div class="container">
+    <div class="labels">
+      <div class="text-field">
+        Category
+      </div>
+      <div class="text-field">
+        Order by
+      </div>
+      <div class="text-field">
+        Search
+      </div>
+    </div>
+    <div class="buttons">
+      <div class="select-field">
+        <select (change)="onChangeCategory($event)" [(ngModel)]="filtered_category" class="form-select" name="category" id="category">
+          <option value="all">All</option>
+          <option value="drink">Drink</option>
+          <option value="dish">Dish</option>
+          <option value="misc">Misc</option>
+        </select>
+      </div>
+      <div class="select-field">
+        <select (change)="onChangeOrdering($event)" [(ngModel)]="ordering" class="form-select" style="width: 100%" name="ordering" id="ordering">
+          <option value="newest">Newest</option>
+          <option value="popular">Most popular</option>
+          <option value="max_price">Max price</option>
+          <option value="min_price">Min price</option>
+        </select>
+      </div>
+      <div class="search-field">
+        <input (change)="onChangeText($event)" [(ngModel)]="keyword"  class="form-control" type="text">
+      </div>
+    </div>
+    <input class="btn-submit" type="submit">
+  </div>
+</form>
+
 <div class="content-box">
 
   <div *ngFor="let dish of dishes" class="product-item">
