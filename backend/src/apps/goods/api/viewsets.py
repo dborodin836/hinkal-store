@@ -1,3 +1,4 @@
+from django.db.models import QuerySet
 from rest_framework import mixins, viewsets
 from rest_framework.permissions import AllowAny
 
@@ -17,6 +18,28 @@ class DishViewSet(viewsets.ModelViewSet):
         if self.action == "list":
             return DishListSerializer
         return DishDetailSerializer
+
+    # Used to convert requested category to order_by parameter.
+    ORDERING_DICT = {
+        "popular": "-times_bought",
+        "newest": "-added_date",
+        "max_price": "-price",
+        "min_price": "price"
+    }
+
+    def get_queryset(self):
+        queryset = Dish.objects.all()
+
+        if self.request.GET.get("query_keyword"):
+            queryset = queryset.filter(title__icontains=self.request.GET.get("query_keyword"))
+
+        if self.request.GET.get("filtered_category"):
+            queryset = queryset.filter(
+                category__dish__title=self.request.GET.get("filtered_category"))
+
+        if self.request.GET.get("ordering"):
+            queryset = queryset.order_by(self.ORDERING_DICT[self.request.GET.get("ordering")])
+        return queryset
 
 
 class BestSellingDishesViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
