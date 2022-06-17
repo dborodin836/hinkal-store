@@ -9,6 +9,14 @@ from src.apps.goods.managers import DishManager
 from src.apps.user.models import Vendor
 
 
+class Category(models.Model):
+    """
+    Categories for products.
+    """
+
+    name = models.CharField(max_length=50)
+
+
 class Dish(models.Model):
     """
     Contains dishes added by Vendors.
@@ -30,11 +38,12 @@ class Dish(models.Model):
     price = models.DecimalField(max_digits=8, decimal_places=2, verbose_name="Price")
     is_active = models.BooleanField(default=True, verbose_name="Available for users?")
     times_bought = models.IntegerField(default=0, verbose_name="Times bought")
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
 
     def __repr__(self):
         return (
             f"Dish({self.title}, {self.description}, {self.image}, {self.added_date}, "
-            f"{repr(self.added_by)}, {self.price}, {self.is_active})"
+            f"{repr(self.added_by)}, {self.price}, {self.is_active}, {self.category})"
         )
 
     def __str__(self):

@@ -40,6 +40,7 @@ export class StoreComponent implements OnInit {
       .subscribe((data:HttpResponse<any>) => {
         this.dishes = data.body.results;
         this.length = data.body.count})
+    console.log(this.dishes)
     return event
   }
 
