@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     "drf_yasg",
     "djoser",
     "rest_framework.authtoken",
+    "coverage",
     # Local Apps
     "src.apps.user",
     "src.apps.goods",

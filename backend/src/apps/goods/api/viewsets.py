@@ -1,4 +1,3 @@
-from django.db.models import QuerySet
 from rest_framework import mixins, viewsets
 from rest_framework.permissions import AllowAny
 
