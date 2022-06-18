@@ -1,5 +1,6 @@
 import logging.config
 import os
+import sys
 from datetime import timedelta
 from pathlib import Path
 
@@ -77,6 +78,11 @@ DATABASES = {
         "PORT": os.getenv("POSTGRES_PORT"),
     }
 }
+
+# Covers regular testing and django-coverage
+if 'test' in sys.argv or 'test\_coverage' in sys.argv:
+    DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql'
+    DATABASES['default']['NAME'] = ':memory:'
 
 logging.config.dictConfig(
     {
