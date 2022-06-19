@@ -16,8 +16,15 @@ class AdminAPIClient(APIClient):
         logger.info("AdminAPIClient is being constructed.")
         self.__username = username
         self.__password = password
-        self._setup_admin_client()
-        self.credentials()
+
+        self.__setup_admin_client()
+
+    def __setup_admin_client(self):
+        """
+        Creates adminClient w/ token auth.
+        """
+        self.__create_test_superuser()
+        self.__obtain_token_for_admin_client()
 
     def __create_test_superuser(self) -> None:
         """
@@ -28,32 +35,25 @@ class AdminAPIClient(APIClient):
             is_superuser=True,
             is_staff=True
         )
-        logger.debug("User created")
         self._admin_user.set_password(self.__password)
-        logger.debug("Password set")
         self._admin_user.save()
+        logger.info("User created")
 
     def __obtain_token_for_admin_client(self) -> None:
         """
         Obtains Auth token for the adminAPIClient.
         """
-        self.adminClient = APIClient()
-        logger.debug('Client created')
 
-        credentials = {"password": self.__username, "username": self.__password}
-        self.adminClient.post("http://localhost:8000/auth/token/login/", credentials)
+        self.__client = APIClient()
+
+        credentials = {"password": self.__password, "username": self.__username}
+        self.__client.post("http://localhost:8000/auth/token/login/", credentials)
 
         try:
-            self.__token = Token.objects.get(user=self._admin_user).key
-            logger.debug("Token is %s" % self.__token)
+            self.__token = Token.objects.get(user_id=self._admin_user.id).key
         except Token.DoesNotExist:
             logger.error("Token doest not exist...")
-            raise Exception
-        self.adminClient.credentials(HTTP_AUTHORIZATION=f'Token {self.__token}')
+            logger.info("All tokens : %s" % Token.objects.all())
+            raise Token.DoesNotExist
 
-    def _setup_admin_client(self):
-        """
-        Creates adminClient w/ token auth.
-        """
-        self.__create_test_superuser()
-        self.__obtain_token_for_admin_client()
+        self.credentials(HTTP_AUTHORIZATION=f'Token {self.__token}')
