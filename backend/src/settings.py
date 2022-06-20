@@ -90,7 +90,7 @@ logging.config.dictConfig(
         "disable_existing_loggers": True,
         "formatters": {
             "main": {
-                "format": "%(asctime)s - %(levelname)s - %(module)s - %(filename)s - %(message)s"
+                "format": "%(asctime)s | %(levelname)s | %(module)s | %(filename)s | %(message)s"
             }
         },
         "handlers": {
@@ -98,7 +98,8 @@ logging.config.dictConfig(
             "file": {"class": "logging.FileHandler", "formatter": "main", "filename": "log.log"},
         },
         "loggers": {
-            "main": {"handlers": ["console", "file"], "level": "DEBUG", "propagate": True}
+            "main": {"handlers": ["console", "file"], "level": "INFO", "propagate": True},
+            "debug": {"handlers": ["console"], "level": "DEBUG", "propagate": True}
         },
     }
 )

@@ -1,5 +1,4 @@
 from rest_framework.test import APITestCase
-from django.test.testcases import SimpleTestCase
 
 from src.apps.contact.models import Contact
 from utils.testing.factories import AdminAPIClient
@@ -58,6 +57,7 @@ class ContactAPITest(APITestCase):
             "subject": "subject",
             "email": "email@gmail.com",
             "message": "message",
+            "added_date": "2015-05-16T05:50:06"
         }
         response = self.adminClient.post(self.base_url, data=data)
         self.assertEqual(response.status_code, 201)
@@ -69,19 +69,6 @@ class ContactAPITest(APITestCase):
             "subject": contact.subject,
             "email": contact.email,
             "message": contact.message,
+            "added_date": "2015-05-16T05:50:06"
         }
         self.assertEqual(data, model_data)
-
-
-class ContactModelTest(SimpleTestCase):
-
-    def setUp(self) -> None:
-        Contact.objects.create(name="name",
-                               subject="subject",
-                               email="email@gmail.com",
-                               message="message")
-
-    def test_str(self):
-        contact = Contact.objects.latest("added_date")
-        print(contact)
-        self.assertEqual(1, 1)

@@ -13,7 +13,7 @@ class Contact(models.Model):
     added_date = models.DateTimeField(default=dt.now)
 
     def __str__(self):
-        return self.subject
+        return "Contact: %s" % self.subject
 
     def __repr__(self):
         return (

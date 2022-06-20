@@ -13,7 +13,7 @@ class AdminAPIClient(APIClient):
 
     def __init__(self, username: str, password: str,  enforce_csrf_checks=False, **defaults):
         super(AdminAPIClient, self).__init__(enforce_csrf_checks=False, **defaults)
-        logger.info("AdminAPIClient is being constructed.")
+        logger.debug("AdminAPIClient is being constructed.")
         self.__username = username
         self.__password = password
 
@@ -37,7 +37,7 @@ class AdminAPIClient(APIClient):
         )
         self._admin_user.set_password(self.__password)
         self._admin_user.save()
-        logger.info("User created")
+        logger.debug("User created")
 
     def __obtain_token_for_admin_client(self) -> None:
         """
