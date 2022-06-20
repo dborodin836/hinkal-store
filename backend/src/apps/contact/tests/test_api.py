@@ -38,11 +38,14 @@ class ContactAPITest(APITestCase):
         self.client.post(self.base_url, data=data)
         self.assertEqual(response.status_code, 401)
 
-    def test_authenticated_user(self):
+        # DELETE
+        response = self.client.delete(self.base_url)
+        self.assertEqual(response.status_code, 401)
+
+    def test_admin_user(self):
         """
         Checks all authenticated user's methods.
         """
-
         # GET
         response = self.adminClient.get(self.base_url)
         self.assertEqual(response.status_code, 200)
@@ -72,3 +75,15 @@ class ContactAPITest(APITestCase):
             "added_date": "2015-05-16T05:50:06"
         }
         self.assertEqual(data, model_data)
+
+        # DELETE
+        response = self.adminClient.delete(self.detailed_url)
+        self.assertEqual(response.status_code, 405)
+
+        # PATCH
+        response = self.adminClient.patch(self.detailed_url)
+        self.assertEqual(response.status_code, 405)
+
+        # PUT
+        response = self.adminClient.patch(self.detailed_url)
+        self.assertEqual(response.status_code, 405)
