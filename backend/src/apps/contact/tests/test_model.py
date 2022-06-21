@@ -6,13 +6,14 @@ from src.apps.contact.models import Contact
 
 
 class ContactModelTest(TestCase):
-
     def setUp(self) -> None:
-        Contact.objects.create(name="name",
-                               subject="subject",
-                               email="email@gmail.com",
-                               message="message",
-                               added_date=datetime.datetime(1, 1, 1, 1, 1, tzinfo=pytz.UTC))
+        Contact.objects.create(
+            name="name",
+            subject="subject",
+            email="email@gmail.com",
+            message="message",
+            added_date=datetime.datetime(1, 1, 1, 1, 1, tzinfo=pytz.UTC),
+        )
 
     def test_str(self):
         """

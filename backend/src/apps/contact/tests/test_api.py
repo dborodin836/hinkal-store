@@ -12,8 +12,9 @@ class ContactAPITest(APITestCase):
     detailed_url = base_url + "1/"
 
     def setUp(self) -> None:
-        self.adminClient = AdminAPIClient(username=self.TEST_ADMIN_USERNAME,
-                                          password=self.TEST_ADMIN_PASSWORD)
+        self.adminClient = AdminAPIClient(
+            username=self.TEST_ADMIN_USERNAME, password=self.TEST_ADMIN_PASSWORD
+        )
 
     def test_unauthenticated_user(self):
         """
@@ -60,7 +61,7 @@ class ContactAPITest(APITestCase):
             "subject": "subject",
             "email": "email@gmail.com",
             "message": "message",
-            "added_date": "2015-05-16T05:50:06"
+            "added_date": "2015-05-16T05:50:06",
         }
         response = self.adminClient.post(self.base_url, data=data)
         self.assertEqual(response.status_code, 201)
@@ -72,7 +73,7 @@ class ContactAPITest(APITestCase):
             "subject": contact.subject,
             "email": contact.email,
             "message": contact.message,
-            "added_date": "2015-05-16T05:50:06"
+            "added_date": "2015-05-16T05:50:06",
         }
         self.assertEqual(data, model_data)
 

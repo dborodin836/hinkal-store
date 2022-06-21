@@ -9,10 +9,9 @@ from src.apps.contact.api.serializers import (
 from src.apps.contact.models import Contact
 
 
-class ContactViewSet(mixins.CreateModelMixin,
-                     mixins.RetrieveModelMixin,
-                     mixins.ListModelMixin,
-                     GenericViewSet):
+class ContactViewSet(
+    mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin, GenericViewSet
+):
     """All contacts"""
 
     queryset = Contact.objects.all()
