@@ -29,6 +29,8 @@ jobs:
         black --check backend/src/ --line-length 99
     - name: Run flake8
       run: flake8 backend/src --config backend/tox.ini
+    - name: Run test
+      run: python backend/manage.py test
     - name: Run Mypy
       run: |
         cd backend
