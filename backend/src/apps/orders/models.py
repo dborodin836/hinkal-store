@@ -49,21 +49,7 @@ class OrderModifier(models.Model):
         return self.title
 
 
-class TemporaryOrder(models.Model):
-    """
-    Contains order that wasn't passed to constructing service (physically constructed).
-    """
-
-    ordered_by = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
-
-    def __repr__(self):
-        return f"TemporaryOrder({repr(self.ordered_by)})"
-
-    def __str__(self):
-        return f"Temporary order {self.id}"
-
-
-class Order(TemporaryOrder):
+class Order(models.Model):
     """
     Contains  order from user.
 
@@ -82,6 +68,7 @@ class Order(TemporaryOrder):
     discount = models.ForeignKey(Discount, on_delete=models.SET_NULL, null=True)
     modifier = models.ManyToManyField(OrderModifier, blank=True)
     status = models.CharField(choices=STATUS, default="new", max_length=200)
+    ordered_by = models.OneToOneField(Customer, on_delete=models.SET_NULL, null=True)
 
     def __repr__(self):
         return (
@@ -102,7 +89,7 @@ class OrderItem(models.Model):
 
     item = models.ForeignKey(Dish, on_delete=models.CASCADE, null=True)
     amount = models.PositiveIntegerField(default=1)
-    order = models.ForeignKey(TemporaryOrder, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
 
     def __repr__(self):
         return f"OrderItem({repr(self.item)}, {self.amount}, {repr(self.order)})"
