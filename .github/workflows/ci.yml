@@ -1,4 +1,4 @@
-name: Python package
+name: Python
 
 on:
   push:
@@ -29,23 +29,50 @@ jobs:
         black --check backend/src/ --line-length 99
     - name: Run flake8
       run: flake8 backend/src --config backend/tox.ini
-    - name: Run test
-      run: |
-        cd backend
-        python manage.py test
     - name: Run Mypy
       run: |
         cd backend
         mypy src --config-file setup.cfg --no-incremental
-
-  migration_job:
+  Test:
     runs-on: ubuntu-latest
-    name: CI migration
+
+    services:
+      postgres:
+        image: postgres
+
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_DB: postgres
+
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
     steps:
-      - name: DB testing
-        uses: postgres-ai/dle-github-actions@v0.1.1
-      - name: Testing
+      # run steps required in the workflow
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+
+      - name: Install dependencies
+        run: |
+          cd backend
+          pip install requirements.txt
+          pip install requirements_dev.txt
+
+      - name: migrate database
+        run: |
+          cd backend
+          py manage.py migrate
+
+      - name: Run the mock tests function
         run: |
           cd backend
           py manage.py test
-            
