@@ -42,23 +42,8 @@ jobs:
     runs-on: ubuntu-latest
     name: CI migration
     steps:
-      # Checkout the source code
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      # Run database migrations with the public action
-      - name: Check database migrations with DLE
-        uses: postgres-ai/dle-github-action@v0.1.1
-        id: db-migrations
-        with:
-          dbname: test
-          commands: |
-            cd backend
-            py manage.py makemigration
-          download_artifacts: true
-          observation_interval: "10"
-          max_lock_duration: "1"
-          max_duration: "600"
+      - name: DB testing
+        uses: postgres-ai/dle-github-actions@v0.1.1
       - name: Testing
         run: |
           cd backend
