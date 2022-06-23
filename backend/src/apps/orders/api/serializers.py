@@ -8,7 +8,7 @@ class OrderItemDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = OrderItem
-        fields = "__all__"
+        fields = ("id", "item", "amount", "order")
 
 
 class OrderDetailSerializer(serializers.ModelSerializer):
@@ -16,7 +16,7 @@ class OrderDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = "__all__"
+        fields = ("id", "comment", "ordered_date", "discount", "modifier", "status", "ordered_by")
 
 
 class DiscountDetailSerializer(serializers.ModelSerializer):
@@ -24,4 +24,12 @@ class DiscountDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Discount
-        fields = "__all__"
+        fields = (
+            "id",
+            "name",
+            "description",
+            "discount_word",
+            "discount_amount",
+            "added_by",
+            "is_active",
+        )
