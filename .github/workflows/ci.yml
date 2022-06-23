@@ -70,9 +70,9 @@ jobs:
       - name: migrate database
         run: |
           cd backend
-          py manage.py migrate
+          python manage.py migrate
 
       - name: Run the mock tests function
         run: |
           cd backend
-          py manage.py test
+          python manage.py test
