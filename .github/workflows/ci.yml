@@ -64,8 +64,8 @@ jobs:
       - name: Install dependencies
         run: |
           cd backend
-          pip install requirements.txt
-          pip install requirements_dev.txt
+          pip install -r requirements.txt
+          pip install -r requirements_dev.txt
 
       - name: migrate database
         run: |
