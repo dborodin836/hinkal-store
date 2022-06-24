@@ -13,6 +13,11 @@ export class DishService {
   constructor(private http: HttpClient) {
   }
 
+  getMultiple(list: any) {
+    let url = baseUrl + "?id=" + list.join(",");
+    return this.http.get<HttpResponse<any>>(url, {observe:"response", responseType:"json"})
+  }
+
   getDetail(id: string | undefined) {
     let url = baseUrl + id;
     return this.http.get<HttpResponse<any>>(url, {observe:"response", responseType:"json"})

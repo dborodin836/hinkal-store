@@ -1,5 +1,4 @@
 body {
-  background: #ddd;
   min-height: 100vh;
   vertical-align: middle;
   display: flex;
@@ -28,24 +27,24 @@ body {
 }
 
 .cart {
-  background-color: #fff;
+  background-color: #303030;
   padding: 4vh 5vh;
-  border-bottom-left-radius: 1rem;
-  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 0.75rem;
+  border-top-left-radius: 0.75rem;
 }
 
 @media (max-width: 767px) {
   .cart {
     padding: 4vh;
     border-bottom-left-radius: unset;
-    border-top-right-radius: 1rem;
+    border-top-right-radius: 0.75rem;
   }
 }
 
 .summary {
-  background-color: #ddd;
-  border-top-right-radius: 1rem;
-  border-bottom-right-radius: 1rem;
+  background-color: #e86741;
+  border-top-right-radius: 0.75rem;
+  border-bottom-right-radius: 0.75rem;
   padding: 4vh;
   color: rgb(65, 65, 65);
 }
@@ -53,7 +52,7 @@ body {
 @media (max-width: 767px) {
   .summary {
     border-top-right-radius: unset;
-    border-bottom-left-radius: 1rem;
+    border-bottom-left-radius: 0.75rem;
   }
 }
 
@@ -85,6 +84,8 @@ body {
 
 a {
   padding: 0 1vh;
+  color: white;
+  text-decoration: none;
 }
 
 .close {
@@ -158,12 +159,8 @@ input:focus::-webkit-input-placeholder {
   color: white;
 }
 
-a {
-  color: black;
-}
-
 a:hover {
-  color: black;
+  color: #e86741;
   text-decoration: none;
 }
 

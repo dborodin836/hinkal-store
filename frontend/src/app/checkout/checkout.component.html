@@ -8,21 +8,21 @@
         </div>
       </div>
 
-      <div *ngFor="let item of cartList" class="row">
+      <div *ngFor="let item of listDishes" class="row">
         <div class="row main align-items-center">
-          <div class="col-2"><img class="img-fluid" src="item.image"></div>
+          <div class="col-2"><img class="img-fluid" src="{{item.image}}"></div>
           <div class="col">
-            <div class="row text-muted">Shirt</div>
-            <div class="row">Cotton T-shirt</div>
+            <div class="row text-muted">{{item.category}}</div>
+            <div class="row">{{item.title}}</div>
           </div>
           <div class="col">
-            <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
+            <a (click)="decAmount(item.id)">-</a><a>1</a><a (click)="incAmount(item.id)">+</a>
           </div>
-          <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
+          <div class="col">$ {{item.price}} <span class="close">&#10005;</span></div>
         </div>
       </div>
 
-      <div class="back-to-shop"><a href="#">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
+      <div class="back-to-shop"><a routerLink="">&leftarrow;<a>Back to shop</a></a></div>
 
     </div>
     <div class="col-md-4 summary">

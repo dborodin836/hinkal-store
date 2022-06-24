@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {DishService} from "./dish.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
-  cartList = []
-
-  constructor(private http: HttpClient) { }
+  constructor(private dishService: DishService) { }
 
   addItem(id: number) {
     // @ts-ignore
@@ -16,6 +14,10 @@ export class CartService {
   }
 
   createOrder() {
-    this.http.post()
+    // this.http.post()
+  }
+
+  getData(list: any) {
+    return this.dishService.getMultiple(list)
   }
 }
