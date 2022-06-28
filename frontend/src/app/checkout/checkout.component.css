@@ -160,7 +160,7 @@ input:focus::-webkit-input-placeholder {
 }
 
 a:hover {
-  color: #e86741;
+  color: #e86741 !important;
   text-decoration: none;
 }
 

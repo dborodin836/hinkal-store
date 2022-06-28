@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
+import {HttpClient, HttpResponse} from "@angular/common/http";
 import {PageEvent} from "@angular/material/paginator";
-import {filter} from "rxjs";
 
 
 const baseUrl = 'http://localhost:8000/api/dish/';
@@ -50,6 +49,3 @@ export class DishService {
     return this.http.get<HttpResponse<any>>(baseUrl, {observe: "response", responseType: "json"})
   }
 }
-
-
-

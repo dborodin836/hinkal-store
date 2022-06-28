@@ -4,23 +4,31 @@
       <div class="title">
         <div class="row">
           <div class="col"><h4><b>Shopping Cart</b></h4></div>
-          <div class="col align-self-center text-right text-muted">3 items</div>
+          <div class="col align-self-center text-right text-muted">{{listDishes.length}} items</div>
         </div>
       </div>
 
-      <div *ngFor="let item of listDishes" class="row">
-        <div class="row main align-items-center">
-          <div class="col-2"><img class="img-fluid" src="{{item.image}}"></div>
-          <div class="col">
-            <div class="row text-muted">{{item.category}}</div>
-            <div class="row">{{item.title}}</div>
+      <div *ngIf="listDishes.length != 0; else elseBlock">
+
+        <div  *ngFor="let item of listDishes" class="row">
+          <div class="row main align-items-center">
+            <div class="col-2"><a routerLink="/store/{{item.id}}"><img class="img-fluid" src="{{item.image}}"></a></div>
+            <div class="col">
+              <div class="row text-muted">{{item.category}}</div>
+              <div class="row"><a routerLink="/store/{{item.id}}">{{item.title}}</a></div>
+            </div>
+            <div class="col">
+              <a (click)="decAmount(item.id)">-</a>1<a (click)="incAmount(item.id)">+</a>
+            </div>
+            <div class="col">$ {{item.price}} <span (click)="delItem(item.id)" class="close">&#10005;</span></div>
           </div>
-          <div class="col">
-            <a (click)="decAmount(item.id)">-</a><a>1</a><a (click)="incAmount(item.id)">+</a>
-          </div>
-          <div class="col">$ {{item.price}} <span class="close">&#10005;</span></div>
         </div>
+
       </div>
+
+      <ng-template #elseBlock>
+        <div class="col" style="font-size: larger">Cart is empty :(</div>
+      </ng-template>
 
       <div class="back-to-shop"><a routerLink="">&leftarrow;<a>Back to shop</a></a></div>
 

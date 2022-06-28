@@ -16,7 +16,7 @@
 </div>
 
 <div class="content-box">
-
+  
   <div *ngFor="let dish of bestSellingDishes" class="product-item">
     <div class="product-img">
       <a routerLink="store/{{dish.id}}">
@@ -30,7 +30,7 @@
       <div class="actions">
         <div class="add-to-cart">
           <i class="fa-solid fa-cart-circle-plus"></i>
-          <a href="" class="cart-button">В корзину</a>
+          <a (click)="addToCart(dish.id)" class="cart-button">В корзину</a>
         </div>
         <div class="add-to-links">
           <a class="wishlist"></a>

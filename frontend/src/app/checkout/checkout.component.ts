@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CartService} from "../services/cart.service";
 import {HttpResponse} from "@angular/common/http";
-import {DishModel} from "../models/dish.model";
 
 @Component({
   selector: 'app-checkout',
@@ -13,13 +12,12 @@ export class CheckoutComponent implements OnInit {
   constructor(private cartService: CartService) {
   }
 
-  cartList: any[] = [1, 121, 12]
 
   listDishes: any[] = []
 
   ngOnInit(): void {
-    if (this.cartList.length != 0) {
-      this.cartService.getData(this.cartList)
+    if (this.cartService.isHaveData()) {
+      this.cartService.getDataFromAPI()
         .subscribe((data: HttpResponse<any>) => {
           this.listDishes = data.body.results
           console.log(data.body.results)
@@ -27,11 +25,20 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
-  decAmount(id: any) {
-    console.log(id)
+  decAmount(id: number) {
+    this.cartService.decreaseAmount(id)
   }
 
-  incAmount(id: any) {
-    console.log(id)
+  incAmount(id: number) {
+    this.cartService.increaseAmount(id)
+  }
+
+  delItem(id: number) {
+    this.cartService.deleteItem(id)
+    let item = this.listDishes.find(x => x["id"] == id)
+    let index = this.listDishes.indexOf(item)
+    if (index != -1) {
+      this.listDishes.splice(index, 1)
+    }
   }
 }
