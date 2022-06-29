@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CartService} from "../services/cart.service";
-import {HttpResponse} from "@angular/common/http";
+import {HttpClient, HttpResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-checkout',
@@ -9,7 +9,8 @@ import {HttpResponse} from "@angular/common/http";
 })
 export class CheckoutComponent implements OnInit {
 
-  constructor(private cartService: CartService) {
+  constructor(private cartService: CartService,
+              private http: HttpClient) {
   }
 
 
@@ -40,5 +41,17 @@ export class CheckoutComponent implements OnInit {
     if (index != -1) {
       this.listDishes.splice(index, 1)
     }
+  }
+
+  getAmount(id: number) {
+   return this.cartService.getAmount(id)
+  }
+
+  createOrder() {
+    this.cartService.createOrder()
+  }
+
+  checkDiscountCode() {
+    // this.http.get()
   }
 }

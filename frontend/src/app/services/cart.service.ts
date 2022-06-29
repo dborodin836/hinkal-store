@@ -40,7 +40,9 @@ export class CartService {
   decreaseAmount(id: number) {
     let item = this.cartIdList.find(x => x["id"] == id)
     let index = this.cartIdList.indexOf(item)
-    item.amount -= 1
+    if (item.amount != 1) {
+      item.amount -= 1
+    }
     this.cartIdList[index] = item
   }
 
@@ -62,5 +64,10 @@ export class CartService {
     if (index != -1) {
       this.cartIdList.splice(index, 1)
     }
+  }
+
+  getAmount(id: number) {
+    let item = this.cartIdList.find(x => x["id"] == id)
+    return item["amount"]
   }
 }
