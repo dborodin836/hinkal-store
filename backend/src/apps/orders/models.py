@@ -69,6 +69,7 @@ class Order(models.Model):
     modifier = models.ManyToManyField(OrderModifier, blank=True)
     status = models.CharField(choices=STATUS, default="new", max_length=200)
     ordered_by = models.OneToOneField(Customer, on_delete=models.SET_NULL, null=True)
+    details = models.ManyToManyField("OrderItem")
 
     def __repr__(self):
         return (
@@ -89,7 +90,7 @@ class OrderItem(models.Model):
 
     item = models.ForeignKey(Dish, on_delete=models.CASCADE, null=True)
     amount = models.PositiveIntegerField(default=1)
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    # order = models.ManyToManyField(Order)
 
     def __repr__(self):
         return f"OrderItem({repr(self.item)}, {self.amount}, {repr(self.order)})"
