@@ -24,7 +24,7 @@ class OrderAdmin(admin.ModelAdmin):
         "ordered_by",
         "ordered_date",
     )
-    # inlines = (OrderItemInline,)
+    inlines = (OrderItemInline,)
 
 
 class DiscountAdmin(admin.ModelAdmin):
