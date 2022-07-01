@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {DishService} from "./dish.service";
 import {HttpClient} from "@angular/common/http";
+import {LoginService} from "./login.service";
 
-const baseUrl = "http://localhost:8000/api/dish/"
+const baseUrl = "http://localhost:8000/api/order/"
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class CartService {
   cartIdList: any[] = []
 
   constructor(private dishService: DishService,
-              private http: HttpClient) {
+              private http: HttpClient,
+              private loginService: LoginService) {
   }
 
   addItem(id: number) {
@@ -27,7 +29,16 @@ export class CartService {
   }
 
   createOrder() {
-    // this.http.post()
+    const userResponse$ = this.loginService.getUser()
+    const response = userResponse$
+    let data = {
+      "details": [],
+      "ordered_by": 1
+    }
+    // @ts-ignore
+    this.cartIdList.forEach(x => data["details"].push({"item": x["id"], "amount": x["amount"]}))
+    this.http.post(baseUrl, {}, {"observe": "response", "responseType": "json"})
+
   }
 
   increaseAmount(id: number) {
@@ -70,4 +81,5 @@ export class CartService {
     let item = this.cartIdList.find(x => x["id"] == id)
     return item["amount"]
   }
+
 }

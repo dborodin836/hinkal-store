@@ -44,7 +44,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   getAmount(id: number) {
-   return this.cartService.getAmount(id)
+    return this.cartService.getAmount(id)
   }
 
   createOrder() {
@@ -54,4 +54,16 @@ export class CheckoutComponent implements OnInit {
   checkDiscountCode() {
     // this.http.get()
   }
+
+  getTotalPrice() {
+    let accumulator = 0
+    this.listDishes.forEach(x => accumulator += (Number(x.price) * this.cartService.getAmount(x.id)))
+    return accumulator
+  }
+
+  getSubPrice(id: number) {
+    let item = this.listDishes.find(x => x["id"] == id)
+    return item.price * this.cartService.getAmount(item.id)
+  }
+
 }
