@@ -1,5 +1,6 @@
 import logging.config
 import os
+import sys
 from datetime import timedelta
 from pathlib import Path
 
@@ -78,13 +79,18 @@ DATABASES = {
     }
 }
 
+# Covers regular testing and django-coverage
+if "test" in sys.argv or "test\_coverage" in sys.argv:
+    DATABASES["default"]["ENGINE"] = "django.db.backends.postgresql"
+    DATABASES["default"]["NAME"] = ":memory:"
+
 logging.config.dictConfig(
     {
         "version": 1,
         "disable_existing_loggers": True,
         "formatters": {
             "main": {
-                "format": "%(asctime)s - %(levelname)s - %(module)s - %(filename)s - %(message)s"
+                "format": "%(asctime)s | %(levelname)s | %(module)s | %(filename)s | %(message)s"
             }
         },
         "handlers": {
@@ -92,7 +98,8 @@ logging.config.dictConfig(
             "file": {"class": "logging.FileHandler", "formatter": "main", "filename": "log.log"},
         },
         "loggers": {
-            "main": {"handlers": ["console", "file"], "level": "DEBUG", "propagate": True}
+            "main": {"handlers": ["console", "file"], "level": "INFO", "propagate": True},
+            "debug": {"handlers": ["console"], "level": "DEBUG", "propagate": True},
         },
     }
 )
