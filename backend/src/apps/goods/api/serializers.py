@@ -15,6 +15,7 @@ class DishListSerializer(serializers.ModelSerializer):
             "title",
             "image",
             "price",
+            "added_by"
         )
 
 

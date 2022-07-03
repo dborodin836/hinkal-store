@@ -45,6 +45,7 @@ services:
     depends_on:
       - db
   frontend:
-    image: dborodin836/frontend-hinkal
+    build: backend/
+    command: bash -c "nginx"
     ports:
       - "4200:80"
