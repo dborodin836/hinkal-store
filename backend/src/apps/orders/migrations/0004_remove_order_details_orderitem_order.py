@@ -7,18 +7,20 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('orders', '0003_alter_order_ordered_by'),
+        ("orders", "0003_alter_order_ordered_by"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='order',
-            name='details',
+            model_name="order",
+            name="details",
         ),
         migrations.AddField(
-            model_name='orderitem',
-            name='order',
-            field=models.ForeignKey(default=None, on_delete=django.db.models.deletion.CASCADE, to='orders.order'),
+            model_name="orderitem",
+            name="order",
+            field=models.ForeignKey(
+                default=None, on_delete=django.db.models.deletion.CASCADE, to="orders.order"
+            ),
             preserve_default=False,
         ),
     ]

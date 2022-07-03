@@ -10,58 +10,114 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('user', '0003_remove_useraddress_mobile_and_more'),
-        ('goods', '0013_category_dish_category'),
+        ("user", "0003_remove_useraddress_mobile_and_more"),
+        ("goods", "0013_category_dish_category"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Discount',
+            name="Discount",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=50)),
-                ('description', models.CharField(blank=True, max_length=255)),
-                ('discount_word', models.CharField(max_length=100)),
-                ('discount_amount', models.PositiveIntegerField()),
-                ('is_active', models.BooleanField(default=False)),
-                ('added_by', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='user.vendor')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                ("name", models.CharField(max_length=50)),
+                ("description", models.CharField(blank=True, max_length=255)),
+                ("discount_word", models.CharField(max_length=100)),
+                ("discount_amount", models.PositiveIntegerField()),
+                ("is_active", models.BooleanField(default=False)),
+                (
+                    "added_by",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="user.vendor"
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Order',
+            name="Order",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('comment', models.TextField(blank=True)),
-                ('ordered_date', models.DateTimeField(default=datetime.datetime.now)),
-                ('status', models.CharField(choices=[('new', 'new order'), ('pending', 'pending order'), ('finished', 'finished order'), ('canceled', 'canceled order')], default='new', max_length=200)),
-                ('discount', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='orders.discount')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                ("comment", models.TextField(blank=True)),
+                ("ordered_date", models.DateTimeField(default=datetime.datetime.now)),
+                (
+                    "status",
+                    models.CharField(
+                        choices=[
+                            ("new", "new order"),
+                            ("pending", "pending order"),
+                            ("finished", "finished order"),
+                            ("canceled", "canceled order"),
+                        ],
+                        default="new",
+                        max_length=200,
+                    ),
+                ),
+                (
+                    "discount",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to="orders.discount",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='OrderModifier',
+            name="OrderModifier",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=100)),
-                ('descriptions', models.CharField(max_length=255)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                ("title", models.CharField(max_length=100)),
+                ("descriptions", models.CharField(max_length=255)),
             ],
         ),
         migrations.CreateModel(
-            name='OrderItem',
+            name="OrderItem",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('amount', models.PositiveIntegerField(default=1)),
-                ('item', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='goods.dish')),
-                ('order', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='orders.order')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                ("amount", models.PositiveIntegerField(default=1)),
+                (
+                    "item",
+                    models.ForeignKey(
+                        null=True, on_delete=django.db.models.deletion.CASCADE, to="goods.dish"
+                    ),
+                ),
+                (
+                    "order",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="orders.order"
+                    ),
+                ),
             ],
         ),
         migrations.AddField(
-            model_name='order',
-            name='modifier',
-            field=models.ManyToManyField(blank=True, to='orders.ordermodifier'),
+            model_name="order",
+            name="modifier",
+            field=models.ManyToManyField(blank=True, to="orders.ordermodifier"),
         ),
         migrations.AddField(
-            model_name='order',
-            name='ordered_by',
-            field=models.OneToOneField(null=True, on_delete=django.db.models.deletion.SET_NULL, to='user.customer'),
+            model_name="order",
+            name="ordered_by",
+            field=models.OneToOneField(
+                null=True, on_delete=django.db.models.deletion.SET_NULL, to="user.customer"
+            ),
         ),
     ]
