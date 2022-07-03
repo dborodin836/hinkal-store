@@ -10,7 +10,7 @@ def main():
     """Run administrative tasks."""
     sys.path.append(str(Path(__file__).resolve().parent.parent))
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'src.settings')
-    get_envs_from_file('local.env')
+    get_envs_from_file("test.env")
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
