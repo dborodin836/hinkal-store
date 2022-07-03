@@ -46,7 +46,6 @@ jobs:
           POSTGRES_PASSWORD: postgres
           POSTGRES_USER: postgres
           POSTGRES_DB: postgres
-          ENV: TEST
 
         options: >-
           --health-cmd pg_isready
@@ -74,8 +73,12 @@ jobs:
         run: |
           cd backend
           python manage.py migrate
+        env:
+          ENV: TEST
 
       - name: Run the mock tests function
         run: |
           cd backend
           python manage.py test
+        env:
+          ENV: TEST
