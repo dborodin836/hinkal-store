@@ -1,24 +1,24 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
+import { UserModel } from '../models/user.model';
 
 const baseUrl = 'http://localhost:8000/auth/';
-// let headers = new HttpHeaders({'Authorization': 'Token f8893cfcd3b0e4b4be269bb647678b1ffaa0c33c'})
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  private response: any;
-  private token = "";
+  private auth_token = "";
+  private user: UserModel = {};
 
   constructor(private http: HttpClient,
               private router: Router) {
   }
 
   getToken(): string | undefined {
-    return this.token
+    return this.auth_token
   }
 
   getAuthHeader() {
@@ -27,23 +27,51 @@ export class LoginService {
 
   logout() {
     // @ts-ignore
-    let headers = new HttpHeaders({'Authorization': 'Token ' + this.token})
-    this.http.post(baseUrl + 'token/logout/', '', {headers: headers})
-    this.token='';
+    console.log(this.auth_token)
+    this.http.post(baseUrl + 'token/logout/', '', {headers: this.getAuthHeader()}).subscribe()
+    this.auth_token='';
+    this.user = {}
     this.router.navigate(['success'])
   }
 
   login(data: { username: any; password: any; }) {
-    this.http.post<any>(baseUrl + 'token/login/', data,)
-      .subscribe(data => {
-        console.log(data.auth_token)
-        this.token = data.auth_token
-      })
-    console.log(this.response)
-    return this.response
+    let promise = new Promise((resolve, rejectt) => {
+      this.http.post<any>(baseUrl + 'token/login/', data,)
+        .toPromise()
+        .then(
+          res => {
+            this.auth_token = res.auth_token
+            console.log(res.auth_token)
+            this.getUser()
+          }
+        )
+    })
+    return promise
   }
 
   isAuthorized(): boolean {
-    return this.token != ''
+    return this.auth_token != ''
+  }
+
+  getUser() {
+    let promise = new Promise((resolve, rejectt) => {
+      let url = baseUrl + "users/me/"
+      this.http.get(url, {observe:"response", responseType:"json", headers: this.getAuthHeader()})
+        .toPromise()
+        .then(
+          res => {
+            // @ts-ignore
+            this.user = res.body
+          }
+        )
+    })
+    return promise
+  }
+  
+  // let url = baseUrl + "users/me/"
+  // // @ts-ignore
+  // return this.http.get<HttpResponse<>>(url, {observe:"response", responseType:"json", headers: this.getAuthHeader()})
+  getUserData() {
+    return this.user
   }
 }

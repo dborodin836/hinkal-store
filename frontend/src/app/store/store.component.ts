@@ -3,6 +3,7 @@ import {DishService} from "../services/dish.service";
 import {DishModel} from "../models/dish.model";
 import {HttpResponse} from "@angular/common/http";
 import {PageEvent} from "@angular/material/paginator";
+import {CartService} from "../services/cart.service";
 
 
 @Component({
@@ -12,7 +13,8 @@ import {PageEvent} from "@angular/material/paginator";
 })
 export class StoreComponent implements OnInit {
 
-  constructor(private dishService: DishService) { }
+  constructor(private dishService: DishService,
+              private cartService: CartService) { }
 
   dishes?: DishModel[]
 
@@ -58,5 +60,9 @@ export class StoreComponent implements OnInit {
     console.log(event.target.value)
     this.keyword = event.target.value
     this.getServerData()
+  }
+
+  addToCart(id: number) {
+    this.cartService.addItem(id)
   }
 }
