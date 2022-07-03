@@ -22,6 +22,7 @@ services:
       - "8000:8000"
       - "80:4200"
     environment:
+      - ENV=DOCKER
       - POSTGRES_DB=${POSTGRES_NAME}
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}

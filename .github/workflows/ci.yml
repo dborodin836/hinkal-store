@@ -8,6 +8,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      ENV: docker
     strategy:
       matrix:
         python-version: [3.9]
@@ -44,6 +46,7 @@ jobs:
           POSTGRES_PASSWORD: postgres
           POSTGRES_USER: postgres
           POSTGRES_DB: postgres
+          ENV: TEST
 
         options: >-
           --health-cmd pg_isready

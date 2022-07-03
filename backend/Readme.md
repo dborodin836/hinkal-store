@@ -25,7 +25,16 @@ Then install the dependencies:
 ```sh
 (env)$ pip install -r requirements_dev.txt 
 ```
-**Before applying migration you must create `.env` file in `hinkali-store` directory.**
+**Before applying migration you must create `.env` file in `hinkali-store` directory. And expose an environment variable.**
+
+Available vars are:
+- "DEV" - local development
+- "PROD" - production
+- "DOCKER" - user to containerize app (no need to set it up manually)
+- "TEST" - used to test app with GH actions
+
+**NOTE: Not all corresponding file are available in gh repository.**
+
 
 **You can find an example in `hinkali-store/backend/docs/.env_template.md`**
 

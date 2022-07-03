@@ -3,14 +3,16 @@
 import os
 import sys
 from pathlib import Path
-from utils.envreader import get_envs_from_file
+from src.apps.core.env import setup_env_vars
 
 
 def main():
     """Run administrative tasks."""
     sys.path.append(str(Path(__file__).resolve().parent.parent))
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'src.settings')
-    get_envs_from_file("test.env")
+
+    setup_env_vars()
+
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
