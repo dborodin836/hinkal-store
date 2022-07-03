@@ -18,6 +18,10 @@ __pycache__
 # Node modules
 node_modules
 
+# Coverage
+backend/htmlcov
+backend/.coverage
+
 # Docker
 data
 
