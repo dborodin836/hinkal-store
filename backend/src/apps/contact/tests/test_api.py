@@ -1,7 +1,7 @@
 from rest_framework.test import APITestCase
 
 from src.apps.contact.models import Contact
-from utils.testing.factories import AdminAPIClient
+from src.apps.core.testing.api_clients import AdminAPIClient
 
 
 class ContactAPITest(APITestCase):
