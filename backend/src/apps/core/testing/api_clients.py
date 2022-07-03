@@ -3,11 +3,10 @@ from rest_framework.authtoken.models import Token
 from rest_framework.test import APIClient
 import logging
 
-logger = logging.getLogger('main')
+logger = logging.getLogger("main")
 
 
 class BaseUserAPIClient(APIClient):
-
     def __init__(self, username: str, password: str, enforce_csrf_checks=False, **defaults):
         super().__init__(enforce_csrf_checks=False, **defaults)
         logger.debug("AdminAPIClient is being constructed.")
@@ -28,9 +27,7 @@ class BaseUserAPIClient(APIClient):
         Creates superuser.
         """
         self._user = User.objects.create(
-            username=self.__username,
-            is_superuser=True,
-            is_staff=True
+            username=self.__username, is_superuser=True, is_staff=True
         )
         self._user.set_password(self.__password)
         self._user.save()
@@ -53,23 +50,20 @@ class BaseUserAPIClient(APIClient):
             logger.info("All tokens : %s" % Token.objects.all())
             raise Token.DoesNotExist
 
-        self.credentials(HTTP_AUTHORIZATION=f'Token {self.__token}')
+        self.credentials(HTTP_AUTHORIZATION=f"Token {self.__token}")
 
 
 class AdminAPIClient(BaseUserAPIClient):
     """
     APIClient that represents superuser/admin client.
     """
+
     def __create_user(self) -> None:
         """
         Creates superuser.
         """
         self._user = User.objects.create(
-            username=self.__username,
-            is_superuser=True,
-            is_staff=True
+            username=self.__username, is_superuser=True, is_staff=True
         )
         self._user.set_password(self.__password)
         self._user.save()
-
-
