@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
+import { UserModel } from '../models/user.model';
 
 const baseUrl = 'http://localhost:8000/auth/';
 
@@ -10,7 +11,7 @@ const baseUrl = 'http://localhost:8000/auth/';
 export class LoginService {
 
   private auth_token = "";
-  private user = {};
+  private user: UserModel = {};
 
   constructor(private http: HttpClient,
               private router: Router) {
@@ -29,6 +30,7 @@ export class LoginService {
     console.log(this.auth_token)
     this.http.post(baseUrl + 'token/logout/', '', {headers: this.getAuthHeader()}).subscribe()
     this.auth_token='';
+    this.user = {}
     this.router.navigate(['success'])
   }
 
@@ -40,9 +42,11 @@ export class LoginService {
           res => {
             this.auth_token = res.auth_token
             console.log(res.auth_token)
+            this.getUser()
           }
         )
     })
+    return promise
   }
 
   isAuthorized(): boolean {
@@ -50,8 +54,24 @@ export class LoginService {
   }
 
   getUser() {
-    let url = baseUrl + "users/me/"
-    // @ts-ignore
-    this.http.get<HttpResponse<any>>(url, {observe:"response", responseType:"json", headers: this.getAuthHeader()}).subscribe
+    let promise = new Promise((resolve, rejectt) => {
+      let url = baseUrl + "users/me/"
+      this.http.get(url, {observe:"response", responseType:"json", headers: this.getAuthHeader()})
+        .toPromise()
+        .then(
+          res => {
+            // @ts-ignore
+            this.user = res.body
+          }
+        )
+    })
+    return promise
+  }
+  
+  // let url = baseUrl + "users/me/"
+  // // @ts-ignore
+  // return this.http.get<HttpResponse<>>(url, {observe:"response", responseType:"json", headers: this.getAuthHeader()})
+  getUserData() {
+    return this.user
   }
 }

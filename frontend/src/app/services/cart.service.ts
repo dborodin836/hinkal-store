@@ -29,15 +29,15 @@ export class CartService {
   }
 
   createOrder() {
-    const userResponse$ = this.loginService.getUser()
-    const response = userResponse$
     let data = {
       "details": [],
-      "ordered_by": 1
+      "ordered_by": this.loginService.getUserData()["id"]
     }
     // @ts-ignore
     this.cartIdList.forEach(x => data["details"].push({"item": x["id"], "amount": x["amount"]}))
-    this.http.post(baseUrl, {}, {"observe": "response", "responseType": "json"})
+    console.log(this.loginService.getToken())
+    console.log(this.loginService.getUserData())
+    this.http.post(baseUrl, data, {observe: "response", responseType: "json", headers: this.loginService.getAuthHeader()}).subscribe()
 
   }
 
