@@ -14,6 +14,15 @@ class OrderItemDetailSerializer(serializers.ModelSerializer):
 class OrderDetailSerializer(serializers.ModelSerializer):
     """Detailed Order"""
 
+    details = OrderItemDetailSerializer(many=True)
+
+    def create(self, validated_data):
+        order_items = validated_data.pop("details")
+        order = Order.objects.create(**validated_data)
+        for item in order_items:
+            OrderItem.objects.create(order=order, **item)
+        return order
+
     class Meta:
         model = Order
         fields = ("id", "comment", "ordered_date", "discount", "modifier", "status", "ordered_by")

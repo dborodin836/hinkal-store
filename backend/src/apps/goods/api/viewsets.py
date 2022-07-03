@@ -29,6 +29,9 @@ class DishViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = Dish.objects.all()
 
+        if self.request.GET.get("id"):
+            queryset = queryset.filter(pk__in=self.request.GET.get("id").split(","))
+
         if self.request.GET.get("query_keyword"):
             queryset = queryset.filter(title__icontains=self.request.GET.get("query_keyword"))
 
