@@ -46,7 +46,11 @@ services:
     depends_on:
       - db
   frontend:
-    build: backend/
-    command: bash -c "nginx"
+    build: frontend/
+    volumes:
+      - ./templates:/etc/nginx/templates
     ports:
       - "4200:80"
+    environment:
+      - NGINX_HOST=localhost
+      - NGINX_PORT=80
