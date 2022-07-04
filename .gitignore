@@ -14,6 +14,7 @@ __pycache__
 
 # Enviroment files
 /backend/local.env
+/backend/prod.env
 
 # Node modules
 node_modules

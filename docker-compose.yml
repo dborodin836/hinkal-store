@@ -15,6 +15,7 @@ services:
                    && python3 manage.py wait_for_db
                    && python3 manage.py migrate
                    && python3 manage.py loaddata data.json
+                   && python3 manage.py sadmin
                    && python3 manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/code
@@ -45,6 +46,11 @@ services:
     depends_on:
       - db
   frontend:
-    image: dborodin836/frontend-hinkal
+    build: frontend/
+    volumes:
+      - ./templates:/etc/nginx/templates
     ports:
       - "4200:80"
+    environment:
+      - NGINX_HOST=localhost
+      - NGINX_PORT=80

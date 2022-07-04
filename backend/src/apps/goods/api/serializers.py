@@ -10,12 +10,7 @@ class DishListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Dish
-        fields = (
-            "id",
-            "title",
-            "image",
-            "price",
-        )
+        fields = ("id", "title", "image", "price", "added_by")
 
 
 class DishDetailSerializer(serializers.ModelSerializer):
