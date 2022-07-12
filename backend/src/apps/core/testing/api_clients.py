@@ -75,6 +75,7 @@ class CustomerAPIClient(BaseUserAPIClient):
     """
     APIClient that represents customer client.
     """
+
     def __create_user(self) -> None:
         """
         Creates superuser.
@@ -88,6 +89,7 @@ class VendorAPIClient(BaseUserAPIClient):
     """
     APIClient that represents vendor client.
     """
+
     def __create_user(self) -> None:
         """
         Creates superuser.

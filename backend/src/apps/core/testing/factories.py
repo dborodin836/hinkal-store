@@ -4,7 +4,7 @@ from datetime import datetime
 
 import factory
 
-from src.apps.user.models import Vendor, Customer
+from src.apps.user.models import Vendor
 
 
 class VendorFactory(factory.Factory):
@@ -15,13 +15,14 @@ class VendorFactory(factory.Factory):
     Password will be ``testpass`` by default.
     """
 
-    _username = "".join(
-        [random.choice(string.ascii_letters + "123456789_-") for _ in range(30)]) + str(
-        datetime.now())[:10]
+    _username = (
+        "".join([random.choice(string.ascii_letters + "123456789_-") for _ in range(30)])
+        + str(datetime.now())[:10]
+    )
 
     username = _username
     email = "{0}@example.com".format(_username)
-    password = factory.PostGenerationMethodCall('set_password', 'testpass')
+    password = factory.PostGenerationMethodCall("set_password", "testpass")
     is_active = True
 
     class Meta:

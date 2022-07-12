@@ -2,7 +2,6 @@ from rest_framework import permissions
 
 
 class VendorPermission(permissions.BasePermission):
-
     def has_permission(self, request, view):
         if str(request.user).lower() == "vendor":
             return True

@@ -21,12 +21,15 @@ class CustomerDishAPITest(APITestCase):
 
     def setUp(self) -> None:
         self.vendor = VendorFactory().save()
-        self.clientAdmin = AdminAPIClient(username=self.TEST_ADMIN_USERNAME,
-                                          password=self.TEST_ADMIN_PASSWORD)
-        self.clientVendor = VendorAPIClient(username=self.TEST_VENDOR_USERNAME,
-                                            password=self.TEST_VENDOR_PASSWORD)
-        self.clientCustomer = CustomerAPIClient(username=self.TEST_CUSTOMER_USERNAME,
-                                                password=self.TEST_CUSTOMER_PASSWORD)
+        self.clientAdmin = AdminAPIClient(
+            username=self.TEST_ADMIN_USERNAME, password=self.TEST_ADMIN_PASSWORD
+        )
+        self.clientVendor = VendorAPIClient(
+            username=self.TEST_VENDOR_USERNAME, password=self.TEST_VENDOR_PASSWORD
+        )
+        self.clientCustomer = CustomerAPIClient(
+            username=self.TEST_CUSTOMER_USERNAME, password=self.TEST_CUSTOMER_PASSWORD
+        )
         category = Category.objects.create(name="Dish")
 
         self.data = {
@@ -35,8 +38,9 @@ class CustomerDishAPITest(APITestCase):
             "added_by": 2,
         }
 
-        self.dish = Dish.objects.create(title="test1", description="", price=699,
-                                        category=category, added_by=self.vendor)
+        self.dish = Dish.objects.create(
+            title="test1", description="", price=699, category=category, added_by=self.vendor
+        )
 
         self.data_update = {
             "title": "test1update",
@@ -58,8 +62,9 @@ class CustomerDishAPITest(APITestCase):
 
     def test_creation_validation(self):
         dish = Dish.objects.get(pk=self.dish.id)
-        self.assertEqual(self.data,
-                         {"title": dish.title, "price": float(dish.price), "added_by": 2})
+        self.assertEqual(
+            self.data, {"title": dish.title, "price": float(dish.price), "added_by": 2}
+        )
 
     def test_creation_unauthorized(self):
         response = self.client.post(self.base_url, data=self.data)

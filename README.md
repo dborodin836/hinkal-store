@@ -1,9 +1,9 @@
 <br/>
 <p align="center">
-  <h3 align="center">Food Store 'HINKAL'</h3>
+  <h3 align="center">Food Marketplace 'HINKAL'</h3>
 
   <p align="center">
-    Fullstack website created for studying and an example of my coding.
+    Fullstack website for interview.
     <br/>
     <br/>
   </p>
@@ -22,8 +22,6 @@
 ## About The Project
 
 ![Screen Shot](photos/home_screenshot.png)
-
-I wanted to create this project to study how to make a cool Fullstack website. I'm using Angular with Django, featuring REST and other technologies.
 
 Main features:
 
