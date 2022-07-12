@@ -12,3 +12,4 @@ setuptools==62.4.0
 djoser==2.1.0
 django-mptt~=0.13.4
 coverage==6.4.1
+factory-boy==3.2.1

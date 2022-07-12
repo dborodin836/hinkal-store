@@ -3,6 +3,8 @@ from rest_framework.authtoken.models import Token
 from rest_framework.test import APIClient
 import logging
 
+from src.apps.user.models import Customer, Vendor
+
 logger = logging.getLogger("main")
 
 
@@ -65,5 +67,33 @@ class AdminAPIClient(BaseUserAPIClient):
         self._user = User.objects.create(
             username=self.__username, is_superuser=True, is_staff=True
         )
+        self._user.set_password(self.__password)
+        self._user.save()
+
+
+class CustomerAPIClient(BaseUserAPIClient):
+    """
+    APIClient that represents customer client.
+    """
+
+    def __create_user(self) -> None:
+        """
+        Creates superuser.
+        """
+        self._user = Customer.objects.create(username=self.__username)
+        self._user.set_password(self.__password)
+        self._user.save()
+
+
+class VendorAPIClient(BaseUserAPIClient):
+    """
+    APIClient that represents vendor client.
+    """
+
+    def __create_user(self) -> None:
+        """
+        Creates superuser.
+        """
+        self._user = Vendor.objects.create(username=self.__username)
         self._user.set_password(self.__password)
         self._user.save()
