@@ -84,6 +84,8 @@ jobs:
           cd backend
           coverage run manage.py test
           coverage xml
+        env:
+          ENV: TEST
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
