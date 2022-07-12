@@ -16,8 +16,8 @@ class VendorFactory(factory.Factory):
     """
 
     _username = (
-        "".join([random.choice(string.ascii_letters + "123456789_-") for _ in range(30)]) +
-        str(datetime.now())[:10]
+        "".join([random.choice(string.ascii_letters + "123456789_-") for _ in range(30)])
+        + str(datetime.now())[:10]
     )
 
     username = _username
