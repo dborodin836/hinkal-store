@@ -81,6 +81,7 @@ jobs:
           ENV: TEST
       - name: Generate coverage report
         run: |
+          cd backend
           coverage run manage.py test
           coverage xml
       - name: Upload coverage to Codecov
