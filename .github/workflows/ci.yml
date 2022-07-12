@@ -2,9 +2,9 @@ name: Python
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, develop, release ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, develop, release ]
 jobs:
   Black_flake8_mypy:
     runs-on: ubuntu-latest
