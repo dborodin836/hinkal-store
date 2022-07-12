@@ -25,7 +25,7 @@ class OrderDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ("id", "comment", "ordered_date", "discount", "modifier", "status", "ordered_by")
+        fields = ("id", "comment", "ordered_date", "discount", "modifier", "status", "ordered_by", "details")
 
 
 class DiscountDetailSerializer(serializers.ModelSerializer):
