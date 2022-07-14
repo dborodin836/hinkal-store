@@ -1,4 +1,8 @@
+import io
+
+from django.core.management import call_command
 from rest_framework.test import APITestCase
+from contextlib import redirect_stdout
 
 from src.apps.core.testing.api_clients import CustomerAPIClient, AdminAPIClient, VendorAPIClient
 from src.apps.goods.models import Dish, Category
@@ -19,17 +23,23 @@ class CustomerDishAPITest(APITestCase):
     base_url = "http://localhost:8000/api/dish/"
     detailed_url = base_url + "3/"
 
+    @classmethod
+    def setUpTestData(cls) -> None:
+        with redirect_stdout(io.StringIO()):
+            call_command("loaddata", "fixtures/groups.json", app_label="auth")
+        cls.vendor = VendorFactory().save()
+        cls.clientAdmin = AdminAPIClient(
+            username=cls.TEST_ADMIN_USERNAME, password=cls.TEST_ADMIN_PASSWORD
+        )
+        cls.clientVendor = VendorAPIClient(
+            username=cls.TEST_VENDOR_USERNAME, password=cls.TEST_VENDOR_PASSWORD
+        )
+
+        cls.clientCustomer = CustomerAPIClient(
+            username=cls.TEST_CUSTOMER_USERNAME, password=cls.TEST_CUSTOMER_PASSWORD
+        )
+
     def setUp(self) -> None:
-        self.vendor = VendorFactory().save()
-        self.clientAdmin = AdminAPIClient(
-            username=self.TEST_ADMIN_USERNAME, password=self.TEST_ADMIN_PASSWORD
-        )
-        self.clientVendor = VendorAPIClient(
-            username=self.TEST_VENDOR_USERNAME, password=self.TEST_VENDOR_PASSWORD
-        )
-        self.clientCustomer = CustomerAPIClient(
-            username=self.TEST_CUSTOMER_USERNAME, password=self.TEST_CUSTOMER_PASSWORD
-        )
         category = Category.objects.create(name="Dish")
 
         self.data = {
@@ -38,22 +48,46 @@ class CustomerDishAPITest(APITestCase):
             "added_by": 2,
         }
 
-        self.dish = Dish.objects.create(
-            title="test1", description="", price=699, category=category, added_by=self.vendor
-        )
-
-        self.data_update = {
+        self.data_updated = {
             "title": "test1update",
             "price": 899,
             "added_by": 2,
         }
 
-    def test_get_list(self):
+        self.dish = Dish.objects.create(
+            title="test1", description="", price=699, category=category, added_by=self.vendor
+        )
+
+    def test_get_list_unauthorized(self):
         response = self.client.get(self.base_url)
         self.assertEqual(response.status_code, 200)
 
-    def test_get_detail(self):
+    def test_get_detail_unauthorized(self):
         response = self.client.get(self.base_url + str(self.dish.id) + "/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_get_list_admin(self):
+        response = self.clientAdmin.get(self.base_url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_get_detail_admin(self):
+        response = self.clientAdmin.get(self.base_url + str(self.dish.id) + "/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_get_list_customer(self):
+        response = self.clientCustomer.get(self.base_url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_get_detail_customer(self):
+        response = self.clientCustomer.get(self.base_url + str(self.dish.id) + "/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_get_list_vendor(self):
+        response = self.clientVendor.get(self.base_url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_get_detail_vendor(self):
+        response = self.clientVendor.get(self.base_url + str(self.dish.id) + "/")
         self.assertEqual(response.status_code, 200)
 
     def test_creation_vendor(self):

@@ -11,9 +11,10 @@ class ContactAPITest(APITestCase):
     base_url = "http://localhost:8000/api/contact/"
     detailed_url = base_url + "1/"
 
-    def setUp(self) -> None:
-        self.adminClient = AdminAPIClient(
-            username=self.TEST_ADMIN_USERNAME, password=self.TEST_ADMIN_PASSWORD
+    @classmethod
+    def setUpTestData(cls) -> None:
+        cls.adminClient = AdminAPIClient(
+            username=cls.TEST_ADMIN_USERNAME, password=cls.TEST_ADMIN_PASSWORD
         )
 
     def test_unauthenticated_user(self):
