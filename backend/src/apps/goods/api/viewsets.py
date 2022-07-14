@@ -1,5 +1,5 @@
 from rest_framework import mixins, viewsets
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, DjangoModelPermissionsOrAnonReadOnly
 
 from src.apps.core.permissions import VendorPermission
 from src.apps.goods.api.serializers import DishDetailSerializer, DishListSerializer
@@ -12,7 +12,7 @@ class DishViewSet(viewsets.ModelViewSet):
     """
 
     queryset = Dish.objects.all()
-    permission_classes = (VendorPermission,)
+    permission_classes = (VendorPermission & DjangoModelPermissionsOrAnonReadOnly,)
 
     def get_serializer_class(self):
         if self.action == "list":
