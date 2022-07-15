@@ -62,19 +62,19 @@ class ContactAPITest(APITestCase):
             "subject": "subject",
             "email": "email@gmail.com",
             "message": "message",
-            "added_date": "2015-05-16T05:50:06",
+            "created_at": "2015-05-16T05:50:06",
         }
         response = self.adminClient.post(self.base_url, data=data)
         self.assertEqual(response.status_code, 201)
 
         # Data validation
-        contact = Contact.objects.latest("added_date")
+        contact = Contact.objects.latest("created_at")
         model_data = {
             "name": contact.name,
             "subject": contact.subject,
             "email": contact.email,
             "message": contact.message,
-            "added_date": "2015-05-16T05:50:06",
+            "created_at": "2015-05-16T05:50:06",
         }
         self.assertEqual(data, model_data)
 
