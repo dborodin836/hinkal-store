@@ -1,3 +1,4 @@
+# mypy: ignore-errors
 import io
 
 from django.core.management import call_command

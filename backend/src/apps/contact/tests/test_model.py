@@ -12,12 +12,12 @@ class ContactModelTest(TestCase):
             subject="subject",
             email="email@gmail.com",
             message="message",
-            added_date=datetime.datetime(1, 1, 1, 1, 1, tzinfo=pytz.UTC),
+            created_at=datetime.datetime(1, 1, 1, 1, 1, tzinfo=pytz.UTC),
         )
 
     def test_str(self):
         """
         Testing __str__ method.
         """
-        contact = Contact.objects.latest("added_date")
+        contact = Contact.objects.latest("created_at")
         self.assertEqual(str(contact), "Contact: subject")
