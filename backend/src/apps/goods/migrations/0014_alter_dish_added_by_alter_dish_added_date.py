@@ -8,20 +8,25 @@ import django.utils.timezone
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('user', '0003_remove_useraddress_mobile_and_more'),
-        ('goods', '0013_category_dish_category'),
+        ("user", "0003_remove_useraddress_mobile_and_more"),
+        ("goods", "0013_category_dish_category"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='dish',
-            name='added_by',
-            field=models.ForeignKey(default=None, on_delete=django.db.models.deletion.CASCADE, to='user.vendor', verbose_name='Vendor'),
+            model_name="dish",
+            name="added_by",
+            field=models.ForeignKey(
+                default=None,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="user.vendor",
+                verbose_name="Vendor",
+            ),
             preserve_default=False,
         ),
         migrations.AlterField(
-            model_name='dish',
-            name='added_date',
-            field=models.DateTimeField(default=django.utils.timezone.now, verbose_name='Added'),
+            model_name="dish",
+            name="added_date",
+            field=models.DateTimeField(default=django.utils.timezone.now, verbose_name="Added"),
         ),
     ]

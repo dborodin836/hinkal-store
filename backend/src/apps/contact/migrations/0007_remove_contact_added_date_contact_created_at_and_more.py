@@ -7,22 +7,22 @@ import django.utils.timezone
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('contact', '0006_alter_contact_added_date'),
+        ("contact", "0006_alter_contact_added_date"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='contact',
-            name='added_date',
+            model_name="contact",
+            name="added_date",
         ),
         migrations.AddField(
-            model_name='contact',
-            name='created_at',
+            model_name="contact",
+            name="created_at",
             field=models.DateTimeField(default=django.utils.timezone.now, editable=False),
         ),
         migrations.AddField(
-            model_name='contact',
-            name='updated_at',
+            model_name="contact",
+            name="updated_at",
             field=models.DateTimeField(default=django.utils.timezone.now, editable=False),
         ),
     ]
