@@ -1,3 +1,4 @@
+# mypy: ignore-errors
 import io
 
 from django.core.management import call_command
@@ -27,15 +28,15 @@ class CustomerDishAPITest(APITestCase):
     def setUpTestData(cls) -> None:
         with redirect_stdout(io.StringIO()):
             call_command("loaddata", "fixtures/groups.json", app_label="auth")
-        cls.vendor = VendorFactory().save()  # type: ignore
-        cls.clientAdmin = AdminAPIClient(  # type: ignore
+        cls.vendor = VendorFactory().save()
+        cls.clientAdmin = AdminAPIClient(
             username=cls.TEST_ADMIN_USERNAME, password=cls.TEST_ADMIN_PASSWORD
         )
-        cls.clientVendor = VendorAPIClient(  # type: ignore
+        cls.clientVendor = VendorAPIClient(
             username=cls.TEST_VENDOR_USERNAME, password=cls.TEST_VENDOR_PASSWORD
         )
 
-        cls.clientCustomer = CustomerAPIClient(  # type: ignore
+        cls.clientCustomer = CustomerAPIClient(
             username=cls.TEST_CUSTOMER_USERNAME, password=cls.TEST_CUSTOMER_PASSWORD
         )
 
@@ -56,7 +57,7 @@ class CustomerDishAPITest(APITestCase):
 
         self.dish = Dish.objects.create(
             title="test1", description="", price=699, category=category, added_by=self.vendor
-        )  # type: ignore
+        )
 
     def test_get_list_unauthorized(self):
         response = self.client.get(self.base_url)
