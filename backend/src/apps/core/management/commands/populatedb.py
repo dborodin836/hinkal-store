@@ -208,7 +208,7 @@ class Command(BaseCommand):
                     subject="I NEED HELP, YOU F*CKERS!!!",
                     email=sender,
                     name=name,
-                    added_date=date,
+                    created_at=date,
                     message=message,
                 )
                 print(f'Contact from "{name}" created successfully!')

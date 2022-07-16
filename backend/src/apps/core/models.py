@@ -9,6 +9,7 @@ class TimeStampedModelMixin(models.Model):
 
     Adds 2 models fields "created_at" and "updated_at".
     """
+
     created_at = models.DateTimeField(default=timezone.now, editable=False)
     updated_at = models.DateTimeField(default=timezone.now, editable=False)
 
@@ -23,6 +24,7 @@ class AddedByModelMixin(models.Model):
     Adds one field "added_by". By default, connects to the default
     django "User" model.
     """
+
     added_by = models.ForeignKey(User, on_delete=models.SET_NULL)
 
     class Meta:
@@ -33,5 +35,6 @@ class TimeStampedAddedByModel(TimeStampedModelMixin, AddedByModelMixin):
     """
     Combines functionality of AddedByModelMixin and TimeStampedModelMixin.
     """
+
     class Meta:
         abstract = True

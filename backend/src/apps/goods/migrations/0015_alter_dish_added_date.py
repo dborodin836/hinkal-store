@@ -7,13 +7,15 @@ import django.utils.timezone
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('goods', '0014_alter_dish_added_by_alter_dish_added_date'),
+        ("goods", "0014_alter_dish_added_by_alter_dish_added_date"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='dish',
-            name='added_date',
-            field=models.DateTimeField(default=django.utils.timezone.now, null=True, verbose_name='Added'),
+            model_name="dish",
+            name="added_date",
+            field=models.DateTimeField(
+                default=django.utils.timezone.now, null=True, verbose_name="Added"
+            ),
         ),
     ]

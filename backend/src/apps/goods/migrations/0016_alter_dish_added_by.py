@@ -7,14 +7,19 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('user', '0003_remove_useraddress_mobile_and_more'),
-        ('goods', '0015_alter_dish_added_date'),
+        ("user", "0003_remove_useraddress_mobile_and_more"),
+        ("goods", "0015_alter_dish_added_date"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='dish',
-            name='added_by',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='user.vendor', verbose_name='Vendor'),
+            model_name="dish",
+            name="added_by",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="user.vendor",
+                verbose_name="Vendor",
+            ),
         ),
     ]

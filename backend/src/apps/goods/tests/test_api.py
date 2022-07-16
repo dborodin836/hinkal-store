@@ -27,15 +27,15 @@ class CustomerDishAPITest(APITestCase):
     def setUpTestData(cls) -> None:
         with redirect_stdout(io.StringIO()):
             call_command("loaddata", "fixtures/groups.json", app_label="auth")
-        cls.vendor = VendorFactory().save()
-        cls.clientAdmin = AdminAPIClient(
+        cls.vendor = VendorFactory().save()  # type: ignore
+        cls.clientAdmin = AdminAPIClient(  # type: ignore
             username=cls.TEST_ADMIN_USERNAME, password=cls.TEST_ADMIN_PASSWORD
         )
-        cls.clientVendor = VendorAPIClient(
+        cls.clientVendor = VendorAPIClient(  # type: ignore
             username=cls.TEST_VENDOR_USERNAME, password=cls.TEST_VENDOR_PASSWORD
         )
 
-        cls.clientCustomer = CustomerAPIClient(
+        cls.clientCustomer = CustomerAPIClient(  # type: ignore
             username=cls.TEST_CUSTOMER_USERNAME, password=cls.TEST_CUSTOMER_PASSWORD
         )
 
@@ -55,7 +55,7 @@ class CustomerDishAPITest(APITestCase):
         }
 
         self.dish = Dish.objects.create(
-            title="test1", description="", price=699, category=category, added_by=self.vendor
+            title="test1", description="", price=699, category=category, added_by=self.vendor  # type: ignore
         )
 
     def test_get_list_unauthorized(self):

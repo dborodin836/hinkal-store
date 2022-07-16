@@ -13,7 +13,7 @@ class ContactAPITest(APITestCase):
 
     @classmethod
     def setUpTestData(cls) -> None:
-        cls.adminClient = AdminAPIClient(
+        cls.adminClient = AdminAPIClient(  # type: ignore
             username=cls.TEST_ADMIN_USERNAME, password=cls.TEST_ADMIN_PASSWORD
         )
 
