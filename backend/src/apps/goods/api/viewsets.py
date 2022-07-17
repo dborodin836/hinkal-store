@@ -1,8 +1,12 @@
-from rest_framework import mixins, viewsets
-from rest_framework.permissions import AllowAny, DjangoModelPermissionsOrAnonReadOnly
+from django.http import HttpResponseForbidden
+from django.shortcuts import get_object_or_404
+from rest_framework import mixins, viewsets, status
+from rest_framework.permissions import AllowAny, DjangoModelPermissionsOrAnonReadOnly, IsAdminUser
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
-from src.apps.core.permissions import VendorPermission
-from src.apps.goods.api.serializers import DishDetailSerializer, DishListSerializer
+from src.apps.core.permissions import Author
+from src.apps.goods.api.serializers import DishDetailSerializer, DishListSerializer, DishCreateSerializer
 from src.apps.goods.models import Dish
 
 
@@ -12,11 +16,26 @@ class DishViewSet(viewsets.ModelViewSet):
     """
 
     queryset = Dish.objects.all()
-    permission_classes = (VendorPermission & DjangoModelPermissionsOrAnonReadOnly,)
+    permission_classes = ((IsAdminUser | Author) & DjangoModelPermissionsOrAnonReadOnly,)
+
+    def create(self, request, *args, **kwargs):
+        """
+        Verify that the POST has the request user as the obj.author
+        """
+        if request.data["added_by"] == str(request.user.id) or request.user.is_superuser:
+            serializer = self.get_serializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            self.perform_create(serializer)
+            headers = self.get_success_headers(serializer.data)
+            return Response(serializer.data, status=201, headers=headers)
+        else:
+            return Response(status=403)
 
     def get_serializer_class(self):
         if self.action == "list":
             return DishListSerializer
+        if self.action == "create":
+            return DishCreateSerializer
         return DishDetailSerializer
 
     # Used to convert requested category to order_by parameter.
