@@ -8,7 +8,7 @@
         </div>
       </div>
 
-      <div *ngIf="listDishes.length != 0; else elseBlock">
+      <div *ngIf="listDishes.length !== 0; else elseBlock">
 
         <div  *ngFor="let item of listDishes" class="row">
           <div class="row main align-items-center">
