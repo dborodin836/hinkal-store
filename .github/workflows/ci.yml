@@ -79,3 +79,22 @@ jobs:
           python manage.py test
         env:
           ENV: TEST
+  ESLint_Prettier:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js 14
+        uses: actions/setup-node@v1
+        with:
+          node_version: 14
+
+      - name: Install modules
+        run: npm install
+
+      - name: ESLint
+        run: ng lint
+
+      - name: Prettier
+        run: npx prettier -c
