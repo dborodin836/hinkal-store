@@ -15,6 +15,7 @@
 <img src="https://img.shields.io/github/last-commit/dborodin836/hinkali-store" alt="Last commit">
 <img src="https://img.shields.io/github/workflow/status/dborodin836/hinkali-store/Python" alt="Build status">
 <img src="https://img.shields.io/github/commit-activity/m/dborodin836/hinkali-store" alt="Commit activity">
+<img src="https://www.codefactor.io/repository/github/dborodin836/hinkali-store/badge" alt="Codefactor">
 
 
 
