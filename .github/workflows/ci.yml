@@ -7,6 +7,7 @@ on:
     branches: [ master, develop, release ]
 jobs:
   Black_flake8_mypy:
+    name: Black flake8 mypy
     runs-on: ubuntu-latest
     env:
       ENV: docker
@@ -80,15 +81,15 @@ jobs:
         env:
           ENV: TEST
   ESLint_Prettier:
-    name: Build
+    name: ESLint Prettier
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v1
-      - name: Use Node.js 14
+      - name: Use Node.js 18
         uses: actions/setup-node@v1
         with:
-          node_version: 14
+          node_version: 18
 
       - name: Install modules
         run: |
