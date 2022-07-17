@@ -1,13 +1,11 @@
 from rest_framework import permissions
 
 
-class VendorPermission(permissions.BasePermission):
-    def has_permission(self, request, view):
-        if str(request.user).lower() == "vendor":
+class Author(permissions.BasePermission):
+    def has_object_permission(self, request, view, obj):
+        print(request.user.id, obj.added_by.id, "esx")
+        if request.method in permissions.SAFE_METHODS:
             return True
-        if request.method.lower() in ["get", "head", "options", "trace"]:
+        if request.user.id == obj.added_by.id:
             return True
         return False
-
-    def has_object_permission(self, request, view, obj):
-        return True
