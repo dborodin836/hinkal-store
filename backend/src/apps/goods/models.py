@@ -1,12 +1,10 @@
-from datetime import datetime as dt
-
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils import timezone
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
 
 from src.apps.goods.managers import DishManager
-from src.apps.user.models import Vendor
 
 
 class Category(models.Model):
@@ -31,10 +29,8 @@ class Dish(models.Model):
         verbose_name="Image",
         default="default/not-found.png",
     )
-    added_date = models.DateTimeField(default=dt.now, verbose_name="Added")
-    added_by = models.ForeignKey(
-        Vendor, null=True, on_delete=models.CASCADE, verbose_name="Vendor"
-    )
+    added_date = models.DateTimeField(default=timezone.now, verbose_name="Added", null=True)
+    added_by = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Vendor")
     price = models.DecimalField(max_digits=8, decimal_places=2, verbose_name="Price")
     is_active = models.BooleanField(default=True, verbose_name="Available for users?")
     times_bought = models.IntegerField(default=0, verbose_name="Times bought")
