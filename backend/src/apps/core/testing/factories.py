@@ -7,6 +7,11 @@ import factory
 from src.apps.user.models import Vendor
 
 
+def get_name(x):
+    return ("".join([random.choice(string.ascii_letters + "123456789_-") for _ in range(30)])
+            + str(datetime.now())[:10])
+
+
 class VendorFactory(factory.Factory):
     """
     Creates a new ``Vendor`` object.
@@ -15,13 +20,8 @@ class VendorFactory(factory.Factory):
     Password will be ``testpass`` by default.
     """
 
-    _username = (
-        "".join([random.choice(string.ascii_letters + "123456789_-") for _ in range(30)])
-        + str(datetime.now())[:10]
-    )
-
-    username = _username
-    email = "{0}@example.com".format(_username)
+    username = factory.LazyAttribute(get_name)
+    email = "{0}@example.com".format(username)
     password = factory.PostGenerationMethodCall("set_password", "testpass")
     is_active = True
 
