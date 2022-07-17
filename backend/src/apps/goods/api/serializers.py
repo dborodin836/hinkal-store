@@ -13,6 +13,23 @@ class DishListSerializer(serializers.ModelSerializer):
         fields = ("id", "title", "image", "price", "added_by")
 
 
+class DishCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Dish
+        fields = (
+            "id",
+            "title",
+            "description",
+            "image",
+            "added_date",
+            "added_by",
+            "price",
+            "is_active",
+            "times_bought",
+            "category",
+        )
+
+
 class DishDetailSerializer(serializers.ModelSerializer):
     """Detailed dish (all fields)"""
 
