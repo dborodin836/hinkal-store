@@ -5,7 +5,6 @@ from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
 
 from src.apps.goods.managers import DishManager
-from src.apps.user.models import Vendor
 
 
 class Category(models.Model):

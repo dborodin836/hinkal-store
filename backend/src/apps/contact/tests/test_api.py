@@ -2,7 +2,7 @@ import io
 from contextlib import redirect_stdout
 
 from django.core.management import call_command
-from rest_framework.test import APITestCase, APIRequestFactory
+from rest_framework.test import APITestCase
 
 from src.apps.contact.models import Contact
 from src.apps.core.testing.api_clients import AdminAPIClient
