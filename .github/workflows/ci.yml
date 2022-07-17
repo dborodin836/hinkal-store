@@ -94,6 +94,8 @@ jobs:
       - name: Install modules
         run: |
           cd frontend
+          nvm install 16.10
+          nvm use 16
           npm link @angular/cli
           npm install
 
