@@ -6,7 +6,11 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from src.apps.core.permissions import Author
-from src.apps.goods.api.serializers import DishDetailSerializer, DishListSerializer, DishCreateSerializer
+from src.apps.goods.api.serializers import (
+    DishDetailSerializer,
+    DishListSerializer,
+    DishCreateSerializer,
+)
 from src.apps.goods.models import Dish
 
 

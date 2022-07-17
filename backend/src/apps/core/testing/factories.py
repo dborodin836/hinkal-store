@@ -8,8 +8,10 @@ from src.apps.user.models import Vendor
 
 
 def get_name(x):
-    return ("".join([random.choice(string.ascii_letters + "123456789_-") for _ in range(30)])
-            + str(datetime.now())[:10])
+    return (
+        "".join([random.choice(string.ascii_letters + "123456789_-") for _ in range(30)])
+        + str(datetime.now())[:10]
+    )
 
 
 class VendorFactory(factory.Factory):

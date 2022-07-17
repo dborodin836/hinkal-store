@@ -14,7 +14,6 @@ class DishListSerializer(serializers.ModelSerializer):
 
 
 class DishCreateSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Dish
         fields = (

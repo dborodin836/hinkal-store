@@ -8,7 +8,6 @@ from src.apps.core.testing.api_clients import CustomerAPIClient, AdminAPIClient,
 
 
 class CustomerTestCase(TestCase):
-
     @classmethod
     def setUpTestData(cls) -> None:
         with redirect_stdout(io.StringIO()):
@@ -22,7 +21,6 @@ class CustomerTestCase(TestCase):
 
 
 class VendorTestCase(TestCase):
-
     @classmethod
     def setUpTestData(cls) -> None:
         with redirect_stdout(io.StringIO()):
@@ -36,7 +34,6 @@ class VendorTestCase(TestCase):
 
 
 class AdminTestCase(TestCase):
-
     @classmethod
     def setUpTestData(cls) -> None:
         with redirect_stdout(io.StringIO()):

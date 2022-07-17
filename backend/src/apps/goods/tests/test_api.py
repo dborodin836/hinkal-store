@@ -55,7 +55,11 @@ class CustomerDishAPITest(APITestCase):
         }
 
         self.dish = Dish.objects.create(
-            title="test1", description="", price=699, category=category, added_by=self.clientVendor.user
+            title="test1",
+            description="",
+            price=699,
+            category=category,
+            added_by=self.clientVendor.user,
         )
 
     def test_get_list_unauthorized(self):
@@ -98,7 +102,8 @@ class CustomerDishAPITest(APITestCase):
     def test_creation_validation(self):
         dish = Dish.objects.get(pk=self.dish.id)
         self.assertEqual(
-            self.data, {"title": dish.title, "price": float(dish.price), "added_by": dish.added_by.id}
+            self.data,
+            {"title": dish.title, "price": float(dish.price), "added_by": dish.added_by.id},
         )
 
     def test_creation_unauthorized(self):
