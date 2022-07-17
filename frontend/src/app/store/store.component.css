@@ -15,9 +15,9 @@
   padding: 10px 10px 5px 10px;
   border: 1px solid #303030;
   background: #202020;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   overflow: hidden;
-  transition: .4s linear;
+  transition: 0.4s linear;
 }
 
 .product-img {
@@ -39,7 +39,7 @@
 
 .product-list h3 {
   font-weight: 700;
-  color: #39404B;
+  color: #39404b;
   margin: 0;
   text-transform: uppercase;
   font-size: 14px;
@@ -47,7 +47,7 @@
 }
 
 .price {
-  color: #E34D38;
+  color: #e34d38;
   display: block;
   margin-bottom: 12px;
 }
@@ -59,8 +59,8 @@
 }
 
 .stars:before {
-  content: "\f005\f005\f005\f005\f006";
-  color: #EFB71C;
+  content: '\f005\f005\f005\f005\f006';
+  color: #efb71c;
   font-size: 14px;
   font-family: FontAwesome, sans-serif;
 }
@@ -74,50 +74,55 @@
 }
 
 .actions:after {
-  content: "";
+  content: '';
   display: table;
   clear: both;
 }
 
-.add-to-cart, .add-to-links {
+.add-to-cart,
+.add-to-links {
   float: left;
 }
 
 .cart-button {
   text-decoration: none;
-  color: #8C877C;
+  color: #8c877c;
   padding-right: 20px;
   border-right: 1px solid #ddd;
-  transition: .4s linear;
+  transition: 0.4s linear;
 }
 
 .cart-button:before {
-  content: "\f07a";
+  content: '\f07a';
   font-family: FontAwesome, sans-serif;
   margin-right: 10px;
 }
 
-.add-to-cart:hover .cart-button, .wishlist:hover, .compare:hover {
-  color: #E34D38;
+.add-to-cart:hover .cart-button,
+.wishlist:hover,
+.compare:hover {
+  color: #e34d38;
 }
 
-.wishlist, .compare {
-  color: #8C877C;
+.wishlist,
+.compare {
+  color: #8c877c;
   padding-left: 17px;
-  transition: .4s linear;
+  transition: 0.4s linear;
 }
 
-.wishlist:after, .compare:after {
+.wishlist:after,
+.compare:after {
   display: inline-block;
   font-family: FontAwesome, sans-serif;
 }
 
 .wishlist:after {
-  content: "\f004";
+  content: '\f004';
 }
 
 .compare:after {
-  content: "\f079";
+  content: '\f079';
 }
 
 .labels {
