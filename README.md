@@ -1,13 +1,20 @@
-<br/>
 <p align="center">
+  <img src="https://i.postimg.cc/wMHtRZft/image-removebg-preview-1.png" alt="Logo" width="40%"/>
+</p>
   <h3 align="center">Food Marketplace 'HINKAL'</h3>
-
   <p align="center">
-    Fullstack website for interview.
+    Fullstack website created for interview.
     <br/>
     <br/>
   </p>
 </p>
+
+<a><img src="https://img.shields.io/codecov/c/github/dborodin836/hinkali-store" alt="Codecov coverage"></a>
+<img src="https://img.shields.io/github/license/dborodin836/hinkali-store" alt="License">
+<img src="https://img.shields.io/github/checks-status/dborodin836/hinkali-store/develop" alt="Checks">
+<img src="https://img.shields.io/github/last-commit/dborodin836/hinkali-store" alt="Last commit">
+<img src="https://img.shields.io/github/workflow/status/dborodin836/hinkali-store/Python" alt="Build status">
+<img src="https://img.shields.io/github/commit-activity/m/dborodin836/hinkali-store" alt="Commit activity">
 
 
 
@@ -21,12 +28,12 @@
 
 ## About The Project
 
-![Screen Shot](photos/home_screenshot.png)
+[![image.png](https://i.postimg.cc/PqzS6R0H/image.png)](https://postimg.cc/06jGjc8X)
 
 Main features:
 
 * Ordering dishes with different modifiers (additional sauce etc.)
-* Common users and vendors (probably custom auth, not built-in Django. WIP)
+* Custom users and vendors
 * Administration
 
 I hope that site will be awesome soon :smile:
@@ -51,7 +58,7 @@ $ git clone https://github.com/dborodin836/hinkali-store.git
 $ cd hinkali-store
 ```
 
-The easiest way to start projct is requires Docker,
+The easiest way to start project is requires Docker,
 If you don't have Docker [install it](https://docs.docker.com/get-docker/).
 And run simple command.
 
@@ -61,7 +68,7 @@ And run simple command.
 $  docker-compose -p hinkali-store --env-file backend/docker.env up
 ```
 
-**NOTE:** Due to permanent temporary crutch, if webinkali-store_web_1 container failed to start you need to restart store_web_1 container manually. ~ 1 min
+**NOTE:** Due to temporary crutch, if hinkali-store_web_1 container failed to start you need to restart hinkali_store_web_1 container manually. ~ 1 min
 
 Alternatively, you can do setup manually following guides in specific folders.
 
