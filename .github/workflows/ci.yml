@@ -94,7 +94,7 @@ jobs:
       - name: Install modules
         run: |
           cd frontend
-          npm link -g @angular/cli
+          npm link @angular/cli
           npm install
 
       - name: ESLint
