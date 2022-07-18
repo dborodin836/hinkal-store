@@ -91,5 +91,9 @@ jobs:
       - run: |
           cd frontend
           npm ci
-      - run: npm run lint
-      - run: npx prettier src -c
+      - run: |
+          cd frontend
+          npm run lint
+      - run: |
+          cd frontend
+          npx prettier src -c
