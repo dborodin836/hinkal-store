@@ -7,8 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint",
-    "prettier-check": "ng prettier -c"
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
