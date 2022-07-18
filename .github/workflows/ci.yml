@@ -81,6 +81,7 @@ jobs:
         env:
           ENV: TEST
   build:
+    name: Frontend Linting
     runs-on: ubuntu-latest
 
     steps:
