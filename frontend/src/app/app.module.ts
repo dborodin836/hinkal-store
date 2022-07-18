@@ -23,6 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { RegisterComponent } from './register/register.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import { AccountActivationComponent } from './account-activation/account-activation.component';
 
 
 const appRoutes: Routes =[
@@ -36,6 +37,7 @@ const appRoutes: Routes =[
   { path: 'dashboard', component: DashboardComponent},
   { path: 'success', component: SuccessComponent},
   { path: 'cart', component: CheckoutComponent},
+  { path: 'account-activation', component: AccountActivationComponent},
   { path: '**', component: NotFoundComponent },
 ];
 
@@ -56,6 +58,7 @@ const appRoutes: Routes =[
     SuccessComponent,
     CheckoutComponent,
     RegisterComponent,
+    AccountActivationComponent,
   ],
   imports: [
     BrowserModule,

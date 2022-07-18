@@ -81,28 +81,26 @@ export class LoginService {
     });
   }
 
-  register(username: string, password: string) {
+  register(username: string, password: string, email: string) {
     let promise: any = new Promise((resolve, reject) => {
       let url = baseUrl + "users/"
-      this.http.post(url, {"username": username, "password": password}, {observe: "response", responseType: "json"})
+      this.http.post(url, {"username": username, "password": password, "email": email}, {observe: "response", responseType: "json"})
         .toPromise().then(() => {
-          this.openSnackBar("Success", "X");
+          this.openSnackBar("Success!", "X");
           this.router.navigate(['account-activation'])
         },
         (error) => {
-          console.log(error.error);
-          if (error.error.username){
+          if (error.error.username || error.error.email) {
             this.openSnackBar("User already exists or unacceptable symbols", "X")
-          }
-          if (error.error.password){
+          } else if (error.error.password) {
             this.openSnackBar("Password is too weak or unacceptable symbols", "X")
-          }
-          if (error.error.username && error.error.password){
+          } else if (error.error.username && error.error.password) {
             this.openSnackBar("User already exists and password is too weak or unacceptable symbols", "X")
+          } else {
+            this.openSnackBar("Service unavailable. Try again later.", "X")
           }
         })
     })
     return promise
-
   }
 }
