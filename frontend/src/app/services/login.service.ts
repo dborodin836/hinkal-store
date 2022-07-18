@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
-import { UserModel } from '../models/user.model';
+import {UserModel} from '../models/user.model';
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 const baseUrl = 'http://localhost:8000/auth/';
 
@@ -14,7 +15,8 @@ export class LoginService {
   private user: UserModel = {};
 
   constructor(private http: HttpClient,
-              private router: Router) {
+              private router: Router,
+              private snackBar: MatSnackBar) {
   }
 
   getToken(): string | undefined {
@@ -29,7 +31,7 @@ export class LoginService {
     // @ts-ignore
     console.log(this.auth_token)
     this.http.post(baseUrl + 'token/logout/', '', {headers: this.getAuthHeader()}).subscribe()
-    this.auth_token='';
+    this.auth_token = '';
     this.user = {}
     this.router.navigate(['success'])
   }
@@ -54,9 +56,9 @@ export class LoginService {
   }
 
   getUser() {
-    let promise = new Promise((resolve, rejectt) => {
+    let promise = new Promise((resolve, reject) => {
       let url = baseUrl + "users/me/"
-      this.http.get(url, {observe:"response", responseType:"json", headers: this.getAuthHeader()})
+      this.http.get(url, {observe: "response", responseType: "json", headers: this.getAuthHeader()})
         .toPromise()
         .then(
           res => {
@@ -72,8 +74,35 @@ export class LoginService {
     return this.user
   }
 
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 7000,
+      horizontalPosition: "end"
+    });
+  }
+
   register(username: string, password: string) {
-    let url = baseUrl + "users/"
-    this.http.post(url, {"username": username, "password": password}, {observe:"response", responseType:"json", headers: this.getAuthHeader()})
+    let promise: any = new Promise((resolve, reject) => {
+      let url = baseUrl + "users/"
+      this.http.post(url, {"username": username, "password": password}, {observe: "response", responseType: "json"})
+        .toPromise().then(() => {
+          this.openSnackBar("Success", "X");
+          this.router.navigate(['account-activation'])
+        },
+        (error) => {
+          console.log(error.error);
+          if (error.error.username){
+            this.openSnackBar("User already exists or unacceptable symbols", "X")
+          }
+          if (error.error.password){
+            this.openSnackBar("Password is too weak or unacceptable symbols", "X")
+          }
+          if (error.error.username && error.error.password){
+            this.openSnackBar("User already exists and password is too weak or unacceptable symbols", "X")
+          }
+        })
+    })
+    return promise
+
   }
 }

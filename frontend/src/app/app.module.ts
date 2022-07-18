@@ -22,6 +22,7 @@ import { SuccessComponent } from './success/success.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { RegisterComponent } from './register/register.component';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 
 const appRoutes: Routes =[
@@ -64,7 +65,8 @@ const appRoutes: Routes =[
     HttpClientXsrfModule,
     BrowserAnimationsModule,
     MatPaginatorModule,
-    FormsModule
+    FormsModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
