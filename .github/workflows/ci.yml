@@ -81,15 +81,15 @@ jobs:
         env:
           ENV: TEST
   build:
-      runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-      steps:
-        - uses: actions/checkout@v2
-        - name: Use Node.js 16
-          uses: actions/setup-node@v1
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 16
+        uses: actions/setup-node@v1
 
-        - run: |
-          cd frontend
-          npm ci
-        - run: npm run lint
-        - run: npx prettier src -c
+      - run: |
+        cd frontend
+        npm ci
+      - run: npm run lint
+      - run: npx prettier src -c
