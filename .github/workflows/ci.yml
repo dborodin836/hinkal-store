@@ -89,7 +89,7 @@ jobs:
         uses: actions/setup-node@v1
 
       - run: |
-        cd frontend
-        npm ci
+          cd frontend
+          npm ci
       - run: npm run lint
       - run: npx prettier src -c
