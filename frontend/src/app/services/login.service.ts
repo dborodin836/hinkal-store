@@ -67,11 +67,13 @@ export class LoginService {
     })
     return promise
   }
-  
-  // let url = baseUrl + "users/me/"
-  // // @ts-ignore
-  // return this.http.get<HttpResponse<>>(url, {observe:"response", responseType:"json", headers: this.getAuthHeader()})
+
   getUserData() {
     return this.user
+  }
+
+  register(username: string, password: string) {
+    let url = baseUrl + "users/"
+    this.http.post(url, {"username": username, "password": password}, {observe:"response", responseType:"json", headers: this.getAuthHeader()})
   }
 }

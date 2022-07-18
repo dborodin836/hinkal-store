@@ -21,6 +21,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SuccessComponent } from './success/success.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { RegisterComponent } from './register/register.component';
 
 
 const appRoutes: Routes =[
@@ -30,6 +31,7 @@ const appRoutes: Routes =[
   { path: 'store/:id', component: DishDetailComponent},
   { path: 'contact', component: ContactComponent},
   { path: 'login', component: LoginComponent},
+  { path: 'register', component: RegisterComponent},
   { path: 'dashboard', component: DashboardComponent},
   { path: 'success', component: SuccessComponent},
   { path: 'cart', component: CheckoutComponent},
@@ -52,6 +54,7 @@ const appRoutes: Routes =[
     DashboardComponent,
     SuccessComponent,
     CheckoutComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
