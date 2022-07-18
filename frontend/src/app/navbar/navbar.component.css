@@ -1,10 +1,9 @@
-@import "../../assets/css/style.css";
-
+@import '../../assets/css/style.css';
 
 .sticky {
   position: fixed;
   top: 0;
-  width: 100%
+  width: 100%;
 }
 
 .sticky + .content {
@@ -16,7 +15,7 @@
   border-radius: 16px;
   background-color: #e86741;
   border: none;
-  color: #FFFFFF;
+  color: #ffffff;
   text-align: center;
   font-size: 17px;
   padding: 3px;
