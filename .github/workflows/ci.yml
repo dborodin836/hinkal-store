@@ -92,7 +92,7 @@ jobs:
 
       - run: |
           cd frontend
-          npm install
+          npm ci --force
       - run: |
           cd frontend
           npm run lint
