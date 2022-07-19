@@ -29,15 +29,23 @@ export class LoginService {
 
   logout() {
     // @ts-ignore
-    console.log(this.auth_token)
-    this.http.post(baseUrl + 'token/logout/', '', {headers: this.getAuthHeader()}).subscribe()
-    this.auth_token = '';
-    this.user = {}
-    this.router.navigate(['success'])
+    let promise = new Promise((resolve, reject) => {
+      this.http.post(baseUrl + 'token/logout/', '', {headers: this.getAuthHeader()},)
+        .toPromise()
+        .then(() => {
+          this.auth_token = '';
+          this.user = {}
+          this.router.navigate([''])
+          this.openSnackBar("You are logged out.", "X")
+        }, () => {
+          this.openSnackBar("Service unavailable. Try again later.", "X")
+        })
+    })
+    return promise
   }
 
   login(data: { username: any; password: any; }) {
-    let promise = new Promise((resolve, rejectt) => {
+    let promise = new Promise((resolve, reject) => {
       this.http.post<any>(baseUrl + 'token/login/', data,)
         .toPromise()
         .then(
@@ -84,7 +92,10 @@ export class LoginService {
   register(username: string, password: string, email: string) {
     let promise: any = new Promise((resolve, reject) => {
       let url = baseUrl + "users/"
-      this.http.post(url, {"username": username, "password": password, "email": email}, {observe: "response", responseType: "json"})
+      this.http.post(url, {"username": username, "password": password, "email": email}, {
+        observe: "response",
+        responseType: "json"
+      })
         .toPromise().then(() => {
           this.openSnackBar("Success!", "X");
           this.router.navigate(['account-activation'])
