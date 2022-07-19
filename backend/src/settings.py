@@ -177,6 +177,9 @@ DJOSER = {
     "ACTIVATION_URL": "api/auth/users/activate/{uid}/{token}/",
     "SEND_ACTIVATION_EMAIL": True,
     "SERIALIZERS": {},
+    "PERMISSIONS": {
+        "user_create": ["rest_framework.permissions.AllowAny"],
+    },
 }
 
 SIMPLE_JWT = {
