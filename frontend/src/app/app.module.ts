@@ -22,21 +22,21 @@ import { SuccessComponent } from './success/success.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { RegisterComponent } from './register/register.component';
-import {MatSnackBarModule} from "@angular/material/snack-bar";
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AccountActivationComponent } from './account-activation/account-activation.component';
 
-const appRoutes: Routes =[
-  { path: '', component: HomeComponent},
-  { path: 'about', component: AboutComponent},
-  { path: 'store', component: StoreComponent},
-  { path: 'store/:id', component: DishDetailComponent},
-  { path: 'contact', component: ContactComponent},
-  { path: 'login', component: LoginComponent},
-  { path: 'register', component: RegisterComponent},
-  { path: 'dashboard', component: DashboardComponent},
-  { path: 'success', component: SuccessComponent},
-  { path: 'cart', component: CheckoutComponent},
-  { path: 'account-activation', component: AccountActivationComponent},
+const appRoutes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'store', component: StoreComponent },
+  { path: 'store/:id', component: DishDetailComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'success', component: SuccessComponent },
+  { path: 'cart', component: CheckoutComponent },
+  { path: 'account-activation', component: AccountActivationComponent },
   { path: '**', component: NotFoundComponent },
 ];
 
