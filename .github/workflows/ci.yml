@@ -1,4 +1,4 @@
-name: Python
+name: CI
 
 on:
   push:
@@ -7,6 +7,7 @@ on:
     branches: [ master, develop, release ]
 jobs:
   Black_flake8_mypy:
+    name: Black flake8 mypy
     runs-on: ubuntu-latest
     env:
       ENV: docker
@@ -79,14 +80,23 @@ jobs:
           python manage.py test
         env:
           ENV: TEST
-      - name: Generate coverage report
-        run: |
-          cd backend
-          coverage run manage.py test
-          coverage xml
-        env:
-          ENV: TEST
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
+  build:
+    name: Frontend Linting
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 16
+        uses: actions/setup-node@v1
         with:
-          fail_ci_if_error: true
+          node-version: 16
+
+      - run: |
+          cd frontend
+          npm install --force
+      - run: |
+          cd frontend
+          npm run lint
+      - run: |
+          cd frontend
+          npx prettier src -c

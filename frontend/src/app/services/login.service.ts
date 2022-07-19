@@ -4,14 +4,14 @@ import {Router} from "@angular/router";
 import {UserModel} from '../models/user.model';
 import {MatSnackBar} from "@angular/material/snack-bar";
 
+
 const baseUrl = 'http://localhost:8000/auth/';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginService {
-
-  private auth_token = "";
+  private auth_token = '';
   private user: UserModel = {};
 
   constructor(private http: HttpClient,
@@ -20,11 +20,11 @@ export class LoginService {
   }
 
   getToken(): string | undefined {
-    return this.auth_token
+    return this.auth_token;
   }
 
   getAuthHeader() {
-    return new HttpHeaders({'Authorization': 'Token ' + this.getToken()})
+    return new HttpHeaders({ Authorization: 'Token ' + this.getToken() });
   }
 
   logout() {
@@ -48,19 +48,17 @@ export class LoginService {
     let promise = new Promise((resolve, reject) => {
       this.http.post<any>(baseUrl + 'token/login/', data,)
         .toPromise()
-        .then(
-          res => {
-            this.auth_token = res.auth_token
-            console.log(res.auth_token)
-            this.getUser()
-          }
-        )
-    })
-    return promise
+        .then((res) => {
+          this.auth_token = res.auth_token;
+          console.log(res.auth_token);
+          this.getUser();
+        });
+    });
+    return promise;
   }
 
   isAuthorized(): boolean {
-    return this.auth_token != ''
+    return this.auth_token != '';
   }
 
   getUser() {
@@ -68,18 +66,16 @@ export class LoginService {
       let url = baseUrl + "users/me/"
       this.http.get(url, {observe: "response", responseType: "json", headers: this.getAuthHeader()})
         .toPromise()
-        .then(
-          res => {
-            // @ts-ignore
-            this.user = res.body
-          }
-        )
-    })
-    return promise
+        .then((res) => {
+          // @ts-ignore
+          this.user = res.body;
+        });
+    });
+    return promise;
   }
 
   getUserData() {
-    return this.user
+    return this.user;
   }
 
   openSnackBar(message: string, action: string) {

@@ -1,36 +1,50 @@
 <section class="ftco-section">
-
   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
-      <a class="navbar-brand" routerLink="">HINKALI <span>store</span></a>
+      <a class="navbar-brand" routerLink="">HINKALI <span>marketplace</span></a>
 
-        <form *ngIf="!isAuthorized(); else elseBlock" class="order-lg-last">
-          <a routerLink="login/" >
-            <button class="button" style="vertical-align:middle">
-              <span>Login </span>
-            </button>
-          </a>
-        </form>
+      <form *ngIf="!isAuthorized(); else elseBlock" class="order-lg-last">
+        <a routerLink="login/">
+          <button class="button" style="vertical-align: middle">
+            <span>Login </span>
+          </button>
+        </a>
+      </form>
 
       <ng-template #elseBlock>
         <form class="order-lg-last">
-          <a routerLink="" >
-            <button (click)="logout()" class="button" style="vertical-align:middle">
+          <a routerLink="">
+            <button (click)="logout()" class="button" style="vertical-align: middle">
               <span>Logout </span>
             </button>
           </a>
         </form>
       </ng-template>
 
-
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#ftco-nav"
+        aria-controls="ftco-nav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
         <span class="fa fa-bars"></span> Menu
       </button>
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav m-auto">
           <li class="nav-item"><a routerLink="" class="nav-link">Home</a></li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Page</a>
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="dropdown04"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              >Page</a
+            >
             <div class="dropdown-menu" aria-labelledby="dropdown04">
               <a class="dropdown-item" routerLink="cart">Cart</a>
               <a class="dropdown-item" href="#">Page 2</a>
@@ -45,5 +59,4 @@
       </div>
     </div>
   </nav>
-
 </section>

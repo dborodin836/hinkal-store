@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {ReactiveFormsModule} from '@angular/forms';
-import { HttpClientModule, HttpClientXsrfModule } from "@angular/common/http";
-import {Routes, RouterModule} from '@angular/router';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {FormsModule} from "@angular/forms";
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
+import { Routes, RouterModule } from '@angular/router';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AboutComponent } from './about/about.component';
-import { StoreComponent } from "./store/store.component";
-import { DishDetailComponent } from "./dish-detail/dish-detail.component";
+import { StoreComponent } from './store/store.component';
+import { DishDetailComponent } from './dish-detail/dish-detail.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -24,7 +24,6 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { RegisterComponent } from './register/register.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { AccountActivationComponent } from './account-activation/account-activation.component';
-
 
 const appRoutes: Routes =[
   { path: '', component: HomeComponent},
@@ -72,6 +71,6 @@ const appRoutes: Routes =[
     MatSnackBarModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

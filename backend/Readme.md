@@ -72,3 +72,11 @@ Currently backend has this links:
 - `localhost:800/api` - api endpoint
 - `localhost:800/redoc` - automatic redoc documentations
 - `localhost:800/swagger` - automatic swagger documentations
+
+## Running Tests
+
+To run tests, expose "ENV=dev" variable and run the following command
+
+```bash
+  $ py backend/manage.py test
+```

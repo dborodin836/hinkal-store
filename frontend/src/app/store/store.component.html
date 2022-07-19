@@ -1,19 +1,19 @@
 <form action="">
   <div class="container">
     <div class="labels">
-      <div class="text-field">
-        Category
-      </div>
-      <div class="text-field">
-        Order by
-      </div>
-      <div class="text-field">
-        Search
-      </div>
+      <div class="text-field">Category</div>
+      <div class="text-field">Order by</div>
+      <div class="text-field">Search</div>
     </div>
     <div class="buttons">
       <div class="select-field">
-        <select (change)="onChangeCategory($event)" [(ngModel)]="filtered_category" class="form-select" name="category" id="category">
+        <select
+          (change)="onChangeCategory($event)"
+          [(ngModel)]="filtered_category"
+          class="form-select"
+          name="category"
+          id="category"
+        >
           <option value="all">All</option>
           <option value="Drink">Drink</option>
           <option value="Dish">Dish</option>
@@ -21,7 +21,14 @@
         </select>
       </div>
       <div class="select-field">
-        <select (change)="onChangeOrdering($event)" [(ngModel)]="ordering" class="form-select" style="width: 100%" name="ordering" id="ordering">
+        <select
+          (change)="onChangeOrdering($event)"
+          [(ngModel)]="ordering"
+          class="form-select"
+          style="width: 100%"
+          name="ordering"
+          id="ordering"
+        >
           <option value="newest">Newest</option>
           <option value="popular">Most popular</option>
           <option value="max_price">Max price</option>
@@ -29,25 +36,27 @@
         </select>
       </div>
       <div class="search-field">
-        <input (change)="onChangeText($event)" [(ngModel)]="keyword"  class="form-control" type="text">
+        <input (change)="onChangeText($event)" [(ngModel)]="keyword" class="form-control" type="text" />
       </div>
     </div>
-    <input class="btn-submit" type="submit">
+    <input class="btn-submit" type="submit" />
   </div>
 </form>
 
 <div class="content-box">
-
   <div *ngFor="let dish of dishes" class="product-item">
     <div class="product-img">
-      <a routerLink="{{dish.id}}">
-        <img src="{{dish.image}}" style="min-height: 200px; max-height: 200px; border-radius: 15px; object-position: center; object-fit: cover">
+      <a routerLink="{{ dish.id }}">
+        <img
+          src="{{ dish.image }}"
+          style="min-height: 200px; max-height: 200px; border-radius: 15px; object-position: center; object-fit: cover"
+        />
       </a>
     </div>
     <div class="product-list">
-      <h3>{{dish.title}}</h3>
+      <h3>{{ dish.title }}</h3>
       <div class="stars"></div>
-      <span class="price">{{dish.price}} UAH</span>
+      <span class="price">{{ dish.price }} UAH</span>
       <div class="actions">
         <div class="add-to-cart">
           <i class="fa-solid fa-cart-circle-plus"></i>
@@ -60,12 +69,13 @@
       </div>
     </div>
   </div>
-
 </div>
-<mat-paginator #paginator
-               [length]="length"
-               [pageIndex]="pageIndex"
-               [pageSize]="pageSize"
-               [pageSizeOptions]="[25, 50, 100, 150]"
-               (page)="getServerData($event)">
+<mat-paginator
+  #paginator
+  [length]="length"
+  [pageIndex]="pageIndex"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="[25, 50, 100, 150]"
+  (page)="getServerData($event)"
+>
 </mat-paginator>
