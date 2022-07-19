@@ -2,8 +2,12 @@
   width: 100%;
   height: 100%;
   background-size: cover;
-  background-image: linear-gradient(to bottom left, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 1)),
-    url('../../assets/img/hero_bg.jpg');
+  background-image: linear-gradient(
+    to bottom left,
+    rgba(0, 0, 0, 0.4),
+    rgba(0, 0, 0, 1)
+  ),
+  url("../../assets/img/hero_bg.jpg");
   background-position: center;
   filter: grayscale(40%);
   margin: 0;
@@ -27,7 +31,7 @@ p {
   font-size: 22px;
   width: 45%;
   top: 35%;
-  font-family: 'Roboto', serif;
+  font-family: "Roboto", serif;
   letter-spacing: 1.8px;
   position: relative;
   padding-left: 40px;
@@ -46,9 +50,9 @@ p {
   padding: 10px 10px 5px 10px;
   border: 1px solid #303030;
   background: #202020;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   overflow: hidden;
-  transition: 0.4s linear;
+  transition: .4s linear;
 }
 .product-img {
   transition: 1s ease-in-out;
@@ -65,14 +69,14 @@ p {
 }
 .product-list h3 {
   font-weight: 700;
-  color: #39404b;
+  color: #39404B;
   margin: 0;
   text-transform: uppercase;
   font-size: 14px;
   line-height: 2;
 }
 .price {
-  color: #e34d38;
+  color: #E34D38;
   display: block;
   margin-bottom: 12px;
 }
@@ -82,8 +86,8 @@ p {
   margin: 7px 0;
 }
 .stars:before {
-  content: '\f005\f005\f005\f005\f006';
-  color: #efb71c;
+  content: "\f005\f005\f005\f005\f006";
+  color: #EFB71C;
   font-size: 14px;
   font-family: FontAwesome, sans-serif;
 }
@@ -95,52 +99,47 @@ p {
   line-height: 30px;
 }
 .actions:after {
-  content: '';
+  content: "";
   display: table;
   clear: both;
 }
-.add-to-cart,
-.add-to-links {
+.add-to-cart, .add-to-links {
   float: left;
 }
 .cart-button {
   text-decoration: none;
-  color: #8c877c;
+  color: #8C877C;
   padding-right: 20px;
   border-right: 1px solid #ddd;
-  transition: 0.4s linear;
+  transition: .4s linear;
 }
 .cart-button:before {
-  content: '\f07a';
+  content: "\f07a";
   font-family: FontAwesome, sans-serif;
   margin-right: 10px;
 }
-.add-to-cart:hover .cart-button,
-.wishlist:hover,
-.compare:hover {
-  color: #e34d38;
+.add-to-cart:hover .cart-button, .wishlist:hover, .compare:hover {
+  color: #E34D38;
 }
-.wishlist,
-.compare {
-  color: #8c877c;
+.wishlist, .compare {
+  color: #8C877C;
   padding-left: 17px;
-  transition: 0.4s linear;
+  transition: .4s linear;
 }
-.wishlist:after,
-.compare:after {
+.wishlist:after, .compare:after {
   display: inline-block;
   font-family: FontAwesome, sans-serif;
 }
 .wishlist:after {
-  content: '\f004';
+  content: "\f004";
 }
 .compare:after {
-  content: '\f079';
+  content: "\f079";
 }
 
 .recommended {
   text-align: center;
-  color: #e34d38;
+  color: #E34D38;
   font-family: Roboto, serif;
   margin-top: 4em;
 }
