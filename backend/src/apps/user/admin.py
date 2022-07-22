@@ -7,13 +7,9 @@ from .models import Country, Customer, UserAddress, Vendor
 class CountryAdmin(admin.ModelAdmin):
     """Admin representation for Country"""
 
-    pass
-
 
 class UserAddressAdmin(admin.ModelAdmin):
     """Admin representation for UserAddresses"""
-
-    pass
 
 
 class VendorAdmin(BaseUserAdmin):
