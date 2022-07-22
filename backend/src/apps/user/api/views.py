@@ -24,5 +24,4 @@ class ActivateUser(APIView):
 
         if response.status_code == 204:
             return Response({"message": "OK"}, response.status_code)
-        else:
-            return Response(response.json())
+        return Response(response.json())

@@ -29,8 +29,7 @@ class DishViewSet(viewsets.ModelViewSet):
             self.perform_create(serializer)
             headers = self.get_success_headers(serializer.data)
             return Response(serializer.data, status=201, headers=headers)
-        else:
-            return Response(status=403)
+        return Response(status=403)
 
     def get_serializer_class(self):
         if self.action == "list":
