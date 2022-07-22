@@ -1,4 +1,4 @@
-FROM node:latest as build
+FROM node:18 as build
 WORKDIR /usr/local/app
 COPY ./ /usr/local/app/
 RUN npm install
