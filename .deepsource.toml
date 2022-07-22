@@ -1,5 +1,7 @@
 version = 1
 
+exclude_patterns = ["frontend/src/assets/*"]
+
 [[analyzers]]
 name = "shell"
 enabled = true
@@ -16,5 +18,16 @@ name = "python"
 enabled = true
 
   [analyzers.meta]
-  max_line_length = 99
   runtime_version = "3.x.x"
+
+[[transformers]]
+name = "black"
+enabled = true
+
+[[transformers]]
+name = "isort"
+enabled = true
+
+[[transformers]]
+name = "prettier"
+enabled = true
