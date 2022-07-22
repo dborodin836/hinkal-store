@@ -69,7 +69,6 @@ class Order(models.Model):
     modifier = models.ManyToManyField(OrderModifier, blank=True)
     status = models.CharField(choices=STATUS, default="new", max_length=200)
     ordered_by = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
-    # details = models.ManyToManyField("OrderItem")
 
     def __repr__(self):
         return (

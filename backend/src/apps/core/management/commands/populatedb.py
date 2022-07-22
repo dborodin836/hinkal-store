@@ -285,4 +285,3 @@ class Command(BaseCommand):
             func()
             self.stdout.write(get_success_message(func.__name__.split("_")[-1]))
         print(f"Time elapsed: {datetime.now() - start}")
-        # print(f'Rows created: {1300} < ')
