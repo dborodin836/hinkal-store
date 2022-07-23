@@ -23,7 +23,7 @@ class VendorFactory(factory.Factory):
     """
 
     username = factory.LazyAttribute(get_name)
-    email = "{0}@example.com".format(username)
+    email = f"{username}@example.com"
     password = factory.PostGenerationMethodCall("set_password", "testpass")
     is_active = True
 

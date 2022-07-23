@@ -7,7 +7,7 @@ from .models import Comment, Dish
 class DishAdmin(admin.ModelAdmin):
     def thumbnail(self, object):
         return format_html(
-            '<img src="{}" width="40" style="border-radius: 50px" />'.format(object.image.url)
+            f'<img src="{object.image.url}" width="40" style="border-radius: 50px" />'
         )
 
     thumbnail.short_description = "photo"  # type: ignore

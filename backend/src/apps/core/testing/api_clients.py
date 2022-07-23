@@ -35,7 +35,7 @@ class BaseUserAPIClient(APIClient):
             self.__token = Token.objects.get(user_id=self.id).key
         except Token.DoesNotExist:
             logger.error("Token doest not exist...")
-            logger.info("All tokens : %s" % Token.objects.all())
+            logger.info(f"All tokens : {Token.objects.all()}")
             raise Token.DoesNotExist
 
         self.credentials(HTTP_AUTHORIZATION=f"Token {self.__token}")

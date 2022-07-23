@@ -12,7 +12,7 @@ class Contact(TimeStampedModelMixin):
     message = models.TextField(verbose_name="User's message")
 
     def __str__(self):
-        return "Contact: %s" % self.subject
+        return f"Contact: {self.subject}"
 
     def __repr__(self):
         return (
