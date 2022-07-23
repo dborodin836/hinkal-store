@@ -1,7 +1,10 @@
+import logging
 import os
 import sys
 
 from django.core.exceptions import ImproperlyConfigured
+
+logger = logging.getLogger("main")
 
 
 def get_envs_from_file(env_file="local.env") -> None:
@@ -62,4 +65,7 @@ def get_env_file():
 
 def setup_env_vars():
     filename = get_env_file()
-    get_envs_from_file(filename)
+    try:
+        get_envs_from_file(filename)
+    except FileNotFoundError:
+        logger.warning("Not using .env file. Using manually set up vars.")
