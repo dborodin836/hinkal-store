@@ -36,6 +36,7 @@ export class StoreComponent implements OnInit {
     }
     // @ts-ignore
     this.dishService
+      // @ts-ignore
       .getList(myevent, this.keyword, this.ordering, this.filtered_category)
       .subscribe((data: HttpResponse<any>) => {
         this.dishes = data.body.results;

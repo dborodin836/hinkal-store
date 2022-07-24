@@ -5,6 +5,7 @@ from typing import Sequence
 
 import pytz
 from django.core.management.base import BaseCommand
+from django.db import IntegrityError
 
 from src.apps.contact.models import Contact
 from src.apps.goods.models import Dish
@@ -135,7 +136,7 @@ class Command(BaseCommand):
                 customer.set_password(password)
                 customer.save()
                 print(f'User "{username}" created successfully!')
-            except Exception:
+            except IntegrityError:
                 print("Collision happened!")
 
     @staticmethod
@@ -159,7 +160,7 @@ class Command(BaseCommand):
             company = choice(Command.COMPANY_NAME_SAMPLES)
             try:
                 vendor = Vendor.objects.create(
-                    username=username,
+                    username=1111,
                     email=email,
                     first_name=name,
                     last_name=last_name,
@@ -169,7 +170,7 @@ class Command(BaseCommand):
                 vendor.set_password(password)
                 vendor.save()
                 print(f'User "{username}" created successfully!')
-            except Exception:
+            except IntegrityError:
                 print("Collision happened!")
 
     @staticmethod
@@ -192,7 +193,7 @@ class Command(BaseCommand):
                     times_bought=times_bought,
                 )
                 print(f'Dish "{title}" created successfully!')
-            except Exception:
+            except IntegrityError:
                 print("Collision happened!")
 
     @staticmethod
@@ -212,7 +213,7 @@ class Command(BaseCommand):
                     message=message,
                 )
                 print(f'Contact from "{name}" created successfully!')
-            except Exception:
+            except IntegrityError:
                 print("Collision happened!")
 
     @staticmethod
@@ -235,7 +236,7 @@ class Command(BaseCommand):
                     discount_amount=discount_amount,
                 )
                 print(f'Discount "{word}" created successfully!')
-            except Exception:
+            except IntegrityError:
                 print("Collision happened!")
 
     @staticmethod
@@ -259,13 +260,10 @@ class Command(BaseCommand):
                 )  # type: ignore
                 all_dishes = Dish.objects.all()
                 for _ in range(randint(1, 10)):
-                    try:
-                        dish = choice(all_dishes)
-                        amount = randint(1, 10)
-                        OrderItem.objects.create(amount=amount, item=dish, order=order)
-                    except Exception:
-                        pass
-            except Exception as e:
+                    dish = choice(all_dishes)
+                    amount = randint(1, 10)
+                    OrderItem.objects.create(amount=amount, item=dish, order=order)
+            except IntegrityError as e:
                 print("Collision happened!", e)
             print(f'Order "{order.id}" created successfully!')
 
