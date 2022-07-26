@@ -1,0 +1,10 @@
+.angular/
+node_modules/
+dist/
+
+# Git
+.git
+.gitignore
+
+# Docker
+.docker

@@ -25,8 +25,6 @@ import { RegisterComponent } from './register/register.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AccountActivationComponent } from './account-activation/account-activation.component';
 
-export const HOST = 'http://localhost:8000';
-
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'about', component: AboutComponent },

@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { FormGroup } from '@angular/forms';
-import { HOST } from '../app.module';
 
-const baseUrl = HOST + '/api/contact/';
+const baseUrl = 'http://localhost:8000/api/contact/';
 const headers = new HttpHeaders({ Authorization: 'Token f8893cfcd3b0e4b4be269bb647678b1ffaa0c33c' });
 
 @Injectable({
