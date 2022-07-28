@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 
-from .models import Comment, Dish
+from .models import Comment, Dish, Category
 
 
 class DishAdmin(admin.ModelAdmin):
@@ -36,5 +36,10 @@ class CommentAdmin(admin.ModelAdmin):
     )
 
 
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ("id", "name")
+
+
 admin.site.register(Dish, DishAdmin)
 admin.site.register(Comment, CommentAdmin)
+admin.site.register(Category, CategoryAdmin)

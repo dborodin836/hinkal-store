@@ -3,8 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserModel } from '../models/user.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HOST } from '../conf';
 
-const baseUrl = 'http://localhost:8000/auth/';
+const baseUrl = HOST + '/auth/';
 
 @Injectable({
   providedIn: 'root',

@@ -13,3 +13,4 @@ djoser==2.1.0
 django-mptt~=0.13.4
 coverage==6.4.2
 factory-boy==3.2.1
+gunicorn==20.1.0
