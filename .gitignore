@@ -29,6 +29,7 @@ data
 
 # Frontend
 /frontend/dist/
+/frontend/dest/
 
 # Logs
 *.log
