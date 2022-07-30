@@ -50,11 +50,21 @@ export class LoginService {
       this.http
         .post<any>(baseUrl + 'token/login/', data)
         .toPromise()
-        .then((res) => {
-          this.auth_token = res.auth_token;
-          console.log(res.auth_token);
-          this.getUser();
-        });
+        .then(
+          (res) => {
+            this.auth_token = res.auth_token;
+            this.router.navigate(['dashboard/']);
+          },
+          (error) => {
+            if (error.error.username) {
+              this.openSnackBar('User does not exists', 'X');
+            } else if (error.error.password) {
+              this.openSnackBar('Wrong password', 'X');
+            } else {
+              this.openSnackBar('Service unavailable. Try again later.', 'X');
+            }
+          }
+        );
     });
     return promise;
   }

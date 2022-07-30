@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { LoginService } from '../services/login.service';
-import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private formBuilder: FormBuilder, private loginService: LoginService, private router: Router) {}
+  constructor(private formBuilder: FormBuilder, private loginService: LoginService, private snackBar: MatSnackBar) {}
 
   loginForm = this.formBuilder.group({
     username: '',
@@ -19,8 +19,18 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
-    console.log(this.loginForm.value);
-    this.loginService.login(this.loginForm.value);
-    this.router.navigate(['dashboard/']);
+    if (this.loginForm.value.username.length === 0) {
+      this.snackBar.open('Enter username', 'X', {
+        duration: 7000,
+        horizontalPosition: 'end',
+      });
+    } else if (this.loginForm.value.password.length === 0) {
+      this.snackBar.open('Enter password', 'X', {
+        duration: 7000,
+        horizontalPosition: 'end',
+      });
+    } else {
+      this.loginService.login(this.loginForm.value);
+    }
   }
 }
