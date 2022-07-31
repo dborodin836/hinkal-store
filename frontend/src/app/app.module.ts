@@ -24,6 +24,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { RegisterComponent } from './register/register.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AccountActivationComponent } from './account-activation/account-activation.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -58,6 +59,7 @@ const appRoutes: Routes = [
     CheckoutComponent,
     RegisterComponent,
     AccountActivationComponent,
+    ForbiddenComponent,
   ],
   imports: [
     BrowserModule,

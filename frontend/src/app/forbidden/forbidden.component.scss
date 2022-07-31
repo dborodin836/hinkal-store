@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Lato');
+@import '../login/login.component.css';
+
+$animationTime: 2s;
+
+h1 {
+  margin: 40px 0 20px;
+  font-size: x-large;
+}
+
+.container {
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

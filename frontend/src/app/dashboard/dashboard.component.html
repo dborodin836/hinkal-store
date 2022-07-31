@@ -1,1 +1,5 @@
-<p>dashboard works!</p>
+<div *ngIf="!this.loginService.isAuthorized()">
+  <div class="container contact-form">
+    <app-forbidden></app-forbidden>
+  </div>
+</div>
