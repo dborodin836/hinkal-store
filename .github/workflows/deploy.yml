@@ -33,6 +33,7 @@ jobs:
         run: |
           cd backend
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:latest -f Dockerfile.prod .
+          docker tag $ECR_REGISTRY/$ECR_REPOSITORY:backend $ECR_REGISTRY/$ECR_REPOSITORY:backend
           docker push -a $ECR_REGISTRY/$ECR_REPOSITORY
 
       - name: Build, tag, and push image to Amazon ECR Frontend
@@ -43,4 +44,5 @@ jobs:
         run: |
           cd frontend
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:latest -f Dockerfile .
+          docker tag $ECR_REGISTRY/$ECR_REPOSITORY:frontend $ECR_REGISTRY/$ECR_REPOSITORY:frontend
           docker push -a $ECR_REGISTRY/$ECR_REPOSITORY
