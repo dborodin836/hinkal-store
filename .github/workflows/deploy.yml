@@ -2,7 +2,8 @@ name: Deploy to Dev Production
 
 on:
   push:
-    branches: [ release ]
+    tags:
+      - **-dev
 
 jobs:
 

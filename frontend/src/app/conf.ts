@@ -1,1 +1,1 @@
-export const HOST: string = 'http://52.90.92.15';
+export const HOST: string = 'http://backend-1948762157.us-east-1.elb.amazonaws.com';
