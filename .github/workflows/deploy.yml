@@ -3,7 +3,7 @@ name: Deploy to Dev Production
 on:
   push:
     tags:
-      - "**-dev"
+      - dev-**
 jobs:
 
   deploy:
