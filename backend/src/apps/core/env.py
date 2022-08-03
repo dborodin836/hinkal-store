@@ -64,6 +64,10 @@ def get_env_file():
 
 
 def setup_env_vars():
+    """
+    Wrapper function tries to export all defined env vars.
+    If file doesn't exist throws exception.
+    """
     filename = get_env_file()
     try:
         get_envs_from_file(filename)

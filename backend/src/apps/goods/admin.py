@@ -6,6 +6,7 @@ from .models import Comment, Dish, Category
 
 class DishAdmin(admin.ModelAdmin):
     def thumbnail(self, obj):
+        """Adds a nice little circle with image of dish."""
         return format_html(f'<img src="{obj.image.url}" width="40" style="border-radius: 50px" />')
 
     thumbnail.short_description = "photo"  # type: ignore

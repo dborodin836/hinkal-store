@@ -8,11 +8,17 @@ from src.apps.user.models import Customer, Vendor
 
 @receiver(post_save, sender=Customer)
 def add_default_customer_group(sender, instance: Customer, created, **kwargs):
+    """
+    Added default group for Customer user.
+    """
     if created:
         instance.groups.add(Group.objects.get(name="Customer"))
 
 
 @receiver(post_save, sender=Vendor)
 def add_default_vendor_group(sender, instance: Vendor, created, **kwargs):
+    """
+    Added default group for Vendor user.
+    """
     if created:
         instance.groups.add(Group.objects.get(name="Vendor"))
