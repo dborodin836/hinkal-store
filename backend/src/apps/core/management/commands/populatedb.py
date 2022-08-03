@@ -242,7 +242,7 @@ class Command(BaseCommand):
     @staticmethod
     @sample_data_generator
     def _create_orders(amount: int = 120) -> None:
-        for i in range(amount):
+        for _ in range(amount):
             all_discounts = Discount.objects.all()
             all_users = Customer.objects.all()
 
