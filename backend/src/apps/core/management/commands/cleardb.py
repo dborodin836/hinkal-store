@@ -23,8 +23,8 @@ class Command(BaseCommand):
         )
         models = model or all_models
         models = list(models)
-        for model in models:
-            model.objects.all().delete()
+        for model_ in models:
+            model_.objects.all().delete()
 
     def add_arguments(self, parser):
         ...
