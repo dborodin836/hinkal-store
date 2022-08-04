@@ -27,18 +27,18 @@ import { AccountActivationComponent } from './account-activation/account-activat
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'store', component: StoreComponent },
-  { path: 'store/:id', component: DishDetailComponent },
-  { path: 'contact', component: ContactComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'success', component: SuccessComponent },
-  { path: 'cart', component: CheckoutComponent },
-  { path: 'account-activation', component: AccountActivationComponent },
-  { path: '**', component: NotFoundComponent },
+  { path: '', component: HomeComponent, title: 'Marketplace Hinkal' },
+  { path: 'about', component: AboutComponent, title: 'MH | About Us' },
+  { path: 'store', component: StoreComponent, title: 'MH | Store' },
+  { path: 'store/:id', component: DishDetailComponent, title: 'MH | Detailed' },
+  { path: 'contact', component: ContactComponent, title: 'MH | Contact Us' },
+  { path: 'login', component: LoginComponent, title: 'MH | Login' },
+  { path: 'register', component: RegisterComponent, title: 'MH | Register' },
+  { path: 'dashboard', component: DashboardComponent, title: 'MH | Dashboard' },
+  { path: 'success', component: SuccessComponent, title: 'MH | Success!' },
+  { path: 'cart', component: CheckoutComponent, title: 'MH | Cart' },
+  { path: 'account-activation', component: AccountActivationComponent, title: 'Marketplace Hinkal' },
+  { path: '**', component: NotFoundComponent, title: 'MH | Not Found' },
 ];
 
 @NgModule({
