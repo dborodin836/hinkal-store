@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { LoginService } from '../services/login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -9,7 +9,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private formBuilder: FormBuilder, private loginService: LoginService, private snackBar: MatSnackBar) {}
+  constructor(
+    private formBuilder: UntypedFormBuilder,
+    private loginService: LoginService,
+    private snackBar: MatSnackBar
+  ) {}
 
   loginForm = this.formBuilder.group({
     username: '',

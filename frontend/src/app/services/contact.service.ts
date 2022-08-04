@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { HOST } from '../conf';
 
 const baseUrl = HOST + '/api/contact/';
@@ -15,7 +15,7 @@ export class ContactService {
 
   constructor(private http: HttpClient) {}
 
-  sendPost(userData: FormGroup): Observable<HttpResponse<any>> {
+  sendPost(userData: UntypedFormGroup): Observable<HttpResponse<any>> {
     this.http.post<any>(baseUrl, userData, { headers: headers }).subscribe((data) => {
       this.response = data;
     });

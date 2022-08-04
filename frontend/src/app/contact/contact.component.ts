@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { ContactService } from '../services/contact.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class ContactComponent implements OnInit {
     message: '',
   });
 
-  constructor(private contactService: ContactService, private formBuilder: FormBuilder) {}
+  constructor(private contactService: ContactService, private formBuilder: UntypedFormBuilder) {}
 
   onSubmit() {
     console.log('submit');
