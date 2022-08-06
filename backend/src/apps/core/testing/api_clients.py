@@ -11,6 +11,8 @@ logger = logging.getLogger("debug")
 class BaseUserAPIClient(APIClient):
     def __init__(self, username: str, password: str, enforce_csrf_checks=False, **defaults):
         super().__init__(enforce_csrf_checks, **defaults)
+        self._user: User | None = None
+        self.__token = None
         self.username = username
         self.password = password
 
