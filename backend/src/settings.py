@@ -96,10 +96,18 @@ logging.config.dictConfig(
         },
         "handlers": {
             "console": {"class": "logging.StreamHandler", "formatter": "main"},
-            "file": {"class": "logging.FileHandler", "formatter": "main", "filename": "log.log"},
+            "file": {
+                "class": "logging.FileHandler",
+                "formatter": "main",
+                "filename": "log.log",
+            },
         },
         "loggers": {
-            "main": {"handlers": ["console", "file"], "level": "INFO", "propagate": True},
+            "main": {
+                "handlers": ["console", "file"],
+                "level": "INFO",
+                "propagate": True,
+            },
             "debug": {"handlers": ["console"], "level": "DEBUG", "propagate": True},
         },
     }

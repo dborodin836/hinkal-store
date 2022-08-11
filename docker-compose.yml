@@ -8,20 +8,20 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
-      - "5432:5432"
+      - '5432:5432'
   backend:
     build: backend/
     command: bash -c "cd backend
-                   && python3 manage.py wait_for_db
-                   && python3 manage.py migrate
-                   && python3 manage.py loaddata fixtures/groups.json
-                   && python3 manage.py sadmin
-                   && python3 manage.py runserver 0.0.0.0:8000"
+      && python3 manage.py wait_for_db
+      && python3 manage.py migrate
+      && python3 manage.py loaddata fixtures/groups.json
+      && python3 manage.py sadmin
+      && python3 manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/code
     ports:
-      - "8000:8000"
-      - "80:4200"
+      - '8000:8000'
+      - '80:4200'
     environment:
       - ENV=PROD
     depends_on:
@@ -39,7 +39,7 @@ services:
       - POOL_MODE=transaction
       - ADMIN_USERS=postgres,dbuser
     ports:
-      - "6432:6432"
+      - '6432:6432'
     depends_on:
       - db
   frontend:
@@ -47,7 +47,7 @@ services:
     volumes:
       - ./templates:/etc/nginx/templates
     ports:
-      - "4200:80"
+      - '4200:80'
     environment:
       - NGINX_HOST=localhost
       - NGINX_PORT=80
