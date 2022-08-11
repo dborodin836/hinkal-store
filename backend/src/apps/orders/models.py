@@ -1,6 +1,5 @@
-from datetime import datetime as dt
-
 from django.db import models
+from django.utils import timezone
 
 from src.apps.goods.models import Dish
 from src.apps.user.models import Customer, Vendor
@@ -64,7 +63,7 @@ class Order(models.Model):
     )
 
     comment = models.TextField(blank=True)
-    ordered_date = models.DateTimeField(default=dt.now)
+    ordered_date = models.DateTimeField(default=timezone.now)
     discount = models.ForeignKey(Discount, on_delete=models.SET_NULL, null=True)
     modifier = models.ManyToManyField(OrderModifier, blank=True)
     status = models.CharField(choices=STATUS, default="new", max_length=200)
