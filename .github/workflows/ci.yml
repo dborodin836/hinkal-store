@@ -79,6 +79,18 @@ jobs:
           python manage.py test
         env:
           ENV: TEST
+
+      - name: Generate coverage report
+        run: |
+          cd backend
+          coverage run manage.py test
+          coverage xml
+        env:
+          ENV: TEST
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          fail_ci_if_error: true
   build:
     name: Frontend Linting
     runs-on: ubuntu-latest
