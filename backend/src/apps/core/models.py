@@ -25,7 +25,7 @@ class AddedByModelMixin(models.Model):
     django "User" model.
     """
 
-    added_by = models.ForeignKey(User, on_delete=models.SET_NULL)
+    added_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
     class Meta:
         abstract = True

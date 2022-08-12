@@ -11,7 +11,7 @@ class DishAdmin(admin.ModelAdmin):
 
     thumbnail.short_description = "photo"  # type: ignore
 
-    list_display = ("id", "title", "thumbnail", "added_date", "added_by")
+    list_display = ("id", "title", "thumbnail", "created_at", "added_by")
 
     list_display_links = (
         "id",
@@ -31,7 +31,6 @@ class CommentAdmin(admin.ModelAdmin):
         "id",
         "dish",
         "parent",
-        # 'added_date',
     )
 
 

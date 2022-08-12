@@ -22,7 +22,7 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = (
         "id",
         "ordered_by",
-        "ordered_date",
+        "created_at",
     )
     inlines = (OrderItemInline,)
 

@@ -41,7 +41,7 @@ class DishViewSet(viewsets.ModelViewSet):
     # Used to convert requested category to order_by parameter.
     ORDERING_DICT = {
         "popular": "-times_bought",
-        "newest": "-added_date",
+        "newest": "-created_at",
         "max_price": "-price",
         "min_price": "price",
     }

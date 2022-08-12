@@ -1,11 +1,11 @@
 from django.db import models
-from django.utils import timezone
 
+from src.apps.core.models import TimeStampedAddedByModel, TimeStampedModelMixin
 from src.apps.goods.models import Dish
-from src.apps.user.models import Customer, Vendor
+from src.apps.user.models import Customer
 
 
-class Discount(models.Model):
+class Discount(TimeStampedAddedByModel):
     """
     Discount for all order.
 
@@ -17,7 +17,6 @@ class Discount(models.Model):
     discount_word = models.CharField(max_length=100)
     discount_amount = models.PositiveIntegerField()
     # Admin should also be able to add Discounts
-    added_by = models.ForeignKey(Vendor, on_delete=models.CASCADE)
     is_active = models.BooleanField(default=False)
 
     def __repr__(self):
@@ -30,7 +29,7 @@ class Discount(models.Model):
         return self.name if self.name else self.discount_word
 
 
-class OrderModifier(models.Model):
+class OrderModifier(TimeStampedAddedByModel):
     """
     Modifier for ALL order.
 
@@ -48,7 +47,7 @@ class OrderModifier(models.Model):
         return self.title
 
 
-class Order(models.Model):
+class Order(TimeStampedModelMixin):
     """
     Contains  order from user.
 
@@ -63,7 +62,6 @@ class Order(models.Model):
     )
 
     comment = models.TextField(blank=True)
-    ordered_date = models.DateTimeField(default=timezone.now)
     discount = models.ForeignKey(Discount, on_delete=models.SET_NULL, null=True)
     modifier = models.ManyToManyField(OrderModifier, blank=True)
     status = models.CharField(choices=STATUS, default="new", max_length=200)
@@ -71,7 +69,7 @@ class Order(models.Model):
 
     def __repr__(self):
         return (
-            f"Order({self.comment}, {self.ordered_date}, {self.discount}, "
+            f"Order({self.comment}, {self.created_at}, {self.discount}, "
             f"{repr(self.modifier)}, {self.status})"
         )
 
@@ -79,7 +77,7 @@ class Order(models.Model):
         return "Order " + str(self.id)
 
 
-class OrderItem(models.Model):
+class OrderItem(TimeStampedModelMixin):
     """
     Contains order items.
 

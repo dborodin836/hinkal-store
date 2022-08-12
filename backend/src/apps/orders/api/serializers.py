@@ -28,7 +28,7 @@ class OrderDetailSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "comment",
-            "ordered_date",
+            "created_at",
             "discount",
             "modifier",
             "status",
