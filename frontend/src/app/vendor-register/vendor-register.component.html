@@ -1,0 +1,57 @@
+<div class="container contact-form">
+  <form method="post" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <h3>REGISTER</h3>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <input
+            formControlName="username"
+            type="text"
+            name="txtName"
+            class="form-control"
+            placeholder="Your Username *"
+            value=""
+          />
+        </div>
+        <div class="form-group">
+          <input
+            formControlName="email"
+            type="email"
+            name="txtName"
+            class="form-control"
+            placeholder="Your Email *"
+            value=""
+          />
+        </div>
+        <div class="form-group">
+          <input
+            formControlName="password"
+            type="password"
+            name="txtPass"
+            class="form-control"
+            placeholder="Your Password *"
+            value=""
+          />
+        </div>
+        <div class="form-group">
+          <input
+            formControlName="password_repeat"
+            type="password"
+            name="txtPass"
+            class="form-control"
+            placeholder="Repeat Your Password *"
+            value=""
+          />
+        </div>
+        <div class="form-group">
+          <input type="submit" name="btnSubmit" class="btnContact" value="Register" />
+        </div>
+        <div class="form-group">
+          <button routerLink="/login" class="btnContact" style="vertical-align: middle">
+            <span>Already have account?</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -5,11 +5,11 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
+  selector: 'app-vendor-register',
+  templateUrl: './vendor-register.component.html',
+  styleUrls: ['./vendor-register.component.css'],
 })
-export class RegisterComponent implements OnInit {
+export class VendorRegisterComponent implements OnInit {
   constructor(
     private formBuilder: UntypedFormBuilder,
     private loginService: LoginService,
@@ -49,7 +49,7 @@ export class RegisterComponent implements OnInit {
       return;
     }
     if (this.registerForm.value.password === this.registerForm.value.password_repeat) {
-      this.loginService.registerCustomer(
+      this.loginService.registerVendor(
         this.registerForm.value.username,
         this.registerForm.value.password,
         this.registerForm.value.email

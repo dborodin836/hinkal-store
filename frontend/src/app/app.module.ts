@@ -25,6 +25,8 @@ import { RegisterComponent } from './register/register.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AccountActivationComponent } from './account-activation/account-activation.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { VendorLoginComponent } from './vendor-login/vendor-login.component';
+import { VendorRegisterComponent } from './vendor-register/vendor-register.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent, title: 'Marketplace Hinkal' },
@@ -33,7 +35,9 @@ const appRoutes: Routes = [
   { path: 'store/:id', component: DishDetailComponent, title: 'MH | Detailed' },
   { path: 'contact', component: ContactComponent, title: 'MH | Contact Us' },
   { path: 'login', component: LoginComponent, title: 'MH | Login' },
+  { path: 'login-vendor', component: VendorLoginComponent, title: 'MH | Login as Vendor' },
   { path: 'register', component: RegisterComponent, title: 'MH | Register' },
+  { path: 'register-vendor', component: RegisterComponent, title: 'MH | Register as Vendor' },
   { path: 'dashboard', component: DashboardComponent, title: 'MH | Dashboard' },
   { path: 'success', component: SuccessComponent, title: 'MH | Success!' },
   { path: 'cart', component: CheckoutComponent, title: 'MH | Cart' },
@@ -60,6 +64,8 @@ const appRoutes: Routes = [
     RegisterComponent,
     AccountActivationComponent,
     ForbiddenComponent,
+    VendorLoginComponent,
+    VendorRegisterComponent,
   ],
   imports: [
     BrowserModule,

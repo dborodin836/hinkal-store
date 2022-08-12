@@ -98,9 +98,9 @@ export class LoginService {
     });
   }
 
-  register(username: string, password: string, email: string) {
+  private register(username: string, password: string, email: string, apiUrl: string) {
     let promise: any = new Promise((resolve, reject) => {
-      let url = baseUrl + 'users/';
+      let url = HOST + apiUrl;
       this.http
         .post(
           url,
@@ -130,5 +130,13 @@ export class LoginService {
         );
     });
     return promise;
+  }
+
+  registerCustomer(username: string, password: string, email: string) {
+    this.register(username, password, email, '/api/customers/');
+  }
+
+  registerVendor(username: string, password: string, email: string) {
+    this.register(username, password, email, '/api/vendors/');
   }
 }
