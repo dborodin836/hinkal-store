@@ -5,8 +5,9 @@ on:
     branches: [master, develop, release]
   pull_request:
     branches: [master, develop, release]
+
 jobs:
-  Black_flake8_mypy:
+  lint-backend:
     name: Black flake8 mypy
     runs-on: ubuntu-latest
     env:
@@ -17,22 +18,29 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.10'
+
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r backend/requirements.txt
           pip install -r backend/requirements_dev.txt
+
       - name: Run black
         run: black --check backend/src/ --line-length 99
+
       - name: Run flake8
         run: flake8 backend/src --config backend/tox.ini
+
       - name: Run Mypy
         run: |
           cd backend
           mypy src --config-file setup.cfg --no-incremental
-  TestingDB:
+
+  test-backend:
+    name: Testing Database
     runs-on: ubuntu-latest
 
     services:
@@ -51,9 +59,7 @@ jobs:
           --health-retries 5
         ports:
           - 5432:5432
-
     steps:
-      # run steps required in the workflow
       - name: Checkout repository
         uses: actions/checkout@v2
 
@@ -66,14 +72,14 @@ jobs:
           pip install -r requirements.txt
           pip install -r requirements_dev.txt
 
-      - name: migrate database
+      - name: Migrate database
         run: |
           cd backend
           python manage.py migrate
         env:
           ENV: TEST
 
-      - name: Run the mock tests function
+      - name: Run tests function
         run: |
           cd backend
           python manage.py test
@@ -87,11 +93,12 @@ jobs:
           coverage xml
         env:
           ENV: TEST
+
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
           fail_ci_if_error: true
-  build:
+  lint-frontend:
     name: Frontend Linting
     runs-on: ubuntu-latest
 
@@ -102,12 +109,43 @@ jobs:
         with:
           node-version: 16
 
-      - run: |
+      - name: Install packages
+        run: |
           cd frontend
           npm install --force
-      - run: |
+
+      - name: Run linting
+        run: |
           cd frontend
           npm run lint
-      - run: |
+
+      - name: Check with prettier
+        run: |
           cd frontend
           npx prettier src -c
+
+  test-frontend:
+    name: Testing Frontend
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 16
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+
+      - name: Install packages
+        run: |
+          cd frontend
+          npm install --legacy-peer-deps
+
+      - name: Run tests
+        run: |
+          cd frontend
+          npm run test:gh
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          fail_ci_if_error: true

@@ -23,6 +23,7 @@ node_modules
 backend/htmlcov
 backend/.coverage
 backend/coverage.xml
+frontend/coverage
 
 # Docker
 data

@@ -13,8 +13,15 @@ export class DishDetailComponent implements OnInit {
   constructor(private dishService: DishService, private router: Router) {}
 
   public id?: string;
-  // @ts-ignore
-  dish: DishModel;
+
+  dish: DishModel = {
+    title: '...',
+    description: '...',
+    id: 'id',
+    image: '',
+    is_active: true,
+    price: 0,
+  };
 
   ngOnInit(): void {
     this.id = this.router.url[this.router.url.length - 1];
@@ -24,7 +31,6 @@ export class DishDetailComponent implements OnInit {
   getDetailedData(id: string) {
     this.dishService.getDetail(id).subscribe((data: HttpResponse<any>) => {
       this.dish = data.body;
-      console.log(this.dish.id);
     });
   }
 }
