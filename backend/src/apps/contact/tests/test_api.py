@@ -1,10 +1,8 @@
-import io
-from contextlib import redirect_stdout
-
 from django.core.management import call_command
 from rest_framework.test import APITestCase
 
 from src.apps.contact.models import Contact
+from src.apps.core.decorators import hide_stdout
 from src.apps.core.testing.api_clients import AdminAPIClient
 
 
@@ -16,9 +14,9 @@ class ContactAPITest(APITestCase):
     detailed_url = base_url + "1/"
 
     @classmethod
+    @hide_stdout
     def setUpTestData(cls) -> None:
-        with redirect_stdout(io.StringIO()):
-            call_command("loaddata", "fixtures/groups.json", app_label="auth")
+        call_command("loaddata", "fixtures/groups.json", app_label="auth")
         cls.adminClient = AdminAPIClient(  # type: ignore
             username=cls.TEST_ADMIN_USERNAME, password=cls.TEST_ADMIN_PASSWORD
         )

@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.permissions import (
     IsAdminUser,
-    DjangoModelPermissionsOrAnonReadOnly,
+    DjangoModelPermissions,
 )
 
 from src.apps.core.permissions import Author
@@ -17,7 +17,7 @@ class OrderViewSet(viewsets.ModelViewSet):
     """List of all Orders"""
 
     queryset = Order.objects.all()
-    permission_classes = (Author & DjangoModelPermissionsOrAnonReadOnly,)
+    permission_classes = (DjangoModelPermissions & Author,)
 
     serializer_class = OrderDetailSerializer
 

@@ -1,10 +1,8 @@
 # mypy: ignore-errors
-import io
-
 from django.core.management import call_command
 from rest_framework.test import APITestCase
-from contextlib import redirect_stdout
 
+from src.apps.core.decorators import hide_stdout
 from src.apps.core.testing.api_clients import CustomerAPIClient, AdminAPIClient, VendorAPIClient
 from src.apps.goods.models import Dish, Category
 
@@ -25,9 +23,9 @@ class CustomerDishAPITest(APITestCase):
     detailed_url = base_url + "3/"
 
     @classmethod
+    @hide_stdout
     def setUpTestData(cls) -> None:
-        with redirect_stdout(io.StringIO()):
-            call_command("loaddata", "fixtures/groups.json", app_label="auth")
+        call_command("loaddata", "fixtures/groups.json", app_label="auth")
 
         cls.clientAdmin = AdminAPIClient(
             username=cls.TEST_ADMIN_USERNAME, password=cls.TEST_ADMIN_PASSWORD

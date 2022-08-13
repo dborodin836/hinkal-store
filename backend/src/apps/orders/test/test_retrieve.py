@@ -1,10 +1,8 @@
 # mypy: ignore-errors
-import io
-from contextlib import redirect_stdout
-
 from django.core.management import call_command
 from rest_framework.test import APITestCase
 
+from src.apps.core.decorators import hide_stdout
 from src.apps.core.testing.api_clients import CustomerAPIClient, VendorAPIClient
 from src.apps.goods.models import Dish, Category
 
@@ -19,9 +17,9 @@ class OrderRetrieveAPITest(APITestCase):
     base_url = "http://localhost:8000/api/order/"
 
     @classmethod
+    @hide_stdout
     def setUpTestData(cls) -> None:
-        with redirect_stdout(io.StringIO()):
-            call_command("loaddata", "fixtures/groups.json", app_label="auth")
+        call_command("loaddata", "fixtures/groups.json", app_label="auth")
         cls.customerClient = CustomerAPIClient(  # type: ignore
             username=cls.TEST_CUSTOMER_USERNAME, password=cls.TEST_CUSTOMER_PASSWORD
         )
@@ -51,9 +49,9 @@ class OrderRetrieveAPITest(APITestCase):
             "ordered_by": self.customerClient.id,
         }
 
-    def test_retrieve(self):
+    def test_retrieve_created(self):
         response = self.customerClient.post(self.base_url, data=self.data, format="json")
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, 201, msg="Couldn't create order.")
         url = self.base_url + str(response.data["id"]) + "/"
         response_author = self.customerClient.get(url)
         self.assertEqual(response_author.status_code, 200)

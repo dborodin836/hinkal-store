@@ -1,17 +1,15 @@
-from contextlib import redirect_stdout
-import io
-
 from django.core.management import call_command
 from django.test import TestCase
 
+from src.apps.core.decorators import hide_stdout
 from src.apps.core.testing.api_clients import CustomerAPIClient, AdminAPIClient, VendorAPIClient
 
 
 class CustomerTestCase(TestCase):
     @classmethod
-    def setUpTestData(cls) -> None:
-        with redirect_stdout(io.StringIO()):
-            call_command("loaddata", "fixtures/groups.json", app_label="auth")
+    @hide_stdout
+    def setUpTestData(cls):
+        call_command("loaddata", "fixtures/groups.json", app_label="auth")
 
     def setUp(self) -> None:
         self.client: CustomerAPIClient = CustomerAPIClient(username="test1", password="test_pass")
@@ -22,9 +20,9 @@ class CustomerTestCase(TestCase):
 
 class VendorTestCase(TestCase):
     @classmethod
+    @hide_stdout
     def setUpTestData(cls) -> None:
-        with redirect_stdout(io.StringIO()):
-            call_command("loaddata", "fixtures/groups.json", app_label="auth")
+        call_command("loaddata", "fixtures/groups.json", app_label="auth")
 
     def setUp(self) -> None:
         self.client: VendorAPIClient = VendorAPIClient(username="test1", password="test_pass")
@@ -35,9 +33,9 @@ class VendorTestCase(TestCase):
 
 class AdminTestCase(TestCase):
     @classmethod
+    @hide_stdout
     def setUpTestData(cls) -> None:
-        with redirect_stdout(io.StringIO()):
-            call_command("loaddata", "fixtures/groups.json", app_label="auth")
+        call_command("loaddata", "fixtures/groups.json", app_label="auth")
 
     def setUp(self) -> None:
         self.client: AdminAPIClient = AdminAPIClient(username="test1", password="test_pass")
