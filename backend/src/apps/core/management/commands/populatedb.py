@@ -189,7 +189,7 @@ class Command(BaseCommand):
                     price=price,
                     added_by=rng_vendor,
                     image="default/not-found.png",
-                    added_date=Command._get_random_date(),
+                    created_at=Command._get_random_date(),
                     times_bought=times_bought,
                 )
                 print(f'Dish "{title}" created successfully!')
@@ -254,7 +254,7 @@ class Command(BaseCommand):
                 order = Order.objects.create(
                     ordered_by=user,
                     comment="Some comment",
-                    ordered_date=date,
+                    created_at=date,
                     discount=discount,
                     status=status,
                 )  # type: ignore
