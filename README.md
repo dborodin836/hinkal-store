@@ -67,7 +67,7 @@ And run simple command.
 **This could take a while...**
 
 ```sh
-$  docker-compose -p marketplace-hinkal --env-file backend/docker.env up
+$  docker-compose up
 ```
 
 **NOTE:** Due to temporary crutch, if marketplace-hinkal_web_1 container failed to start you need to restart hinkali_store_web_1 container manually. ~ 1 min

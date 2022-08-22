@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
+from django.db import IntegrityError
+from psycopg2 import IntegrityError as PsycopgIntegrityError
 
 
 class Command(BaseCommand):
@@ -9,9 +11,9 @@ class Command(BaseCommand):
         ...
 
     def handle(self, *args, **options):
-        User.objects.create_superuser("admin", "admin@example.com", "adminpass")
-        self.stdout.write(
-            """
-Login: admin
-Password: adminpass"""
-        )
+        try:
+            User.objects.create_superuser("admin", "admin@example.com", "adminpass")
+        except (IntegrityError, PsycopgIntegrityError):
+            self.stdout.write("Sample superuser already exists. Skipping...")
+        else:
+            self.stdout.write("Login: admin\nPassword: adminpass")
