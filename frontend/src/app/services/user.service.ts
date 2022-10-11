@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { HOST } from '../conf';
+import { environment } from '../../environments/environment';
 
-const baseUrl = HOST + '/auth/users';
+const baseUrl = `${environment.HOST}/auth/users`;
 const headers = new HttpHeaders({ Authorization: 'Token f8893cfcd3b0e4b4be269bb647678b1ffaa0c33c' });
 
 @Injectable({

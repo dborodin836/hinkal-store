@@ -33,33 +33,14 @@ services:
       - marketplace-hinkal-network
     env_file: backend/docker.env
     environment:
-      - ENV=PROD
-    depends_on:
-      - pgbouncer
-
-  pgbouncer:
-    image: edoburu/pgbouncer
-    container_name: marketplace-hinkal-pgbouncer
-    restart: unless-stopped
-    ports:
-      - '6432:6432'
-    networks:
-      - marketplace-hinkal-network
-    env_file: backend/docker.env
-    environment:
-      - DB_HOST=db
-      - DB_PORT=5432
-      - LISTEN_PORT=6432
-      - AUTH_TYPE=plain
-      - POOL_MODE=transaction
-      - ADMIN_USERS=postgres,dbuser
+      - ENV=DOCKER
     depends_on:
       - db
 
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.docker
     container_name: marketplace-hinkal-frontend
     restart: unless-stopped
     volumes:

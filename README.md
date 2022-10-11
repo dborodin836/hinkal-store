@@ -67,10 +67,8 @@ And run simple command.
 **This could take a while...**
 
 ```sh
-$  docker-compose up
+$  docker-compose -f .\docker-compose-local.yml up
 ```
-
-**NOTE:** Due to temporary crutch, if marketplace-hinkal_web_1 container failed to start you need to restart hinkali_store_web_1 container manually. ~ 1 min
 
 Alternatively, you can do setup manually following guides in specific folders.
 

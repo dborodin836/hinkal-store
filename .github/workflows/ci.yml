@@ -124,6 +124,22 @@ jobs:
           cd frontend
           npx prettier src -c
 
+  docker-compose-check:
+    name: Docker Compose Healthschecks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build containers
+        run: docker-compose -f docker-compose-local.yml up -d
+      - name: Test Frontend
+        run: |
+          sleep 15
+          curl --fail http://0.0.0.0:4200 || exit 1
+      - name: Test Backend
+        run: |
+          sleep 45
+          curl --fail http://0.0.0.0:8000/api/dish/?format=api || exit 1
+
   test-frontend:
     name: Testing Frontend
     runs-on: ubuntu-latest
