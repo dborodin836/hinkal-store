@@ -31,14 +31,7 @@ repos:
         name: Black
         args: ['--line-length', '99']
 
-  #- repo: local
-  #  hooks:
-  #  - id: migrations-check
-  #    language: system
-  #    name: Check for uncreated migrations.
-  #    entry: bash -c "pip3 install -r backend/requirements.txt backend requirements_dev.txt"
-  #    types: ["python"]
-  #    pass_filenames: false
+  # There should be checks for uncreated migrations.
 
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v0.950
