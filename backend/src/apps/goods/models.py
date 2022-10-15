@@ -14,6 +14,12 @@ class Category(TimeStampedAddedByModel):
 
     name = models.CharField(max_length=50)
 
+    def __repr__(self):
+        return f"Category({self.name})"
+
+    def __str__(self):
+        return self.name
+
 
 class Dish(TimeStampedAddedByModel):
     """
@@ -36,8 +42,8 @@ class Dish(TimeStampedAddedByModel):
 
     def __repr__(self):
         return (
-            f"Dish({self.title}, {self.description}, {self.image}, {self.added_date}, "
-            f"{repr(self.added_by)}, {self.price}, {self.is_active}, {self.category})"
+            f"Dish({self.title}, {self.description}, {self.image}, {self.created_at}, "
+            f"{repr(self.added_by)}, {self.price}, {self.is_active}, {self.times_bought}, {self.category})"
         )
 
     def __str__(self):
