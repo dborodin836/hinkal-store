@@ -13,7 +13,7 @@
 <img src="https://img.shields.io/github/license/dborodin836/marketplace-hinkal" alt="License">
 <img src="https://img.shields.io/github/checks-status/dborodin836/marketplace-hinkal/develop" alt="Checks">
 <img src="https://img.shields.io/github/last-commit/dborodin836/marketplace-hinkal" alt="Last commit">
-<img src="https://img.shields.io/github/workflow/status/dborodin836/marketplace-hinkal/Python" alt="Build status">
+<img src="http://img.shields.io/github/actions/workflow/status/dborodin836/marketplace-hinkal/ci.yml?branch=develop" alt="Build status">
 <img src="https://img.shields.io/github/commit-activity/m/dborodin836/marketplace-hinkal" alt="Commit activity">
 <img src="https://www.codefactor.io/repository/github/dborodin836/marketplace-hinkal/badge" alt="Codefactor">
 [![DeepSource](https://deepsource.io/gh/dborodin836/marketplace-hinkal.svg/?label=active+issues&token=IHInroIWzClOi9afsigBuueu)](https://deepsource.io/gh/dborodin836/marketplace-hinkal/?ref=repository-badge)
