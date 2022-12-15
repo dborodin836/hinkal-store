@@ -9,15 +9,21 @@
   </p>
 </p>
 
-<a><img src="https://img.shields.io/codecov/c/github/dborodin836/marketplace-hinkal" alt="Codecov coverage"></a>
+[![Code style: black][black-badge]][black-link]
 <img src="https://img.shields.io/github/license/dborodin836/marketplace-hinkal" alt="License">
 <img src="https://img.shields.io/github/checks-status/dborodin836/marketplace-hinkal/develop" alt="Checks">
 <img src="https://img.shields.io/github/last-commit/dborodin836/marketplace-hinkal" alt="Last commit">
 <img src="http://img.shields.io/github/actions/workflow/status/dborodin836/marketplace-hinkal/ci.yml?branch=develop" alt="Build status">
 <img src="https://img.shields.io/github/commit-activity/m/dborodin836/marketplace-hinkal" alt="Commit activity">
 <img src="https://www.codefactor.io/repository/github/dborodin836/marketplace-hinkal/badge" alt="Codefactor">
-[![DeepSource](https://deepsource.io/gh/dborodin836/marketplace-hinkal.svg/?label=active+issues&token=IHInroIWzClOi9afsigBuueu)](https://deepsource.io/gh/dborodin836/marketplace-hinkal/?ref=repository-badge)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![DeepSource][deepsource-badge]][deepsource-link]
+
+
+## Coverage
+| **Backend**                                       | **Frontend**                                       | **Total**                                 |
+|:-------------------------------------------------:|:--------------------------------------------------:|:-----------------------------------------:|
+| [![codecov][codecov-backend-badge]][codecov-link] | [![codecov][codecov-frontend-badge]][codecov-link] | [![codecov][codecov-badge]][codecov-link] |
+
 
 ## Table Of Contents
 
@@ -75,3 +81,12 @@ Alternatively, you can do setup manually following guides in specific folders.
 ## Usage
 
 - Screenshots and addition description, usage \*
+
+[black-badge]: https://img.shields.io/badge/code%20style-black-000000.svg
+[black-link]: https://github.com/psf/black
+[deepsource-badge]: https://deepsource.io/gh/dborodin836/marketplace-hinkal.svg/?label=active+issues&token=IHInroIWzClOi9afsigBuueu
+[deepsource-link]: https://deepsource.io/gh/dborodin836/marketplace-hinkal/?ref=repository-badge
+[codecov-backend-badge]: https://codecov.io/gh/dborodin836/marketplace-hinkal/branch/develop/graph/badge.svg?token=VLZPPIYUOG&flag=backend
+[codecov-frontend-badge]: https://codecov.io/gh/dborodin836/marketplace-hinkal/branch/develop/graph/badge.svg?token=VLZPPIYUOG&flag=frontend
+[codecov-badge]: https://codecov.io/gh/dborodin836/marketplace-hinkal/branch/develop/graph/badge.svg?token=VLZPPIYUOG
+[codecov-link]: https://codecov.io/gh/dborodin836/marketplace-hinkal
