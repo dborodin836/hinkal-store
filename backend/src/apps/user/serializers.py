@@ -73,6 +73,25 @@ class CustomerCreateSerializer(djoser_serializers.UserCreateSerializer):
         return user
 
 
+class CustomerCreatePasswordRetypeSerializer(CustomerCreateSerializer):
+    default_error_messages = {
+        "password_mismatch": settings.CONSTANTS.messages.PASSWORD_MISMATCH_ERROR
+    }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["re_password"] = serializers.CharField(style={"input_type": "password"})
+
+    def validate(self, attrs):
+        self.fields.pop("re_password", None)
+        re_password = attrs.pop("re_password")
+        attrs = super().validate(attrs)
+        if attrs["password"] == re_password:
+            return attrs
+        else:
+            self.fail("password_mismatch")
+
+
 class CurrentPasswordSerializer(serializers.Serializer):
     current_password = serializers.CharField(style={"input_type": "password"})
 
