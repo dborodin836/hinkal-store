@@ -7,7 +7,6 @@ from rest_framework.decorators import action
 from src.apps.user.models import Customer, Vendor
 from src.apps.user.serializers import (
     CustomerCreateSerializer,
-    CustomerCreatePasswordRetypeSerializer,
     CustomerDeleteSerializer,
     CustomerSerializer,
     VendorSerializer,
@@ -29,8 +28,6 @@ class CustomerViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self):
         self.user_view_set.action = self.action
         if self.action == "create":
-            if settings.USER_CREATE_PASSWORD_RETYPE:
-                return CustomerCreatePasswordRetypeSerializer
             return CustomerCreateSerializer
         elif self.action == "destroy" or (
             self.action == "me" and self.request and self.request.method == "DELETE"
