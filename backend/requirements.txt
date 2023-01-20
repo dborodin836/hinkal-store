@@ -1,5 +1,5 @@
 asgiref==3.5.2
-coverage==6.5.0
+coverage==7.0.5
 Django==4.1.2
 django-cors-headers==3.13.0
 django-mptt~=0.14.0
