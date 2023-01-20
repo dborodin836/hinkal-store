@@ -5,7 +5,7 @@ djet==0.3.0
 drf-yasg-stubs==0.1.4
 factory_boy==3.2.1
 flake8==5.0.4
-isort==5.10.1
+isort==5.11.4
 mypy==0.950
 pre-commit==2.20.0
 pytest==7.1.3
