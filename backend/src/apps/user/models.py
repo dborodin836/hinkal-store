@@ -37,7 +37,7 @@ class UserAddress(models.Model):
         )
 
     def __str__(self):
-        return self.customer.username + " address"
+        return f"Customer {str(self.customer.username)}'s addresses"
 
     class Meta:
         verbose_name = "User's Address"
