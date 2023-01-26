@@ -1,5 +1,5 @@
 black==22.12.0
-django-stubs==1.11.0
+django-stubs==1.14.0
 djangorestframework-stubs==1.7.0
 djet==0.3.0
 drf-yasg-stubs==0.1.4
