@@ -10,7 +10,7 @@ from django.db import IntegrityError
 from src.apps.contact.models import Contact
 from src.apps.goods.models import Dish
 from src.apps.orders.models import Discount, Order, OrderItem
-from src.apps.user.models import Country, Customer, Vendor
+from src.apps.user.models import Customer, Vendor
 
 # List for the funcs that will be used to generate data
 funcs = []
@@ -81,8 +81,6 @@ class Command(BaseCommand):
         "Stream",
         "Picassa",
     )
-
-    HINKALI_EXTRA = ("Hinkali from " + country.fullname for country in Country.objects.all())
 
     DISHES_NAME_SAMPLES = [
         "Borsch",

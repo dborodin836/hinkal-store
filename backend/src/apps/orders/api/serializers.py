@@ -51,3 +51,16 @@ class DiscountDetailSerializer(serializers.ModelSerializer):
             "added_by",
             "is_active",
         )
+
+
+class DiscountPublicSerializer(serializers.ModelSerializer):
+    """Public Discount"""
+
+    class Meta:
+        model = Discount
+        fields = (
+            "name",
+            "description",
+            "discount_word",
+            "discount_amount",
+        )
