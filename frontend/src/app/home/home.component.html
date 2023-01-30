@@ -36,8 +36,8 @@
         />
       </a>
     </div>
+    <h3 class="product-item-title">{{ dish.title }}</h3>
     <div class="product-list">
-      <h3>{{ dish.title }}</h3>
       <div class="stars"></div>
       <span class="price">{{ dish.price }} UAH</span>
       <div class="actions">
@@ -45,10 +45,10 @@
           <i class="fa-solid fa-cart-circle-plus"></i>
           <a (click)="addToCart(dish.id)" class="cart-button">В корзину</a>
         </div>
-        <div class="add-to-links">
-          <a class="wishlist"></a>
-          <a href="" class="compare"></a>
-        </div>
+<!--        <div class="add-to-links">-->
+<!--          <a class="wishlist"></a>-->
+<!--          <a href="" class="compare"></a>-->
+<!--        </div>-->
       </div>
     </div>
   </div>

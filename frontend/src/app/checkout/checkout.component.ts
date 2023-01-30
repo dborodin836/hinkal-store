@@ -1,6 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { CartService } from '../services/cart.service';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {CartService} from '../services/cart.service';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import {LoginService} from "../services/login.service";
+import {Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {environment} from "../../environments/environment";
+
+const baseUrl = `${environment.HOST}/auth/`;
 
 @Component({
   selector: 'app-checkout',
@@ -8,7 +14,13 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
   styleUrls: ['./checkout.component.css'],
 })
 export class CheckoutComponent implements OnInit {
-  constructor(private cartService: CartService, private http: HttpClient) {}
+  constructor(
+    private cartService: CartService,
+    private http: HttpClient,
+    private loginService: LoginService,
+    private router: Router,
+    private snackBar: MatSnackBar
+    ) { }
 
   listDishes: any[] = [];
 
@@ -43,6 +55,13 @@ export class CheckoutComponent implements OnInit {
   }
 
   createOrder() {
+    if (!this.loginService.isAuthorized()) {
+      this.router.navigate(['login']);
+      this.snackBar.open('Please login or register.', 'X', {
+        duration: 7000,
+        horizontalPosition: 'end',
+      });
+    }
     this.cartService.createOrder();
   }
 
