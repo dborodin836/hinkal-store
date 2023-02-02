@@ -18,12 +18,11 @@
 <img src="https://www.codefactor.io/repository/github/dborodin836/marketplace-hinkal/badge" alt="Codefactor">
 [![DeepSource][deepsource-badge]][deepsource-link]
 
-
 ## Coverage
-| **Backend**                                       | **Frontend**                                       | **Total**                                 |
-|:-------------------------------------------------:|:--------------------------------------------------:|:-----------------------------------------:|
-| [![codecov][codecov-backend-badge]][codecov-link] | [![codecov][codecov-frontend-badge]][codecov-link] | [![codecov][codecov-badge]][codecov-link] |
 
+|                    **Backend**                    |                    **Frontend**                    |                 **Total**                 |
+| :-----------------------------------------------: | :------------------------------------------------: | :---------------------------------------: |
+| [![codecov][codecov-backend-badge]][codecov-link] | [![codecov][codecov-frontend-badge]][codecov-link] | [![codecov][codecov-badge]][codecov-link] |
 
 ## Table Of Contents
 

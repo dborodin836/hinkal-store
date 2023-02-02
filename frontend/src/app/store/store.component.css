@@ -11,16 +11,16 @@
 
 .product-item {
   width: 200px;
-    margin: 0.25em;
-    padding: 10px 10px 5px 10px;
-    border: 1px solid #303030;
-    background: #202020;
-    font-family: "Open Sans", sans-serif;
-    overflow: hidden;
-    transition: 0.4s linear;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  margin: 0.25em;
+  padding: 10px 10px 5px 10px;
+  border: 1px solid #303030;
+  background: #202020;
+  font-family: 'Open Sans', sans-serif;
+  overflow: hidden;
+  transition: 0.4s linear;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .product-img {
@@ -38,11 +38,11 @@
 
 .product-list {
   margin-top: 15px;
-    display: flex;
-    flex-direction: column;
-    align-content: stretch;
-    justify-content: space-evenly;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .product-item-title {
@@ -86,16 +86,16 @@
 }
 
 .actions {
-    border-top: 1px solid #eee;
-    padding-top: 4px;
-    font-size: 13px;
-    height: 30px;
-    line-height: 30px;
-    display: flex;
-    align-content: stretch;
-    justify-content: space-evenly;
-    align-items: flex-end;
-    flex-direction: row-reverse;
+  border-top: 1px solid #eee;
+  padding-top: 4px;
+  font-size: 13px;
+  height: 30px;
+  line-height: 30px;
+  display: flex;
+  align-content: stretch;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  flex-direction: row-reverse;
 }
 
 .actions:after {
