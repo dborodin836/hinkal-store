@@ -26,7 +26,7 @@
     "bootstrap": "^5.2.0",
     "gulp": "^4.0.2",
     "gulp-postcss": "^9.0.1",
-    "ngx-bootstrap": "^9.0.0",
+    "ngx-bootstrap": "^10.0.0",
     "npm-check-updates": "^16.7.4",
     "postcss-combine-duplicated-selectors": "^10.0.3",
     "postcss-discard-duplicates": "^5.1.0",
