@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DishService } from './dish.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { LoginService } from './login.service';
 import { environment } from '../../environments/environment';
 
@@ -23,6 +23,15 @@ export class CartService {
     });
 
     console.log(`Added item w/ id:${id}`);
+  }
+
+  checkDiscountCode(code: string) {
+    let url = `${environment.HOST}/api/discount/${code}`;
+    return this.http.get<HttpResponse<any>>(url, {
+      observe: 'response',
+      responseType: 'json',
+      headers: this.loginService.getAuthHeader(),
+    });
   }
 
   createOrder() {

@@ -3,7 +3,12 @@ from rest_framework import routers
 
 from src.apps.contact.api.viewsets import ContactViewSet
 from src.apps.goods.api.viewsets import BestSellingDishesViewSet, DishViewSet
-from src.apps.orders.api.viewsets import DiscountViewSet, OrderItemViewSet, OrderViewSet
+from src.apps.orders.api.viewsets import (
+    DiscountViewSet,
+    OrderItemViewSet,
+    OrderViewSet,
+    get_discount_by_name,
+)
 from src.apps.user.api.views import ActivateUser
 from src.apps.user.api.urls import router as user_router
 
@@ -17,6 +22,7 @@ router.register(r"best-selling-dishes", BestSellingDishesViewSet, basename="best
 
 urlpatterns = [
     path(r"auth/users/activate/<uid>/<token>/", ActivateUser.as_view()),
+    path(r"discount/<str:code>", get_discount_by_name, name="get_discount_by_code"),
     path(r"", include(router.urls)),
     path(r"", include(user_router.urls)),
 ]

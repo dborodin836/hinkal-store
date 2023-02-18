@@ -27,7 +27,7 @@ export class LoginService {
     // @ts-ignore
     let promise = new Promise((resolve, reject) => {
       this.http
-        .post(`${baseUrl}/logout/`, '', { headers: this.getAuthHeader() })
+        .post(`${baseUrl}token/logout/`, '', { headers: this.getAuthHeader() })
         .toPromise()
         .then(
           () => {
@@ -133,9 +133,5 @@ export class LoginService {
 
   registerCustomer(username: string, password: string, email: string) {
     this.register(username, password, email, '/api/customers/');
-  }
-
-  registerVendor(username: string, password: string, email: string) {
-    this.register(username, password, email, '/api/vendors/');
   }
 }

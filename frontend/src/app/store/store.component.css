@@ -18,6 +18,9 @@
   font-family: 'Open Sans', sans-serif;
   overflow: hidden;
   transition: 0.4s linear;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .product-img {
@@ -35,6 +38,23 @@
 
 .product-list {
   margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.product-item-title {
+  font-weight: 700;
+  color: #7e858d;
+  align-self: center;
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 14px;
+  line-height: 2;
+  margin-top: 5px;
+  text-align: center;
 }
 
 .product-list h3 {
@@ -71,6 +91,11 @@
   font-size: 13px;
   height: 30px;
   line-height: 30px;
+  display: flex;
+  align-content: stretch;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  flex-direction: row-reverse;
 }
 
 .actions:after {
@@ -88,7 +113,7 @@
   text-decoration: none;
   color: #8c877c;
   padding-right: 20px;
-  border-right: 1px solid #ddd;
+  padding-left: 20px;
   transition: 0.4s linear;
 }
 
@@ -102,6 +127,7 @@
 .wishlist:hover,
 .compare:hover {
   color: #e34d38;
+  cursor: pointer;
 }
 
 .wishlist,

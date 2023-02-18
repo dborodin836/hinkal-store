@@ -1,14 +1,19 @@
 from rest_framework import viewsets
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import (
     IsAdminUser,
     DjangoModelPermissions,
+    IsAuthenticated,
 )
+from rest_framework.response import Response
 
 from src.apps.core.permissions import Author
 from src.apps.orders.api.serializers import (
     DiscountDetailSerializer,
     OrderDetailSerializer,
     OrderItemDetailSerializer,
+    DiscountPublicSerializer,
 )
 from src.apps.orders.models import Discount, Order, OrderItem
 
@@ -38,3 +43,14 @@ class DiscountViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAdminUser,)
 
     serializer_class = DiscountDetailSerializer
+
+
+@api_view(["GET"])
+@permission_classes((IsAuthenticated,))
+def get_discount_by_name(request, code):
+    """
+    Get public discount data by discount word.
+    """
+    discount = get_object_or_404(Discount, discount_word=code, is_active=True)
+    serializer = DiscountPublicSerializer(discount, many=False)
+    return Response(serializer.data)

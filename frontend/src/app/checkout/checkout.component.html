@@ -23,7 +23,8 @@
               </div>
             </div>
             <div class="col">
-              <a (click)="decAmount(item.id)">-</a>{{ getAmount(item.id) }}<a (click)="incAmount(item.id)">+</a>
+              <a (click)="decAmount(item.id)" style="cursor: pointer">-</a>{{ getAmount(item.id)
+              }}<a (click)="incAmount(item.id)" style="cursor: pointer">+</a>
             </div>
             <div class="col">
               $ {{ getSubPrice(item.id) }} <span (click)="delItem(item.id)" class="close">&#10005;</span>
@@ -53,7 +54,13 @@
         <p>COMMENT</p>
         <textarea style="width: 100%"></textarea>
         <p>DISCOUNT CODE</p>
-        <input id="code" placeholder="Enter your code" />
+        <input
+          (change)="checkDiscountCode($event)"
+          [(ngModel)]="discountCode"
+          id="code"
+          placeholder="Enter your code"
+          name="discountCode"
+        />
       </form>
       <div class="row" style="border-top: 1px solid rgba(0, 0, 0, 0.1); padding: 2vh 0">
         <div class="col">TOTAL PRICE</div>
