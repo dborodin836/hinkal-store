@@ -15,7 +15,7 @@ services:
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.prod
     container_name: marketplace-hinkal-backend
     command: bash -c "cd backend
       && python3 manage.py wait_for_db
