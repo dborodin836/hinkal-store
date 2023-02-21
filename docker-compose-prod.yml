@@ -39,9 +39,8 @@ services:
       - db
 
   frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
+    #  This is temporary solution, should be reverted to regular build. 1Mbs internet sucks...
+    image: dborodin836/frontend_buit
     container_name: marketplace-hinkal-frontend
     restart: unless-stopped
     volumes:

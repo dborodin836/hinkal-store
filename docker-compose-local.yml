@@ -41,7 +41,7 @@ services:
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.local
     container_name: marketplace-hinkal-frontend
     restart: unless-stopped
     volumes:
