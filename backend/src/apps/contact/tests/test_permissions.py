@@ -1,5 +1,6 @@
 from django.core.management import call_command
 from rest_framework.test import APITestCase
+from rest_framework import status
 
 from src.apps.core.decorators import hide_stdout
 from src.apps.core.testing.api_clients import AdminAPIClient, VendorAPIClient, CustomerAPIClient
@@ -34,16 +35,16 @@ class ContactPermissionTest(APITestCase):
 
     def test_unauthenticated_get_api(self):
         response = self.client.get(self.base_url)
-        self.assertIn(response.status_code, [403, 401])
+        self.assertIn(response.status_code, [status.HTTP_403_FORBIDDEN, status.HTTP_401_UNAUTHORIZED])
 
     def test_customer_get_api(self):
         response = self.customerClient.get(self.base_url)
-        self.assertIn(response.status_code, [403, 401])
+        self.assertIn(response.status_code, [status.HTTP_403_FORBIDDEN, status.HTTP_401_UNAUTHORIZED])
 
     def test_vendor_get_api(self):
         response = self.vendorClient.get(self.base_url)
-        self.assertIn(response.status_code, [403, 401])
+        self.assertIn(response.status_code, [status.HTTP_403_FORBIDDEN, status.HTTP_401_UNAUTHORIZED])
 
     def test_admin_get_api(self):
         response = self.adminClient.get(self.base_url)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
