@@ -1,5 +1,6 @@
 from django.core.management import call_command
 from rest_framework.test import APITestCase
+from rest_framework import status
 
 from src.apps.contact.models import Contact
 from src.apps.core.decorators import hide_stdout
@@ -28,25 +29,24 @@ class ContactAPITest(APITestCase):
 
         # GET
         response = self.client.get(self.base_url)
-        self.assertEqual(response.status_code, 401)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
         response = self.client.get(self.detailed_url)
-        self.assertEqual(response.status_code, 401)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
         # POST
-
         data = {
             "name": "name",
             "subject": "subject",
             "email": "email@gmail.com",
             "message": "message",
         }
-        self.client.post(self.base_url, data=data)
-        self.assertEqual(response.status_code, 401)
+        response = self.client.post(self.base_url, data=data)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
         # DELETE
         response = self.client.delete(self.base_url)
-        self.assertEqual(response.status_code, 401)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_admin_user(self):
         """
@@ -54,10 +54,10 @@ class ContactAPITest(APITestCase):
         """
         # GET
         response = self.adminClient.get(self.base_url)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         response = self.adminClient.get(self.detailed_url)
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
         # POST
 
@@ -69,7 +69,7 @@ class ContactAPITest(APITestCase):
             "created_at": "2015-05-16T05:50:06",
         }
         response = self.adminClient.post(self.base_url, data=data)
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
         # Data validation
         contact = Contact.objects.latest("created_at")
@@ -84,12 +84,12 @@ class ContactAPITest(APITestCase):
 
         # DELETE
         response = self.adminClient.delete(self.detailed_url)
-        self.assertEqual(response.status_code, 405)
+        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
         # PATCH
         response = self.adminClient.patch(self.detailed_url)
-        self.assertEqual(response.status_code, 405)
+        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
         # PUT
         response = self.adminClient.patch(self.detailed_url)
-        self.assertEqual(response.status_code, 405)
+        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
