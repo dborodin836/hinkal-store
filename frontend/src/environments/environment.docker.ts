@@ -1,4 +1,4 @@
 export const environment = {
-  production: false,
-  HOST: 'http://localhost:8000',
+  production: true,
+  HOST: 'http://hinkal.fun:8000',
 };

@@ -23,13 +23,12 @@ services:
       && python3 manage.py loaddata fixtures/groups.json
       && python3 manage.py loaddata fixtures/demo_data.json
       && python3 manage.py sadmin
-      && python3 manage.py runserver 0.0.0.0:8000"
+      && gunicorn --bind :8000 --workers 3 src.wsgi --env DJANGO_SETTINGS_MODULE=src.settings"
     restart: unless-stopped
     volumes:
       - .:/code
     ports:
       - '8000:8000'
-      - '80:4200'
     networks:
       - marketplace-hinkal-network
     env_file: backend/docker.env
@@ -39,14 +38,16 @@ services:
       - db
 
   frontend:
-    #  This is temporary solution, should be reverted to regular build. 1Mbs internet sucks...
-    image: dborodin836/frontend_buit
+#    image: dborodin836/frontend_buit
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     container_name: marketplace-hinkal-frontend
     restart: unless-stopped
     volumes:
       - ./templates:/etc/nginx/templates
     ports:
-      - '4200:80'
+      - '80:80'
     networks:
       - marketplace-hinkal-network
     environment:
