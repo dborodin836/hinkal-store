@@ -27,6 +27,8 @@ frontend/coverage
 
 # Docker
 data
+static_files/
+backend/static
 
 # Frontend
 /frontend/dist/

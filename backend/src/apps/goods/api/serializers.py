@@ -7,6 +7,10 @@ class DishListSerializer(serializers.ModelSerializer):
     """List of all dishes"""
 
     added_by = serializers.SlugRelatedField(slug_field="username", read_only=True)  # type: ignore
+    image = serializers.SerializerMethodField()
+
+    def get_image(self, obj):
+        return "http://hinkal.fun%s" % obj.image.url
 
     class Meta:
         model = Dish
@@ -34,6 +38,10 @@ class DishDetailSerializer(serializers.ModelSerializer):
     """Detailed dish (all fields)"""
 
     added_by = serializers.SlugRelatedField(slug_field="username", read_only=True)  # type: ignore
+    image = serializers.SerializerMethodField()
+
+    def get_image(self, obj):
+        return "http://hinkal.fun%s" % obj.image.url
 
     class Meta:
         model = Dish

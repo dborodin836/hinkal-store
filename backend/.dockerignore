@@ -12,6 +12,8 @@ venv/
 .pytest_cache/
 htmlcov/
 docs/
+.coverage
 
-# Local PostgreSQL data
+# Local data
 data/
+static
