@@ -7,8 +7,6 @@ services:
     volumes:
       - ./data/db:/var/lib/postgresql/data
     env_file: backend/docker.env
-    ports:
-      - '5432:5432'
     networks:
       - marketplace-hinkal-network
 
@@ -29,8 +27,6 @@ services:
     volumes:
       - .:/code
       - ./static_files:/code/backend/static
-    ports:
-      - '8000:8000'
     networks:
       - marketplace-hinkal-network
     env_file: backend/docker.env
@@ -40,7 +36,6 @@ services:
       - db
 
   nginx:
-    #    image: dborodin836/frontend_buit
     build:
       context: ./frontend
       dockerfile: Dockerfile
