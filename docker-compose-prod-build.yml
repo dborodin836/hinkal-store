@@ -6,7 +6,7 @@ services:
     container_name: hinkal-store-db
     volumes:
       - ./data/db:/var/lib/postgresql/data
-    env_file: backend/docker.env
+    env_file: backend/prod.env
     expose:
       - 5432
     networks:
@@ -33,9 +33,9 @@ services:
       - ./static_files:/code/backend/static
     networks:
       - marketplace-hinkal-network
-    env_file: backend/docker.env
+    env_file: backend/prod.env
     environment:
-      - ENV=DOCKER
+      - ENV=PROD
     depends_on:
       - db
 
@@ -52,6 +52,8 @@ services:
       - '80:80'
     networks:
       - marketplace-hinkal-network
+    depends_on:
+      - backend
 
 volumes:
   static_files:
