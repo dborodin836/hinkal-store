@@ -15,7 +15,7 @@ services:
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile.prod
+      dockerfile: Dockerfile
     container_name: hinkal-store-backend
     command: bash -c "cd backend
       && python3 manage.py wait_for_db
