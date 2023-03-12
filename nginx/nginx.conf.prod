@@ -16,8 +16,7 @@ server {
   }
 
   location /media {
-    autoindex on;
-    proxy_pass http://api;
+    alias /home/app/mediafiles;
   }
 
   location /static {

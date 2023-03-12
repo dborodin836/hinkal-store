@@ -17,8 +17,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     container_name: hinkal-store-backend
-    command: bash -c "cd backend
-      && python3 manage.py wait_for_db
+    command: bash -c "python3 manage.py wait_for_db
       && python3 manage.py migrate
       && python3 manage.py loaddata fixtures/groups.json
       && python3 manage.py loaddata fixtures/demo_data.json
@@ -29,8 +28,8 @@ services:
     expose:
       - 8000
     volumes:
-      - .:/code
-      - ./static_files:/code/backend/static
+      - ./static_files:/code/static
+      - ./backend/media:/code/media
     networks:
       - marketplace-hinkal-network
     env_file: backend/prod.env
@@ -48,6 +47,7 @@ services:
     volumes:
       - ./nginx/nginx.conf.prod:/etc/nginx/conf.d/nginx.conf
       - ./static_files:/home/app/staticfiles/
+      - ./backend/media:/home/app/mediafiles/
     ports:
       - '80:80'
     networks:
