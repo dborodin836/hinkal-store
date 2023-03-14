@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from src.settings import FRONTEND_HOST
 
 from src.apps.goods.models import Dish
 
@@ -10,7 +11,7 @@ class DishListSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField()
 
     def get_image(self, obj):
-        return "http://hinkal.fun%s" % obj.image.url
+        return FRONTEND_HOST + obj.image.url
 
     class Meta:
         model = Dish
@@ -41,7 +42,7 @@ class DishDetailSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField()
 
     def get_image(self, obj):
-        return "http://hinkal.fun%s" % obj.image.url
+        return FRONTEND_HOST + obj.image.url
 
     class Meta:
         model = Dish
