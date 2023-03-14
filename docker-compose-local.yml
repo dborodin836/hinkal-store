@@ -3,7 +3,7 @@ version: '3.4'
 services:
   db:
     image: postgres
-    container_name: marketplace-hinkal-db
+    container_name: hinkal-store-db
     volumes:
       - ./data/db:/var/lib/postgresql/data
     env_file: backend/docker.env
@@ -16,20 +16,22 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: marketplace-hinkal-backend
-    command: bash -c "cd backend
-      && python3 manage.py wait_for_db
+    container_name: hinkal-store-backend
+    command: bash -c "python3 manage.py wait_for_db
       && python3 manage.py migrate
       && python3 manage.py loaddata fixtures/groups.json
       && python3 manage.py loaddata fixtures/demo_data.json
       && python3 manage.py sadmin
-      && python3 manage.py runserver 0.0.0.0:8000"
+      && python3 manage.py collectstatic --noinput
+      && gunicorn --bind :8000 --workers 3 src.wsgi --env DJANGO_SETTINGS_MODULE=src.settings"
     restart: unless-stopped
     volumes:
-      - .:/code
+      - ./static_files:/code/static
+      - ./backend/media:/code/media
     ports:
       - '8000:8000'
-      - '80:4200'
+    expose:
+      - 8000
     networks:
       - marketplace-hinkal-network
     env_file: backend/docker.env
@@ -38,21 +40,25 @@ services:
     depends_on:
       - db
 
-  frontend:
+  nginx:
     build:
       context: ./frontend
       dockerfile: Dockerfile.local
-    container_name: marketplace-hinkal-frontend
+    container_name: hinkal-store-nginx
     restart: unless-stopped
     volumes:
-      - ./templates:/etc/nginx/templates
+      - ./nginx/nginx.conf.docker:/etc/nginx/conf.d/nginx.conf
+      - ./static_files:/home/app/staticfiles/
+      - ./backend/media:/home/app/mediafiles/
     ports:
-      - '4200:80'
+      - '80:80'
     networks:
       - marketplace-hinkal-network
-    environment:
-      - NGINX_HOST=localhost
-      - NGINX_PORT=80
+    depends_on:
+      - backend
+
+volumes:
+  static_files:
 
 networks:
   marketplace-hinkal-network:

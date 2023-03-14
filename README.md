@@ -67,15 +67,20 @@ $ cd marketplace-hinkal
 
 The easiest way to start project is requires Docker,
 If you don't have Docker [install it](https://docs.docker.com/get-docker/).
-And run simple command.
 
-**This could take a while...**
+Add this line to your `C:\Windows\System32\drivers\etc\hosts` file
 
-```sh
-$  docker-compose -f .\docker-compose-local.yml up
+```
+127.0.0.1 hinkal.com
 ```
 
-Alternatively, you can do setup manually following guides in specific folders.
+And run simple command.
+
+```sh
+$  docker compose -f .\docker-compose-local.yml up
+```
+
+Wait for build to complete and navigate to `localhost`.
 
 ## Usage
 

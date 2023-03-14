@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  HOST: 'http://hinkal.fun',
+  HOST: 'http://hinkal.com',
 };
