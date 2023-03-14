@@ -7,8 +7,19 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv("SECRET_KEY")
-DEBUG = os.getenv("DEBUG")
+DEBUG = os.getenv("DEBUG") == "True"
+FRONTEND_HOST = os.getenv("FRONTEND_HOST")
+
 ALLOWED_HOSTS = ["*"]
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.hinkal.fun",
+    "https://*.127.0.0.1",
+    "https://*.localhost",
+    "http://*.hinkal.fun",
+    "http://*.127.0.0.1",
+    "http://*.localhost",
+    "http://hinkal.fun",
+]
 
 # Application definition
 INSTALLED_APPS = [
@@ -136,6 +147,7 @@ USE_I18N = True
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = "static/"
 
 # Default primary key field type

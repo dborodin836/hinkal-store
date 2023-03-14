@@ -138,11 +138,14 @@ jobs:
       - name: Test Frontend
         run: |
           sleep 15
-          curl --fail http://0.0.0.0:4200 || exit 1
+          curl --fail http://0.0.0.0 || exit 1
+      - name: Add hosts to /etc/hosts
+        run: |
+          sudo echo "127.0.0.1 hinkal.com" | sudo tee -a /etc/hosts
       - name: Test Backend
         run: |
           sleep 45
-          curl --fail http://0.0.0.0:8000/api/dish/?format=api || exit 1
+          curl --fail http://hinkal.com/api/dish/?format=api || exit 1
 
   test-frontend:
     name: Testing Frontend

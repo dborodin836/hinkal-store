@@ -6,9 +6,9 @@ services:
     container_name: hinkal-store-db
     volumes:
       - ./data/db:/var/lib/postgresql/data
-    env_file: backend/docker.env
-    ports:
-      - '5432:5432'
+    env_file: backend/prod.env
+    expose:
+      - 5432
     networks:
       - marketplace-hinkal-network
 
@@ -25,29 +25,27 @@ services:
       && python3 manage.py collectstatic --noinput
       && gunicorn --bind :8000 --workers 3 src.wsgi --env DJANGO_SETTINGS_MODULE=src.settings"
     restart: unless-stopped
+    expose:
+      - 8000
     volumes:
       - ./static_files:/code/static
       - ./backend/media:/code/media
-    ports:
-      - '8000:8000'
-    expose:
-      - 8000
     networks:
       - marketplace-hinkal-network
-    env_file: backend/docker.env
+    env_file: backend/prod.env
     environment:
-      - ENV=DOCKER
+      - ENV=PROD
     depends_on:
       - db
 
   nginx:
     build:
       context: ./frontend
-      dockerfile: Dockerfile.local
+      dockerfile: Dockerfile
     container_name: hinkal-store-nginx
     restart: unless-stopped
     volumes:
-      - ./nginx/nginx.conf.docker:/etc/nginx/conf.d/nginx.conf
+      - ./nginx/nginx.conf.prod:/etc/nginx/conf.d/nginx.conf
       - ./static_files:/home/app/staticfiles/
       - ./backend/media:/home/app/mediafiles/
     ports:

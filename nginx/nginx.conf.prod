@@ -1,0 +1,26 @@
+upstream api {
+    server backend:8000;
+}
+
+server {
+  listen 80;
+
+  server_name hinkal.fun;
+
+  location /admin {
+    proxy_pass http://api;
+  }
+
+  location /api {
+    proxy_pass http://api;
+  }
+
+  location /media {
+    alias /home/app/mediafiles;
+  }
+
+  location /static {
+    autoindex on;
+    alias /home/app/staticfiles/;
+  }
+}

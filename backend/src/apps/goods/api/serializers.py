@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from src.settings import FRONTEND_HOST
 
 from src.apps.goods.models import Dish
 
@@ -7,6 +8,10 @@ class DishListSerializer(serializers.ModelSerializer):
     """List of all dishes"""
 
     added_by = serializers.SlugRelatedField(slug_field="username", read_only=True)  # type: ignore
+    image = serializers.SerializerMethodField()
+
+    def get_image(self, obj):
+        return FRONTEND_HOST + obj.image.url
 
     class Meta:
         model = Dish
@@ -34,6 +39,10 @@ class DishDetailSerializer(serializers.ModelSerializer):
     """Detailed dish (all fields)"""
 
     added_by = serializers.SlugRelatedField(slug_field="username", read_only=True)  # type: ignore
+    image = serializers.SerializerMethodField()
+
+    def get_image(self, obj):
+        return FRONTEND_HOST + obj.image.url
 
     class Meta:
         model = Dish
