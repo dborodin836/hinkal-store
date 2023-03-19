@@ -9,11 +9,10 @@ const baseUrl = `${environment.HOST}/auth/`;
   providedIn: 'root',
 })
 export class LoginService {
-
   constructor(private http: HttpClient, private router: Router, private snackBar: MatSnackBar) {}
 
   getToken(): string | null {
-    return localStorage.getItem("auth_token");
+    return localStorage.getItem('auth_token');
   }
 
   getAuthHeader() {
@@ -28,8 +27,8 @@ export class LoginService {
         .toPromise()
         .then(
           () => {
-            localStorage.removeItem("auth_token");
-            localStorage.removeItem("user");
+            localStorage.removeItem('auth_token');
+            localStorage.removeItem('user');
             this.router.navigate(['']);
             this.openSnackBar('You are logged out.', 'X');
           },
@@ -48,7 +47,7 @@ export class LoginService {
         .toPromise()
         .then(
           (res) => {
-            localStorage.setItem("auth_token", res.auth_token);
+            localStorage.setItem('auth_token', res.auth_token);
             this.router.navigate(['dashboard/']);
           },
           (error) => {
@@ -66,7 +65,7 @@ export class LoginService {
   }
 
   isAuthorized(): boolean {
-    return localStorage.getItem("auth_token") != null;
+    return localStorage.getItem('auth_token') != null;
   }
 
   getUser() {
@@ -77,14 +76,14 @@ export class LoginService {
         .toPromise()
         .then((res) => {
           // @ts-ignore
-          localStorage.setItem("user", res.body);
+          localStorage.setItem('user', res.body);
         });
     });
     return promise;
   }
 
   getUserData() {
-    return localStorage.getItem("user");
+    return localStorage.getItem('user');
   }
 
   openSnackBar(message: string, action: string) {

@@ -14,9 +14,9 @@ export class CartService {
   cartIdList: any[] = [];
 
   constructor(private dishService: DishService, private http: HttpClient, private loginService: LoginService) {
-    if (localStorage.getItem("cartIdList") != null) {
+    if (localStorage.getItem('cartIdList') != null) {
       // @ts-ignore
-      this.cartIdList = JSON.parse(localStorage.getItem("cartIdList"));
+      this.cartIdList = JSON.parse(localStorage.getItem('cartIdList'));
     }
   }
 
@@ -26,7 +26,7 @@ export class CartService {
       id: id,
       amount: 1,
     });
-    localStorage.setItem("cartIdList", JSON.stringify(this.cartIdList));
+    localStorage.setItem('cartIdList', JSON.stringify(this.cartIdList));
   }
 
   checkDiscountCode(code: string) {
@@ -56,7 +56,7 @@ export class CartService {
     let index = this.cartIdList.indexOf(item);
     item.amount += 1;
     this.cartIdList[index] = item;
-    localStorage.setItem("cartIdList", JSON.stringify(this.cartIdList));
+    localStorage.setItem('cartIdList', JSON.stringify(this.cartIdList));
   }
 
   decreaseAmount(id: number) {
@@ -66,7 +66,7 @@ export class CartService {
       item.amount -= 1;
     }
     this.cartIdList[index] = item;
-    localStorage.setItem("cartIdList", JSON.stringify(this.cartIdList));
+    localStorage.setItem('cartIdList', JSON.stringify(this.cartIdList));
   }
 
   getDataFromAPI() {
@@ -86,7 +86,7 @@ export class CartService {
     let index = this.cartIdList.indexOf(item);
     if (index != -1) {
       this.cartIdList.splice(index, 1);
-      localStorage.setItem("cartIdList", JSON.stringify(this.cartIdList));
+      localStorage.setItem('cartIdList', JSON.stringify(this.cartIdList));
     }
   }
 
