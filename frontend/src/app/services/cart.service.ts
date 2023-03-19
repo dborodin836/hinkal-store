@@ -13,7 +13,12 @@ export class CartService {
   // ID's and amount [{"id": 123, "amount": 2}]
   cartIdList: any[] = [];
 
-  constructor(private dishService: DishService, private http: HttpClient, private loginService: LoginService) {}
+  constructor(private dishService: DishService, private http: HttpClient, private loginService: LoginService) {
+    if (localStorage.getItem('cartIdList') != null) {
+      // @ts-ignore
+      this.cartIdList = JSON.parse(localStorage.getItem('cartIdList'));
+    }
+  }
 
   addItem(id: number) {
     // @ts-ignore
@@ -21,8 +26,7 @@ export class CartService {
       id: id,
       amount: 1,
     });
-
-    console.log(`Added item w/ id:${id}`);
+    localStorage.setItem('cartIdList', JSON.stringify(this.cartIdList));
   }
 
   checkDiscountCode(code: string) {
@@ -37,12 +41,11 @@ export class CartService {
   createOrder() {
     let data = {
       details: [],
+      // @ts-ignore
       ordered_by: this.loginService.getUserData()['id'],
     };
     // @ts-ignore
     this.cartIdList.forEach((x) => data['details'].push({ item: x['id'], amount: x['amount'] }));
-    console.log(this.loginService.getToken());
-    console.log(this.loginService.getUserData());
     this.http
       .post(baseUrl, data, { observe: 'response', responseType: 'json', headers: this.loginService.getAuthHeader() })
       .subscribe();
@@ -53,6 +56,7 @@ export class CartService {
     let index = this.cartIdList.indexOf(item);
     item.amount += 1;
     this.cartIdList[index] = item;
+    localStorage.setItem('cartIdList', JSON.stringify(this.cartIdList));
   }
 
   decreaseAmount(id: number) {
@@ -62,6 +66,7 @@ export class CartService {
       item.amount -= 1;
     }
     this.cartIdList[index] = item;
+    localStorage.setItem('cartIdList', JSON.stringify(this.cartIdList));
   }
 
   getDataFromAPI() {
@@ -81,6 +86,7 @@ export class CartService {
     let index = this.cartIdList.indexOf(item);
     if (index != -1) {
       this.cartIdList.splice(index, 1);
+      localStorage.setItem('cartIdList', JSON.stringify(this.cartIdList));
     }
   }
 

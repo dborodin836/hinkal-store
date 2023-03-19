@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { UserModel } from '../models/user.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { environment } from '../../environments/environment';
 const baseUrl = `${environment.HOST}/auth/`;
@@ -10,13 +9,10 @@ const baseUrl = `${environment.HOST}/auth/`;
   providedIn: 'root',
 })
 export class LoginService {
-  private auth_token = '';
-  private user: UserModel = {};
-
   constructor(private http: HttpClient, private router: Router, private snackBar: MatSnackBar) {}
 
-  getToken(): string | undefined {
-    return this.auth_token;
+  getToken(): string | null {
+    return localStorage.getItem('auth_token');
   }
 
   getAuthHeader() {
@@ -31,8 +27,8 @@ export class LoginService {
         .toPromise()
         .then(
           () => {
-            this.auth_token = '';
-            this.user = {};
+            localStorage.removeItem('auth_token');
+            localStorage.removeItem('user');
             this.router.navigate(['']);
             this.openSnackBar('You are logged out.', 'X');
           },
@@ -51,7 +47,7 @@ export class LoginService {
         .toPromise()
         .then(
           (res) => {
-            this.auth_token = res.auth_token;
+            localStorage.setItem('auth_token', res.auth_token);
             this.router.navigate(['dashboard/']);
           },
           (error) => {
@@ -69,7 +65,7 @@ export class LoginService {
   }
 
   isAuthorized(): boolean {
-    return this.auth_token != '';
+    return localStorage.getItem('auth_token') != null;
   }
 
   getUser() {
@@ -80,14 +76,14 @@ export class LoginService {
         .toPromise()
         .then((res) => {
           // @ts-ignore
-          this.user = res.body;
+          localStorage.setItem('user', res.body);
         });
     });
     return promise;
   }
 
   getUserData() {
-    return this.user;
+    return localStorage.getItem('user');
   }
 
   openSnackBar(message: string, action: string) {
