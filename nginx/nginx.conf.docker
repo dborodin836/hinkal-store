@@ -7,11 +7,41 @@ server {
 
   server_name hinkal.com;
 
+  server_tokens off;
+  add_header X-XSS-Protection "1; mode=block";
+  add_header X-Content-Type-Options nosniff;
+  add_header X-Frame-Options SAMEORIGIN;
+
+  ## Start: Size Limits & Buffer Overflows ##
+  client_body_buffer_size  1K;
+  client_header_buffer_size 1k;
+  client_max_body_size 1k;
+  large_client_header_buffers 2 1k;
+  ## END: Size Limits & Buffer Overflows ##
+
+  ## Start: Timeouts ##
+  client_body_timeout   10;
+  client_header_timeout 10;
+  keepalive_timeout     5 5;
+  send_timeout          10;
+  ## End: Timeouts ##
+
+  location / {
+     root   /usr/share/nginx/html;
+     index  index.html;
+
+     try_files $uri$args $uri$args/ /index.html;
+  }
+
   location /admin {
     proxy_pass http://api;
   }
 
   location /api {
+    proxy_pass http://api;
+  }
+
+  location /auth {
     proxy_pass http://api;
   }
 

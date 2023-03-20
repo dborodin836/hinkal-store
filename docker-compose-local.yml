@@ -47,7 +47,7 @@ services:
     container_name: hinkal-store-nginx
     restart: unless-stopped
     volumes:
-      - ./nginx/nginx.conf.docker:/etc/nginx/conf.d/nginx.conf
+      - ./nginx/nginx.conf.prod:/etc/nginx/conf.d/default.conf
       - ./static_files:/home/app/staticfiles/
       - ./backend/media:/home/app/mediafiles/
     ports:
