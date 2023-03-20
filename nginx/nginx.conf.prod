@@ -7,11 +7,22 @@ server {
 
   server_name hinkal.fun;
 
+  location / {
+     root   /usr/share/nginx/html;
+     index  index.html;
+
+     try_files $uri$args $uri$args/ /index.html;
+}
+
   location /admin {
     proxy_pass http://api;
   }
 
   location /api {
+    proxy_pass http://api;
+  }
+
+  location /auth {
     proxy_pass http://api;
   }
 
