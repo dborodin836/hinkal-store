@@ -62,6 +62,10 @@ export class StoreComponent implements OnInit {
     this.getServerData();
   }
 
+  isInCart(id: number) {
+    return this.cartService.isInCart(id);
+  }
+
   addToCart(id: number) {
     this.cartService.addItem(id);
   }
