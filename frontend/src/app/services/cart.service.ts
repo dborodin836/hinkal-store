@@ -19,6 +19,11 @@ export class CartService {
       this.cartIdList = JSON.parse(localStorage.getItem('cartIdList'));
     }
   }
+  isInCart(id: number): boolean {
+    // @ts-ignore
+    this.cartIdList = JSON.parse(localStorage.getItem('cartIdList'));
+    return this.cartIdList.some(item => item.id === id);
+}
 
   addItem(id: number) {
     // @ts-ignore
@@ -82,12 +87,14 @@ export class CartService {
   }
 
   deleteItem(id: number) {
-    let item = this.cartIdList.find((x) => x['id'] == id);
-    let index = this.cartIdList.indexOf(item);
-    if (index != -1) {
-      this.cartIdList.splice(index, 1);
-      localStorage.setItem('cartIdList', JSON.stringify(this.cartIdList));
-    }
+    // @ts-ignore
+    const cartIdList = JSON.parse(localStorage.getItem('cartIdList')) || [];
+
+    // Remove any items with matching id
+    const filteredCart = cartIdList.filter((item: { id: number; }) => item.id !== id);
+
+    // Write updated list back to localStorage
+    localStorage.setItem('cartIdList', JSON.stringify(filteredCart));
   }
 
   getAmount(id: number) {
