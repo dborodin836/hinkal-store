@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { DishService } from '../services/dish.service';
-import { DishModel } from '../models/dish.model';
-import { Router } from '@angular/router';
-import { HttpResponse } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {DishService} from '../services/dish.service';
+import {DishModel} from '../models/dish.model';
+import {Router} from '@angular/router';
+import {HttpResponse} from '@angular/common/http';
+import {CartService} from "../services/cart.service";
 
 @Component({
   selector: 'app-dish-detail',
@@ -10,7 +11,8 @@ import { HttpResponse } from '@angular/common/http';
   styleUrls: ['./dish-detail.component.scss'],
 })
 export class DishDetailComponent implements OnInit {
-  constructor(private dishService: DishService, private router: Router) {}
+  constructor(private dishService: DishService, private router: Router, private cartService: CartService) {
+  }
 
   public id?: string;
 
@@ -32,5 +34,9 @@ export class DishDetailComponent implements OnInit {
     this.dishService.getDetail(id).subscribe((data: HttpResponse<any>) => {
       this.dish = data.body;
     });
+  }
+
+  addToCart(id: any) {
+    this.cartService.addItem(id);
   }
 }

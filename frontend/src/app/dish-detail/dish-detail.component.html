@@ -1,7 +1,7 @@
 <div class="container main">
   <div class="card">
     <div class="row">
-      <div class="col-md-6 text-center align-self-center"><img class="img-fluid" src="{{ dish.image }}" /></div>
+      <div class="col-md-6 text-center align-self-center"><img class="img-fluid" src="{{ dish.image }}"/></div>
       <div class="col-md-6 info">
         <div class="row title">
           <div class="col">
@@ -12,7 +12,9 @@
       </div>
     </div>
     <div class="row lower">
-      <div class="col text-right align-self-center"><button class="btn">Add to cart</button></div>
+      <div class="col text-right align-self-center">
+        <button (click)="addToCart(dish.id)" class="btn">Add to cart</button>
+      </div>
     </div>
   </div>
 </div>
