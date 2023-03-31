@@ -18,6 +18,10 @@ class Category(TimeStampedAddedByModel):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = "Category"
+        verbose_name_plural = "Categories"
+
 
 class Dish(TimeStampedAddedByModel):
     """
