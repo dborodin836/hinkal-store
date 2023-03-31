@@ -1,11 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
-from .models import Country, Customer, UserAddress, Vendor
-
-
-class CountryAdmin(admin.ModelAdmin):
-    """Admin representation for Country"""
+from .models import Customer, UserAddress, Vendor
 
 
 class UserAddressAdmin(admin.ModelAdmin):
@@ -55,7 +51,6 @@ class CustomerAdmin(BaseUserAdmin):
     )
 
 
-admin.site.register(Country, CountryAdmin)
 admin.site.register(UserAddress, UserAddressAdmin)
 admin.site.register(Customer, CustomerAdmin)
 admin.site.register(Vendor, VendorAdmin)

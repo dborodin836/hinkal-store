@@ -2,23 +2,6 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
-class Country(models.Model):
-    """Table for countries and their codes"""
-
-    fullname = models.CharField(max_length=100)
-    code = models.CharField(max_length=4)
-
-    def __repr__(self):
-        return f"Country({self.fullname}), {self.code}"
-
-    def __str__(self):
-        return self.fullname
-
-    class Meta:
-        verbose_name = "Country"
-        verbose_name_plural = "Countries"
-
-
 class UserAddress(models.Model):
     """Contains user's addresses"""
 
@@ -28,12 +11,11 @@ class UserAddress(models.Model):
     address_2 = models.CharField(max_length=255, blank=True)
     city = models.CharField(max_length=50)
     postal_code = models.PositiveIntegerField()
-    county = models.ForeignKey(Country, on_delete=models.SET_NULL, null=True)
+    # county = models.ForeignKey(Country, on_delete=models.SET_NULL, null=True)
 
     def __repr__(self):
         return (
-            f"UserAddress({self.address_1}, {self.address_2}, {self.city}, {self.postal_code}, "
-            f"{repr(self.county)})"
+            f"UserAddress({self.address_1}, {self.address_2}, {self.city}, {self.postal_code})"
         )
 
     def __str__(self):

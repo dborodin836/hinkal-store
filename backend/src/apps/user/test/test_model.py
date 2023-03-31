@@ -1,14 +1,6 @@
 from django.test.testcases import TestCase
 
-from src.apps.user.models import Country, UserAddress, Customer
-
-
-class CountryModelTest(TestCase):
-    def setUp(self) -> None:
-        self.country = Country.objects.create(fullname="test", code=123)
-
-    def test_str(self):
-        self.assertEqual(str(self.country), self.country.fullname)
+from src.apps.user.models import UserAddress, Customer
 
 
 class UserAddressModelTest(TestCase):
