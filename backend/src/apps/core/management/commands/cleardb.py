@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 
 from src.apps.contact.models import Contact
 from src.apps.goods.models import Dish
-from src.apps.orders.models import Discount, Order, OrderItem, OrderModifier
+from src.apps.orders.models import Discount, Order, OrderItem
 from src.apps.user.models import Customer, Vendor
 
 
@@ -19,7 +19,6 @@ class Command(BaseCommand):
             Discount,
             Order,
             OrderItem,
-            OrderModifier,
         )
         models = model or all_models
         models = list(models)

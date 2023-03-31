@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Discount, Order, OrderItem, OrderModifier
+from .models import Discount, Order, OrderItem
 
 
 class OrderItemAdmin(admin.ModelAdmin):
@@ -39,4 +39,3 @@ class DiscountAdmin(admin.ModelAdmin):
 admin.site.register(Order, OrderAdmin)
 admin.site.register(OrderItem, OrderItemAdmin)
 admin.site.register(Discount, DiscountAdmin)
-admin.site.register(OrderModifier)

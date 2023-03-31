@@ -29,24 +29,6 @@ class Discount(TimeStampedAddedByModel):
         return self.name if self.name else self.discount_word
 
 
-class OrderModifier(TimeStampedAddedByModel):
-    """
-    Modifier for ALL order.
-
-    Examples: Fast Delivery
-             Personal Support
-    """
-
-    title = models.CharField(max_length=100)
-    descriptions = models.CharField(max_length=255)
-
-    def __repr__(self):
-        return f"OrderModifier({self.title}, {self.descriptions})"
-
-    def __str__(self):
-        return self.title
-
-
 class Order(TimeStampedModelMixin):
     """
     Contains  order from user.
@@ -63,14 +45,12 @@ class Order(TimeStampedModelMixin):
 
     comment = models.TextField(blank=True)
     discount = models.ForeignKey(Discount, on_delete=models.SET_NULL, null=True)
-    modifier = models.ManyToManyField(OrderModifier, blank=True)
     status = models.CharField(choices=STATUS, default="new", max_length=200)
     ordered_by = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
 
     def __repr__(self):
         return (
-            f"Order({self.comment}, {self.created_at}, {self.discount}, "
-            f"{repr(self.modifier)}, {self.status})"
+            f"Order({self.comment}, {self.created_at}, {self.discount}, {self.status})"
         )
 
     def __str__(self):

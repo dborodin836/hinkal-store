@@ -30,7 +30,6 @@ class OrderDetailSerializer(serializers.ModelSerializer):
             "comment",
             "created_at",
             "discount",
-            "modifier",
             "status",
             "ordered_by",
             "details",
