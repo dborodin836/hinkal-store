@@ -22,8 +22,8 @@ export class CartService {
   isInCart(id: number): boolean {
     // @ts-ignore
     this.cartIdList = JSON.parse(localStorage.getItem('cartIdList'));
-    return this.cartIdList.some(item => item.id === id);
-}
+    return this.cartIdList.some((item) => item.id === id);
+  }
 
   addItem(id: number) {
     // @ts-ignore
@@ -91,7 +91,7 @@ export class CartService {
     const cartIdList = JSON.parse(localStorage.getItem('cartIdList')) || [];
 
     // Remove any items with matching id
-    const filteredCart = cartIdList.filter((item: { id: number; }) => item.id !== id);
+    const filteredCart = cartIdList.filter((item: { id: number }) => item.id !== id);
 
     // Write updated list back to localStorage
     localStorage.setItem('cartIdList', JSON.stringify(filteredCart));

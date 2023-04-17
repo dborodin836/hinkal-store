@@ -48,7 +48,8 @@
     <div class="product-img">
       <a routerLink="{{ dish.id }}">
         <img
-          src="{{ dish.image }}" alt="dish image"
+          src="{{ dish.image }}"
+          alt="dish image"
           style="min-height: 200px; max-height: 200px; border-radius: 15px; object-position: center; object-fit: cover"
         />
       </a>
@@ -59,8 +60,11 @@
       <div class="actions">
         <div class="add-to-cart">
           <i class="fa-solid fa-cart-circle-plus"></i>
-          <a (click)="addToCart(dish.id)" [ngClass]="{'cart-button': !isInCart(dish.id), 'card-button-in-cart': isInCart(dish.id)}">
-            {{ isInCart(dish.id) ? 'В корзине' : 'В корзину'}}
+          <a
+            (click)="addToCart(dish.id)"
+            [ngClass]="{ 'cart-button': !isInCart(dish.id), 'card-button-in-cart': isInCart(dish.id) }"
+          >
+            {{ isInCart(dish.id) ? 'В корзине' : 'В корзину' }}
           </a>
         </div>
       </div>

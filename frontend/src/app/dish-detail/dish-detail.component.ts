@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {DishService} from '../services/dish.service';
-import {DishModel} from '../models/dish.model';
-import {Router} from '@angular/router';
-import {HttpResponse} from '@angular/common/http';
-import {CartService} from "../services/cart.service";
+import { Component, OnInit } from '@angular/core';
+import { DishService } from '../services/dish.service';
+import { DishModel } from '../models/dish.model';
+import { Router } from '@angular/router';
+import { HttpResponse } from '@angular/common/http';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-dish-detail',
@@ -11,8 +11,7 @@ import {CartService} from "../services/cart.service";
   styleUrls: ['./dish-detail.component.scss'],
 })
 export class DishDetailComponent implements OnInit {
-  constructor(private dishService: DishService, private router: Router, private cartService: CartService) {
-  }
+  constructor(private dishService: DishService, private router: Router, private cartService: CartService) {}
 
   public id?: string;
 
