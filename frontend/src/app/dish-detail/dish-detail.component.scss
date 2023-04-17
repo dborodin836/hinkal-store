@@ -1,3 +1,4 @@
+html,
 body {
   min-height: 100vh;
   display: flex;
@@ -7,7 +8,12 @@ body {
   font-size: 0.8rem;
   font-family: 'Work Sans', sans-serif;
 }
+.align-self-center {
+  display: flex;
+  flex-direction: column;
+}
 .main {
+  height: 100%;
   margin-top: 4em;
   margin-bottom: 3em;
 }
@@ -17,6 +23,11 @@ body {
   background-color: rgb(46, 45, 45);
   color: white;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  height: 80%;
+  justify-content: space-around;
 }
 @media (max-width: 768px) {
   .card {
@@ -26,6 +37,9 @@ body {
 }
 .row {
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-content: space-around;
 }
 .hearth {
   font-size: 3rem;
@@ -41,7 +55,12 @@ body {
   color: #ffffff;
 }
 .info {
-  padding: 6vh 0vh;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+  justify-content: center;
+  align-items: center;
 }
 @media (max-width: 768px) {
   .info {
@@ -58,13 +77,15 @@ body {
 img {
   height: -moz-fit-content;
   height: fit-content;
-  width: 75%;
   padding: 1rem;
 }
 @media (max-width: 768px) {
   img {
     padding: 2.5rem 0;
   }
+}
+.title-text {
+  text-align: center;
 }
 .title .col {
   padding: 0;

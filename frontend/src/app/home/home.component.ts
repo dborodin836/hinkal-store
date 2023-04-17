@@ -24,6 +24,10 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  isInCart(id: number) {
+    return this.cartService.isInCart(id);
+  }
+
   addToCart(id: number) {
     this.cartService.addItem(id);
   }

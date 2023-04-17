@@ -49,18 +49,23 @@
       <a routerLink="{{ dish.id }}">
         <img
           src="{{ dish.image }}"
+          alt="dish image"
           style="min-height: 200px; max-height: 200px; border-radius: 15px; object-position: center; object-fit: cover"
         />
       </a>
     </div>
     <h3 class="product-item-title">{{ dish.title }}</h3>
     <div class="product-list">
-      <div class="stars"></div>
       <span class="price">{{ dish.price }} UAH</span>
       <div class="actions">
         <div class="add-to-cart">
           <i class="fa-solid fa-cart-circle-plus"></i>
-          <a (click)="addToCart(dish.id)" class="cart-button">В корзину</a>
+          <a
+            (click)="addToCart(dish.id)"
+            [ngClass]="{ 'cart-button': !isInCart(dish.id), 'card-button-in-cart': isInCart(dish.id) }"
+          >
+            {{ isInCart(dish.id) ? 'В корзине' : 'В корзину' }}
+          </a>
         </div>
       </div>
     </div>
