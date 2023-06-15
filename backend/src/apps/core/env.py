@@ -1,36 +1,10 @@
 import logging
 import os
-import sys
 
+from dotenv import load_dotenv
 from django.core.exceptions import ImproperlyConfigured
 
 logger = logging.getLogger("main")
-
-
-def get_envs_from_file(file_name="local.env") -> None:
-    """
-    Open file and set the all env variables it contains.
-
-    Example:
-
-    # "./local.env" #
-        ...
-        # DB settings        -- will be ignored
-        DB_HOST=foobar       -- will be set as "DB_HOST" environment variable with value "foobar"
-        DB_PASS=span_eggs       os.environ["DB_HOST"] = "foobar"
-        ...
-    """
-    with open(os.path.join(sys.path[0], file_name)) as env_file:
-        for line in env_file:
-            if line.strip().startswith("#"):
-                continue
-            try:
-                key, value = line.strip().split("=", 1)
-                if isinstance(value, str):
-                    os.environ[key] = value
-            # In case some comments exist in file
-            except ValueError:
-                continue
 
 
 def get_env_file():
@@ -70,6 +44,6 @@ def setup_env_vars():
     """
     filename = get_env_file()
     try:
-        get_envs_from_file(filename)
+        load_dotenv(filename)
     except FileNotFoundError:
         logger.warning("Not using .env file. Using manually set up vars.")
