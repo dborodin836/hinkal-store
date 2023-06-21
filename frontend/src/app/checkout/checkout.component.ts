@@ -29,9 +29,12 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.cartService.isHaveData()) {
-      this.cartService.getDataFromAPI().subscribe((data: HttpResponse<any>) => {
+      const dataObservable = this.cartService.getDataFromAPI();
+
+      if (dataObservable === undefined) return;
+
+      dataObservable.subscribe((data: HttpResponse<any>) => {
         this.listDishes = data.body.results;
-        console.log(data.body.results);
       });
     }
   }

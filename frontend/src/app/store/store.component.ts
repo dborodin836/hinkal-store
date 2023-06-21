@@ -23,26 +23,23 @@ export class StoreComponent implements OnInit {
   keyword = '';
 
   ngOnInit(): void {
-    // @ts-ignore
-    this.getServerData({ pageIndex: 0, pageSize: 25 });
+    this.getServerData();
   }
 
   getServerData(event?: PageEvent) {
-    if (typeof event == 'undefined') {
-      var myevent = { pageIndex: 0, pageSize: 25 };
-    } else {
-      // @ts-ignore
-      var myevent = event;
+    if (event === undefined) {
+      event = new PageEvent();
+      event.pageIndex = 0;
+      event.pageSize = 25;
     }
-    // @ts-ignore
+
     this.dishService
-      // @ts-ignore
-      .getList(myevent, this.keyword, this.ordering, this.filtered_category)
+      .getList(event, this.keyword, this.ordering, this.filtered_category)
       .subscribe((data: HttpResponse<any>) => {
         this.dishes = data.body.results;
         this.length = data.body.count;
       });
-    console.log(this.dishes);
+
     return event;
   }
 

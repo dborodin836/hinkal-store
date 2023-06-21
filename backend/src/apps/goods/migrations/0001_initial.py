@@ -30,15 +30,11 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "created_at",
-                    models.DateTimeField(
-                        default=django.utils.timezone.now, editable=False
-                    ),
+                    models.DateTimeField(default=django.utils.timezone.now, editable=False),
                 ),
                 (
                     "updated_at",
-                    models.DateTimeField(
-                        default=django.utils.timezone.now, editable=False
-                    ),
+                    models.DateTimeField(default=django.utils.timezone.now, editable=False),
                 ),
                 ("name", models.CharField(max_length=50)),
                 (
@@ -68,15 +64,11 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "created_at",
-                    models.DateTimeField(
-                        default=django.utils.timezone.now, editable=False
-                    ),
+                    models.DateTimeField(default=django.utils.timezone.now, editable=False),
                 ),
                 (
                     "updated_at",
-                    models.DateTimeField(
-                        default=django.utils.timezone.now, editable=False
-                    ),
+                    models.DateTimeField(default=django.utils.timezone.now, editable=False),
                 ),
                 ("title", models.CharField(max_length=255, verbose_name="Title")),
                 (
@@ -93,15 +85,11 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "price",
-                    models.DecimalField(
-                        decimal_places=2, max_digits=8, verbose_name="Price"
-                    ),
+                    models.DecimalField(decimal_places=2, max_digits=8, verbose_name="Price"),
                 ),
                 (
                     "is_active",
-                    models.BooleanField(
-                        default=True, verbose_name="Available for users?"
-                    ),
+                    models.BooleanField(default=True, verbose_name="Available for users?"),
                 ),
                 (
                     "times_bought",

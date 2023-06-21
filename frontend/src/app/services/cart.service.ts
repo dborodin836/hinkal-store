@@ -10,23 +10,25 @@ const baseUrl = `${environment.HOST}/api/order/`;
   providedIn: 'root',
 })
 export class CartService {
-  // ID's and amount [{"id": 123, "amount": 2}]
-  cartIdList: any[] = [];
+  cartIdList?: { id: number; amount: number }[] = [];
 
   constructor(private dishService: DishService, private http: HttpClient, private loginService: LoginService) {
-    if (localStorage.getItem('cartIdList') != null) {
-      // @ts-ignore
-      this.cartIdList = JSON.parse(localStorage.getItem('cartIdList'));
-    }
+    let cartIDListStorage: string | null = localStorage.getItem('cartIdList');
+    if (cartIDListStorage != null) this.cartIdList = JSON.parse(cartIDListStorage);
   }
+
   isInCart(id: number): boolean {
-    // @ts-ignore
-    this.cartIdList = JSON.parse(localStorage.getItem('cartIdList'));
-    return this.cartIdList.some((item) => item.id === id);
+    let cartIDListStorage: string | null = localStorage.getItem('cartIdList');
+    if (cartIDListStorage == null) return false;
+
+    this.cartIdList = JSON.parse(cartIDListStorage);
+
+    return this.cartIdList ? this.cartIdList.some((item) => item.id === id) : false;
   }
 
   addItem(id: number) {
-    // @ts-ignore
+    if (this.cartIdList == null) return;
+
     this.cartIdList.push({
       id: id,
       amount: 1,
@@ -56,39 +58,55 @@ export class CartService {
       .subscribe();
   }
 
-  increaseAmount(id: number) {
+  increaseAmount(id: number): void {
+    if (this.cartIdList == null) return;
+
     let item = this.cartIdList.find((x) => x['id'] == id);
+    if (item == null) return;
+
     let index = this.cartIdList.indexOf(item);
     item.amount += 1;
     this.cartIdList[index] = item;
+
     localStorage.setItem('cartIdList', JSON.stringify(this.cartIdList));
   }
 
-  decreaseAmount(id: number) {
+  decreaseAmount(id: number): void {
+    if (this.cartIdList == null) return;
+
     let item = this.cartIdList.find((x) => x['id'] == id);
+    if (item == null) return;
+
     let index = this.cartIdList.indexOf(item);
     if (item.amount != 1) {
       item.amount -= 1;
     }
     this.cartIdList[index] = item;
+
     localStorage.setItem('cartIdList', JSON.stringify(this.cartIdList));
   }
 
   getDataFromAPI() {
+    if (this.cartIdList == null) return;
+
     let payload: any[] = [];
+
     this.cartIdList.forEach(function (x: any) {
       payload.push(x.id);
     });
     return this.dishService.getMultiple(payload);
   }
 
-  isHaveData() {
+  isHaveData(): boolean {
+    if (this.cartIdList == null) return false;
     return this.cartIdList.length != 0;
   }
 
   deleteItem(id: number) {
-    // @ts-ignore
-    const cartIdList = JSON.parse(localStorage.getItem('cartIdList')) || [];
+    let cartIDListStorage: string | null = localStorage.getItem('cartIdList');
+    if (cartIDListStorage == null) return;
+
+    const cartIdList = JSON.parse(cartIDListStorage) || [];
 
     // Remove any items with matching id
     const filteredCart = cartIdList.filter((item: { id: number }) => item.id !== id);
@@ -98,7 +116,11 @@ export class CartService {
   }
 
   getAmount(id: number) {
+    if (this.cartIdList == null) return 0;
+
     let item = this.cartIdList.find((x) => x['id'] == id);
+    if (item == null) return 0;
+
     return item['amount'];
   }
 }
