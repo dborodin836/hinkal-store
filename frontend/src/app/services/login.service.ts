@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
-import {Router} from '@angular/router';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {environment} from '../../environments/environment';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { environment } from '../../environments/environment';
 
 const baseUrl = `${environment.HOST}/auth/`;
 
@@ -23,7 +23,7 @@ export class LoginService {
   logout() {
     return new Promise<HttpResponse<any>>((resolve, reject) => {
       this.http
-        .post(`${baseUrl}token/logout/`, '', {headers: this.getAuthHeader()})
+        .post(`${baseUrl}token/logout/`, '', { headers: this.getAuthHeader() })
         .toPromise()
         .then(
           () => {
@@ -70,11 +70,10 @@ export class LoginService {
     return new Promise<HttpResponse<any>>((resolve, reject) => {
       let url = `${baseUrl}users/me/`;
       this.http
-        .get(url, {observe: 'response', responseType: 'json', headers: this.getAuthHeader()})
+        .get(url, { observe: 'response', responseType: 'json', headers: this.getAuthHeader() })
         .toPromise()
         .then((res) => {
-          if (res?.body)
-            localStorage.setItem('user', res.body.toString());
+          if (res?.body) localStorage.setItem('user', res.body.toString());
         });
     });
   }

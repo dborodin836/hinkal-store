@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {DishService} from './dish.service';
-import {HttpClient, HttpResponse} from '@angular/common/http';
-import {LoginService} from './login.service';
-import {environment} from '../../environments/environment';
+import { Injectable } from '@angular/core';
+import { DishService } from './dish.service';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { LoginService } from './login.service';
+import { environment } from '../../environments/environment';
 
 const baseUrl = `${environment.HOST}/api/order/`;
 
@@ -10,27 +10,24 @@ const baseUrl = `${environment.HOST}/api/order/`;
   providedIn: 'root',
 })
 export class CartService {
-  cartIdList?: { id: number, amount: number }[] = [];
+  cartIdList?: { id: number; amount: number }[] = [];
 
   constructor(private dishService: DishService, private http: HttpClient, private loginService: LoginService) {
-    let cartIDListStorage: string | null = localStorage.getItem('cartIdList')
-    if (cartIDListStorage != null)
-      this.cartIdList = JSON.parse(cartIDListStorage);
+    let cartIDListStorage: string | null = localStorage.getItem('cartIdList');
+    if (cartIDListStorage != null) this.cartIdList = JSON.parse(cartIDListStorage);
   }
 
   isInCart(id: number): boolean {
-    let cartIDListStorage: string | null = localStorage.getItem('cartIdList')
-    if (cartIDListStorage == null)
-      return false
+    let cartIDListStorage: string | null = localStorage.getItem('cartIdList');
+    if (cartIDListStorage == null) return false;
 
     this.cartIdList = JSON.parse(cartIDListStorage);
 
-    return this.cartIdList ? this.cartIdList.some((item) => item.id === id) : false
+    return this.cartIdList ? this.cartIdList.some((item) => item.id === id) : false;
   }
 
   addItem(id: number) {
-    if (this.cartIdList == null)
-      return
+    if (this.cartIdList == null) return;
 
     this.cartIdList.push({
       id: id,
@@ -55,19 +52,17 @@ export class CartService {
       ordered_by: this.loginService.getUserData()['id'],
     };
     // @ts-ignore
-    this.cartIdList.forEach((x) => data['details'].push({item: x['id'], amount: x['amount']}));
+    this.cartIdList.forEach((x) => data['details'].push({ item: x['id'], amount: x['amount'] }));
     this.http
-      .post(baseUrl, data, {observe: 'response', responseType: 'json', headers: this.loginService.getAuthHeader()})
+      .post(baseUrl, data, { observe: 'response', responseType: 'json', headers: this.loginService.getAuthHeader() })
       .subscribe();
   }
 
   increaseAmount(id: number): void {
-    if (this.cartIdList == null)
-      return
+    if (this.cartIdList == null) return;
 
     let item = this.cartIdList.find((x) => x['id'] == id);
-    if (item == null)
-      return
+    if (item == null) return;
 
     let index = this.cartIdList.indexOf(item);
     item.amount += 1;
@@ -77,12 +72,10 @@ export class CartService {
   }
 
   decreaseAmount(id: number): void {
-    if (this.cartIdList == null)
-      return
+    if (this.cartIdList == null) return;
 
     let item = this.cartIdList.find((x) => x['id'] == id);
-    if (item == null)
-      return
+    if (item == null) return;
 
     let index = this.cartIdList.indexOf(item);
     if (item.amount != 1) {
@@ -94,8 +87,7 @@ export class CartService {
   }
 
   getDataFromAPI() {
-    if (this.cartIdList == null)
-      return
+    if (this.cartIdList == null) return;
 
     let payload: any[] = [];
 
@@ -106,15 +98,13 @@ export class CartService {
   }
 
   isHaveData(): boolean {
-    if (this.cartIdList == null)
-      return false
+    if (this.cartIdList == null) return false;
     return this.cartIdList.length != 0;
   }
 
   deleteItem(id: number) {
-    let cartIDListStorage: string | null = localStorage.getItem('cartIdList')
-    if (cartIDListStorage == null)
-      return
+    let cartIDListStorage: string | null = localStorage.getItem('cartIdList');
+    if (cartIDListStorage == null) return;
 
     const cartIdList = JSON.parse(cartIDListStorage) || [];
 
@@ -126,12 +116,10 @@ export class CartService {
   }
 
   getAmount(id: number) {
-    if (this.cartIdList == null)
-      return 0
+    if (this.cartIdList == null) return 0;
 
     let item = this.cartIdList.find((x) => x['id'] == id);
-    if (item == null)
-      return 0
+    if (item == null) return 0;
 
     return item['amount'];
   }

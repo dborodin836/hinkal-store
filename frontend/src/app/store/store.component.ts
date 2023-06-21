@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {DishService} from '../services/dish.service';
-import {DishModel} from '../models/dish.model';
-import {HttpResponse} from '@angular/common/http';
-import {PageEvent} from '@angular/material/paginator';
-import {CartService} from '../services/cart.service';
+import { Component, OnInit } from '@angular/core';
+import { DishService } from '../services/dish.service';
+import { DishModel } from '../models/dish.model';
+import { HttpResponse } from '@angular/common/http';
+import { PageEvent } from '@angular/material/paginator';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-store',
@@ -11,8 +11,7 @@ import {CartService} from '../services/cart.service';
   styleUrls: ['./store.component.css'],
 })
 export class StoreComponent implements OnInit {
-  constructor(private dishService: DishService, private cartService: CartService) {
-  }
+  constructor(private dishService: DishService, private cartService: CartService) {}
 
   dishes?: DishModel[];
 
@@ -29,7 +28,7 @@ export class StoreComponent implements OnInit {
 
   getServerData(event?: PageEvent) {
     if (event === undefined) {
-      event = new PageEvent;
+      event = new PageEvent();
       event.pageIndex = 0;
       event.pageSize = 25;
     }

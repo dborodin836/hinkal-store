@@ -28,8 +28,7 @@ export class DishDetailComponent implements OnInit {
     let routerUrl = this.router.url;
     this.id = routerUrl.split('/').at(-1);
 
-    if (this.id !== undefined)
-      this.getDetailedData(this.id);
+    if (this.id !== undefined) this.getDetailedData(this.id);
   }
 
   getDetailedData(id: string) {
