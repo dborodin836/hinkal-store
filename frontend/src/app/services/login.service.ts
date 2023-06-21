@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { environment } from '../../environments/environment';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
+import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {environment} from '../../environments/environment';
+
 const baseUrl = `${environment.HOST}/auth/`;
 
 @Injectable({
@@ -20,10 +21,9 @@ export class LoginService {
   }
 
   logout() {
-    // @ts-ignore
-    let promise = new Promise((resolve, reject) => {
+    return new Promise<HttpResponse<any>>((resolve, reject) => {
       this.http
-        .post(`${baseUrl}token/logout/`, '', { headers: this.getAuthHeader() })
+        .post(`${baseUrl}token/logout/`, '', {headers: this.getAuthHeader()})
         .toPromise()
         .then(
           () => {
@@ -37,11 +37,10 @@ export class LoginService {
           }
         );
     });
-    return promise;
   }
 
   login(data: { username: any; password: any }) {
-    let promise = new Promise((resolve, reject) => {
+    return new Promise<HttpResponse<any>>((resolve, reject) => {
       this.http
         .post<any>(`${baseUrl}token/login/`, data)
         .toPromise()
@@ -61,7 +60,6 @@ export class LoginService {
           }
         );
     });
-    return promise;
   }
 
   isAuthorized(): boolean {
@@ -69,17 +67,16 @@ export class LoginService {
   }
 
   getUser() {
-    let promise = new Promise((resolve, reject) => {
+    return new Promise<HttpResponse<any>>((resolve, reject) => {
       let url = `${baseUrl}users/me/`;
       this.http
-        .get(url, { observe: 'response', responseType: 'json', headers: this.getAuthHeader() })
+        .get(url, {observe: 'response', responseType: 'json', headers: this.getAuthHeader()})
         .toPromise()
         .then((res) => {
-          // @ts-ignore
-          localStorage.setItem('user', res.body);
+          if (res?.body)
+            localStorage.setItem('user', res.body.toString());
         });
     });
-    return promise;
   }
 
   getUserData() {

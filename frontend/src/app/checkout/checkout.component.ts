@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { CartService } from '../services/cart.service';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { LoginService } from '../services/login.service';
-import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { environment } from '../../environments/environment';
+import {Component, OnInit} from '@angular/core';
+import {CartService} from '../services/cart.service';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import {LoginService} from '../services/login.service';
+import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {environment} from '../../environments/environment';
 
 const baseUrl = `${environment.HOST}/api/`;
 
@@ -20,7 +20,8 @@ export class CheckoutComponent implements OnInit {
     private loginService: LoginService,
     private router: Router,
     private snackBar: MatSnackBar
-  ) {}
+  ) {
+  }
 
   discountCode: string = '';
   discountCodeStatus: string = '';
@@ -29,9 +30,13 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.cartService.isHaveData()) {
-      this.cartService.getDataFromAPI().subscribe((data: HttpResponse<any>) => {
+      const dataObservable = this.cartService.getDataFromAPI();
+
+      if (dataObservable === undefined)
+        return
+
+      dataObservable.subscribe((data: HttpResponse<any>) => {
         this.listDishes = data.body.results;
-        console.log(data.body.results);
       });
     }
   }

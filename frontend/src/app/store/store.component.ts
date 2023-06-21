@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { DishService } from '../services/dish.service';
-import { DishModel } from '../models/dish.model';
-import { HttpResponse } from '@angular/common/http';
-import { PageEvent } from '@angular/material/paginator';
-import { CartService } from '../services/cart.service';
+import {Component, OnInit} from '@angular/core';
+import {DishService} from '../services/dish.service';
+import {DishModel} from '../models/dish.model';
+import {HttpResponse} from '@angular/common/http';
+import {PageEvent} from '@angular/material/paginator';
+import {CartService} from '../services/cart.service';
 
 @Component({
   selector: 'app-store',
@@ -11,7 +11,8 @@ import { CartService } from '../services/cart.service';
   styleUrls: ['./store.component.css'],
 })
 export class StoreComponent implements OnInit {
-  constructor(private dishService: DishService, private cartService: CartService) {}
+  constructor(private dishService: DishService, private cartService: CartService) {
+  }
 
   dishes?: DishModel[];
 
@@ -23,26 +24,23 @@ export class StoreComponent implements OnInit {
   keyword = '';
 
   ngOnInit(): void {
-    // @ts-ignore
-    this.getServerData({ pageIndex: 0, pageSize: 25 });
+    this.getServerData();
   }
 
   getServerData(event?: PageEvent) {
-    if (typeof event == 'undefined') {
-      var myevent = { pageIndex: 0, pageSize: 25 };
-    } else {
-      // @ts-ignore
-      var myevent = event;
+    if (event === undefined) {
+      event = new PageEvent;
+      event.pageIndex = 0;
+      event.pageSize = 25;
     }
-    // @ts-ignore
+
     this.dishService
-      // @ts-ignore
-      .getList(myevent, this.keyword, this.ordering, this.filtered_category)
+      .getList(event, this.keyword, this.ordering, this.filtered_category)
       .subscribe((data: HttpResponse<any>) => {
         this.dishes = data.body.results;
         this.length = data.body.count;
       });
-    console.log(this.dishes);
+
     return event;
   }
 

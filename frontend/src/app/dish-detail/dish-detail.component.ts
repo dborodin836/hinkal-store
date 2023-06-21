@@ -25,8 +25,11 @@ export class DishDetailComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.id = this.router.url[this.router.url.length - 1];
-    this.getDetailedData(this.id);
+    let routerUrl = this.router.url;
+    this.id = routerUrl.split('/').at(-1);
+
+    if (this.id !== undefined)
+      this.getDetailedData(this.id);
   }
 
   getDetailedData(id: string) {
