@@ -1,12 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { CartService } from '../services/cart.service';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { LoginService } from '../services/login.service';
-import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { environment } from '../../environments/environment';
+import {Component, OnInit} from '@angular/core';
+import {CartService} from '../services/cart.service';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import {LoginService} from '../services/login.service';
+import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Dish} from "../models/dish";
 
-const baseUrl = `${environment.HOST}/api/`;
+interface Discount {
+  name: string,
+  description?: string,
+  discount_word: string,
+  discount_amount: number
+}
 
 @Component({
   selector: 'app-checkout',
@@ -20,12 +25,14 @@ export class CheckoutComponent implements OnInit {
     private loginService: LoginService,
     private router: Router,
     private snackBar: MatSnackBar
-  ) {}
+  ) {
+  }
 
   discountCode: string = '';
   discountCodeStatus: string = '';
+  discountAmount?: number;
 
-  listDishes: any[] = [];
+  listDishes: Dish[] = [];
 
   ngOnInit(): void {
     if (this.cartService.isHaveData()) {
@@ -35,7 +42,10 @@ export class CheckoutComponent implements OnInit {
 
       dataObservable.subscribe((data: HttpResponse<any>) => {
         this.listDishes = data.body.results;
+        console.log(this.listDishes)
       });
+
+      this.discountAmount = undefined;
     }
   }
 
@@ -50,9 +60,11 @@ export class CheckoutComponent implements OnInit {
   delItem(id: number) {
     this.cartService.deleteItem(id);
     let item = this.listDishes.find((x) => x['id'] == id);
-    let index = this.listDishes.indexOf(item);
-    if (index != -1) {
-      this.listDishes.splice(index, 1);
+    if (item) {
+      let index = this.listDishes.indexOf(item);
+      if (index != -1) {
+        this.listDishes.splice(index, 1);
+      }
     }
   }
 
@@ -71,11 +83,20 @@ export class CheckoutComponent implements OnInit {
     this.cartService.createOrder();
   }
 
-  checkDiscountCode(event: any) {
-    let response = this.cartService.checkDiscountCode(event.target.value).subscribe((data: HttpResponse<any>) => {
-      // this.listDishes = data.body.results;
-      console.log(data.body.results);
-    });
+  async checkDiscountCode(event: any) {
+    let response = await this.cartService.checkDiscountCode(event.target.value);
+    console.log(response);
+    try {
+      response.subscribe((data: HttpResponse<any>) => {
+        if (data?.body) {
+          let discount: Discount = data.body;
+          console.log(discount)
+          this.discountAmount = discount.discount_amount;
+        }});
+    } catch (e) {
+      console.log('jjjj');
+    }
+
   }
 
   getTotalPrice() {
@@ -86,6 +107,7 @@ export class CheckoutComponent implements OnInit {
 
   getSubPrice(id: number) {
     let item = this.listDishes.find((x) => x['id'] == id);
-    return item.price * this.cartService.getAmount(item.id);
+    if (item) return item.price * this.cartService.getAmount(item.id);
+    return -1
   }
 }

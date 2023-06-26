@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DishService } from '../services/dish.service';
-import { DishModel } from '../models/dish.model';
+import { Dish } from '../models/dish';
 import { HttpResponse } from '@angular/common/http';
 import { PageEvent } from '@angular/material/paginator';
 import { CartService } from '../services/cart.service';
@@ -13,7 +13,7 @@ import { CartService } from '../services/cart.service';
 export class StoreComponent implements OnInit {
   constructor(private dishService: DishService, private cartService: CartService) {}
 
-  dishes?: DishModel[];
+  dishes?: Dish[];
 
   pageIndex?: number;
   pageSize?: number;

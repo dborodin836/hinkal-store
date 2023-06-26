@@ -1,8 +1,8 @@
-import { DishModel } from './dish.model';
+import { Dish } from './dish';
 
 export class PaginatedResponseModel {
   count?: number;
   next?: string;
   previous?: string;
-  results?: DishModel[];
+  results?: Dish[];
 }
