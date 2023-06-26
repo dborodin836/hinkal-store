@@ -3,8 +3,8 @@ import {CartService} from '../services/cart.service';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {LoginService} from '../services/login.service';
 import {Router} from '@angular/router';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {Dish} from "../models/dish";
+import {SnackBarService} from "../services/snack-bar.service";
 
 interface Discount {
   name: string,
@@ -24,14 +24,14 @@ export class CheckoutComponent implements OnInit {
     private http: HttpClient,
     private loginService: LoginService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: SnackBarService
   ) {
   }
 
   discountCode: string = '';
   discount?: Discount;
 
-  listDishes: Dish[] = [];
+  listDishes: Array<Dish> = [];
 
   ngOnInit(): void {
     if (this.cartService.isHaveData()) {
@@ -41,7 +41,6 @@ export class CheckoutComponent implements OnInit {
 
       dataObservable.subscribe((data: HttpResponse<any>) => {
         this.listDishes = data.body.results;
-        console.log(this.listDishes)
       });
 
       this.discount = undefined;
@@ -74,10 +73,7 @@ export class CheckoutComponent implements OnInit {
   createOrder() {
     if (!this.loginService.isAuthorized()) {
       this.router.navigate(['login']);
-      this.snackBar.open('Please login or register.', 'X', {
-        duration: 7000,
-        horizontalPosition: 'end',
-      });
+      this.snackBar.openSnackBar('Please login or register.', undefined, undefined, "warning");
     }
     this.cartService.createOrder();
   }
@@ -90,13 +86,10 @@ export class CheckoutComponent implements OnInit {
           this.discount = data.body;
         }
       },
-      (error: any) => {
-        this.snackBar.open('Promo-code is not valid.', 'X', {
-          duration: 70000000000,
-          horizontalPosition: 'end',
-          panelClass: ['success-snackbar',]
-        });
-      });
+      (error: Error) => {
+        this.snackBar.openSnackBar('Promo-code is not valid.', undefined, undefined, "error");
+      }
+    )
   }
 
   getTotalPrice() {

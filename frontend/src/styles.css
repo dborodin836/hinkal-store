@@ -1,11 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
-  --primary-color: #153d77;
-  --secondary-color: #6c757d;
   --white-color: #fff;
   --success-color: #198754;
   --delete-color: #dc3545;
   --background-color: #f2f2f2;
+}
+
+.mat-mdc-snack-bar-container .mdc-snackbar__label {
+  color: var(--white-color) !important;
 }
 
 .success-snackbar {
@@ -23,13 +25,7 @@
   --mat-mdc-snack-bar-button-color: var(--white-color);
 }
 
-.light-success-snackbar {
-  color: #155724;
-  --mdc-snackbar-container-color: #d4edda;
-  --mat-mdc-snack-bar-button-color: darkgreen;
-}
-
-.light-error-snackbar {
+.warning-snackbar {
   color: #721c24;
   --mdc-snackbar-container-color: #f8d7da;
   border-color: #f5c6cb;
