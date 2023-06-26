@@ -7,6 +7,13 @@ body {
   font-weight: bold;
 }
 
+.discount {
+  text-align: center;
+  color: #ffffff;
+  font-size: 2vh;
+  margin-bottom: 2vh;
+}
+
 .title {
   margin-bottom: 5vh;
 }

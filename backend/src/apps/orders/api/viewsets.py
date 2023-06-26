@@ -53,5 +53,4 @@ def get_discount_by_name(request, code):
     """
     discount = get_object_or_404(Discount, discount_word=code, is_active=True)
     serializer = DiscountPublicSerializer(discount, many=False)
-    print(serializer.data)
     return Response(serializer.data)

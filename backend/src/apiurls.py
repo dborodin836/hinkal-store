@@ -22,7 +22,7 @@ router.register(r"best-selling-dishes", BestSellingDishesViewSet, basename="best
 
 urlpatterns = [
     path(r"auth/users/activate/<uid>/<token>/", ActivateUser.as_view()),
-    path(r"code/<str:code>", get_discount_by_name, name="get_discount_by_code"),
+    path(r"discount/<str:code>", get_discount_by_name, name="get_discount_by_code"),
     path(r"", include(router.urls)),
     path(r"", include(user_router.urls)),
 ]

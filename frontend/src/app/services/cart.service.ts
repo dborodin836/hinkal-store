@@ -37,11 +37,10 @@ export class CartService {
   }
 
   checkDiscountCode(code: string) {
-    let url = `${environment.HOST}/api/code/${code}`;
+    let url = `${environment.HOST}/api/discount/${code}`;
     return this.http.get<any>(url, {
       observe: 'response',
       responseType: 'json',
-      headers: this.loginService.getAuthHeader(),
     });
   }
 

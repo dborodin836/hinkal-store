@@ -29,8 +29,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   discountCode: string = '';
-  discountCodeStatus: string = '';
-  discountAmount?: number;
+  discount?: Discount;
 
   listDishes: Dish[] = [];
 
@@ -45,7 +44,7 @@ export class CheckoutComponent implements OnInit {
         console.log(this.listDishes)
       });
 
-      this.discountAmount = undefined;
+      this.discount = undefined;
     }
   }
 
@@ -85,18 +84,19 @@ export class CheckoutComponent implements OnInit {
 
   async checkDiscountCode(event: any) {
     let response = await this.cartService.checkDiscountCode(event.target.value);
-    console.log(response);
-    try {
-      response.subscribe((data: HttpResponse<any>) => {
+    response.subscribe(
+      (data: HttpResponse<any>) => {
         if (data?.body) {
-          let discount: Discount = data.body;
-          console.log(discount)
-          this.discountAmount = discount.discount_amount;
-        }});
-    } catch (e) {
-      console.log('jjjj');
-    }
-
+          this.discount = data.body;
+        }
+      },
+      (error: any) => {
+        this.snackBar.open('Promo-code is not valid.', 'X', {
+          duration: 70000000000,
+          horizontalPosition: 'end',
+          panelClass: ['success-snackbar',]
+        });
+      });
   }
 
   getTotalPrice() {
