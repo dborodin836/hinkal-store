@@ -6,6 +6,17 @@ import {SnackBarService} from "./snack-bar.service";
 
 const baseUrl = `${environment.HOST}/auth/`;
 
+interface ICredentials {
+  username: string,
+  password: string
+}
+
+export interface IUser {
+  email: string,
+  id: number,
+  username: string
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -44,10 +55,10 @@ export class LoginService {
     });
   }
 
-  login(data: { username: any; password: any }) {
+  login(credentials: ICredentials) {
     return new Promise<HttpResponse<any>>((resolve, reject) => {
       this.http
-        .post<any>(`${baseUrl}token/login/`, data)
+        .post<any>(`${baseUrl}token/login/`, credentials)
         .toPromise()
         .then(
           (res) => {
@@ -73,19 +84,18 @@ export class LoginService {
   }
 
   getUser() {
-    return new Promise<HttpResponse<any>>((resolve, reject) => {
-      let url = `${baseUrl}users/me/`;
-      this.http
-        .get(url, {observe: 'response', responseType: 'json', headers: this.getAuthHeader()})
-        .toPromise()
-        .then((res) => {
-          if (res?.body) localStorage.setItem('user', res.body.toString());
-        });
-    });
+    let url = `${baseUrl}users/me/`;
+    return this.http.get(url, {observe: 'response', responseType: 'json', headers: this.getAuthHeader()}).toPromise()
   }
 
-  getUserData() {
-    return localStorage.getItem('user');
+  getUserData(): IUser | null {
+    let userLocal: string | null = localStorage.getItem('user');
+    // @ts-ignore
+    console.log(userLocal.toString());
+    if (userLocal !== null)
+      return JSON.parse(userLocal) as IUser;
+
+    return null
   }
 
   private register(username: string, password: string, email: string, apiUrl: string) {

@@ -27,18 +27,20 @@ export class DishService {
       return of(new HttpResponse<any>({ body: { count: 0, results: [] } }));
     }
 
+    let url = new URL(baseUrl)
     let offset = event.pageSize * event.pageIndex;
-    baseUrl.searchParams.append('offset', offset.toString());
-    baseUrl.searchParams.append('limit', event.pageSize.toString());
 
-    if (keyword != '') baseUrl.searchParams.append('query_keyword', keyword);
+    url.searchParams.append('offset', offset.toString());
+    url.searchParams.append('limit', event.pageSize.toString());
 
-    if (ordering != 'popular') baseUrl.searchParams.append('ordering', ordering);
+    if (keyword != '') url.searchParams.append('query_keyword', keyword);
 
-    if (filtered_category != 'all') baseUrl.searchParams.append('filtered_category', filtered_category);
+    if (ordering != 'popular') url.searchParams.append('ordering', ordering);
 
-    console.log(baseUrl.toString());
-    return this.http.get<HttpResponse<any>>(baseUrl.toString(), { observe: 'response', responseType: 'json' });
+    if (filtered_category != 'all') url.searchParams.append('filtered_category', filtered_category);
+
+    console.log(url.toString());
+    return this.http.get<HttpResponse<any>>(url.toString(), { observe: 'response', responseType: 'json' });
   }
 
   getBestSelling() {

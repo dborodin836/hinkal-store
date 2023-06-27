@@ -147,6 +147,11 @@ input:focus::-webkit-input-placeholder {
   color: transparent;
 }
 
+.btn:hover {
+  background-color: #303030;
+  border-color: #303030;
+}
+
 .btn {
   background-color: #000;
   border-color: #000;

@@ -21,14 +21,17 @@
   color: white;
   --mdc-snackbar-container-color: var(--delete-color);
   border-color: #f5c6cb;
-
   --mat-mdc-snack-bar-button-color: var(--white-color);
+}
+
+.nav-link {
+  padding-left: 1rem !important;
 }
 
 .warning-snackbar {
   color: #721c24;
-  --mdc-snackbar-container-color: #f8d7da;
-  border-color: #f5c6cb;
+  --mdc-snackbar-container-color: #d9d95f;
+  border-color: #d9d95f;
   --mat-mdc-snack-bar-button-color: darkred;
 }
 
