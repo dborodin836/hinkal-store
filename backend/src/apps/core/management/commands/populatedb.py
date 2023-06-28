@@ -1,7 +1,7 @@
 from datetime import datetime
 from random import choice, randint
 from string import ascii_letters
-from typing import Sequence
+from typing import Optional, Sequence
 
 import pytz
 from django.core.management.base import BaseCommand
@@ -110,8 +110,8 @@ class Command(BaseCommand):
     def _create_customers(
         amount: int = 200,
         customer_names=None,
-        customer_surnames: Sequence = None,
-        static_password: str = None,
+        customer_surnames: Optional[Sequence] = None,
+        static_password: Optional[str] = None,
     ) -> None:
         names = customer_names or Command.CUSTOMERS_NAME_SAMPLES
         surnames = customer_surnames or Command.CUSTOMERS_SURNAME_SAMPLES
@@ -141,9 +141,9 @@ class Command(BaseCommand):
     @sample_data_generator
     def _create_vendors(
         amount: int = 40,
-        customer_names: Sequence = None,
-        customer_surnames: Sequence = None,
-        static_password: str = None,
+        customer_names: Optional[Sequence] = None,
+        customer_surnames: Optional[Sequence] = None,
+        static_password: Optional[str] = None,
     ) -> None:
         names = customer_names or Command.CUSTOMERS_NAME_SAMPLES
         surnames = customer_surnames or Command.CUSTOMERS_SURNAME_SAMPLES

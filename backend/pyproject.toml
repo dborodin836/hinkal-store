@@ -6,7 +6,16 @@ buld-backend = "setuptools.build_neta"
 python_files = "test_*.py *_tests.py tests.py"
 cache_dir = "tmp/.pytest_cache"
 
-[mypy]
+[tool.mypy]
 cache_dir = "tmp/.mypy_cache"
-plugins = "mypy_django_plugin.main"
-strict_optional = "True"
+plugins = ["mypy_django_plugin.main", "mypy_drf_plugin.main"]
+strict_optional = "False"
+ignore_missing_imports = "True"
+exclude = [
+    "migrations",
+    "apps.py"  # bugged
+]
+
+[tool.django-stubs]
+django_settings_module = "src.settings"
+

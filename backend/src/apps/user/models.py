@@ -1,3 +1,5 @@
+# mypy: disable-error-code="django-manager-missing"
+# Probably bugged django-mptt x mypy
 from django.contrib.auth.models import User
 from django.db import models
 
