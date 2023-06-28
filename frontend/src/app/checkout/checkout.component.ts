@@ -1,11 +1,11 @@
-import {Component, OnInit, ViewContainerRef} from '@angular/core';
-import {CartService} from '../services/cart.service';
-import {HttpClient, HttpResponse} from '@angular/common/http';
-import {LoginService} from '../services/login.service';
-import {Router} from '@angular/router';
-import {Dish} from '../models/dish';
-import {SnackBarMessagesService} from '../services/messages.service';
-import {LoaderService} from "../services/loader.service";
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { CartService } from '../services/cart.service';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { LoginService } from '../services/login.service';
+import { Router } from '@angular/router';
+import { Dish } from '../models/dish';
+import { SnackBarMessagesService } from '../services/messages.service';
+import { LoaderService } from '../services/loader.service';
 
 interface Discount {
   name: string;
@@ -28,8 +28,7 @@ export class CheckoutComponent implements OnInit {
     private snackBar: SnackBarMessagesService,
     private viewContainerRef: ViewContainerRef,
     private loaderService: LoaderService
-  ) {
-  }
+  ) {}
 
   discountCode: string = '';
   discount?: Discount;

@@ -36,7 +36,7 @@
   position: absolute;
   left: 50%;
   top: 0;
-  background: #FF3D00;
+  background: #ff3d00;
   width: 24px;
   height: 24px;
   transform: translateX(-50%) rotate(0deg);
@@ -45,15 +45,15 @@
 
 @keyframes rotate {
   100% {
-    transform: translateX(-50%) rotate(360deg)
+    transform: translateX(-50%) rotate(360deg);
   }
 }
 
 @keyframes move {
   0% {
-    transform: rotate(10deg)
+    transform: rotate(10deg);
   }
   100% {
-    transform: rotate(-10deg)
+    transform: rotate(-10deg);
   }
 }

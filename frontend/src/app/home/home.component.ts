@@ -1,10 +1,10 @@
-import {Component, OnInit, ViewContainerRef} from '@angular/core';
-import {HttpResponse} from '@angular/common/http';
-import {Dish} from '../models/dish';
-import {DishService} from '../services/dish.service';
-import {CartService} from '../services/cart.service';
-import {SnackBarMessagesService} from "../services/messages.service";
-import {LoaderService} from "../services/loader.service";
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
+import { Dish } from '../models/dish';
+import { DishService } from '../services/dish.service';
+import { CartService } from '../services/cart.service';
+import { SnackBarMessagesService } from '../services/messages.service';
+import { LoaderService } from '../services/loader.service';
 
 @Component({
   selector: 'app-home',
@@ -20,8 +20,7 @@ export class HomeComponent implements OnInit {
     private loaderService: LoaderService,
     private viewContainerRef: ViewContainerRef,
     private messagesService: SnackBarMessagesService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.getBestSellingDishes();
@@ -36,9 +35,10 @@ export class HomeComponent implements OnInit {
         this.loaderService.removeLoader();
       },
       (error) => {
-        this.messagesService.errorMessage("Error happened while loading data.");
+        this.messagesService.errorMessage('Error happened while loading data.');
         this.loaderService.removeLoader();
-      });
+      }
+    );
   }
 
   isInCart(id: number) {

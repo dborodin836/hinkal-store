@@ -112,8 +112,7 @@ export class LoginService {
           },
           (error) => {
             if (error.error.username && error.error.password) {
-              this.snackBar.warningMessage(
-                'User already exists and password is too weak or unacceptable symbols');
+              this.snackBar.warningMessage('User already exists and password is too weak or unacceptable symbols');
             } else if (error.error.password) {
               this.snackBar.warningMessage('Password is too weak or unacceptable symbols');
             } else if (error.error.username || error.error.email) {

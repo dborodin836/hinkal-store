@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {DishService} from './dish.service';
-import {HttpClient} from '@angular/common/http';
-import {IUser, LoginService} from './login.service';
-import {environment} from '../../environments/environment';
-import {SnackBarMessagesService} from './messages.service';
-import {Router} from '@angular/router';
+import { Injectable } from '@angular/core';
+import { DishService } from './dish.service';
+import { HttpClient } from '@angular/common/http';
+import { IUser, LoginService } from './login.service';
+import { environment } from '../../environments/environment';
+import { SnackBarMessagesService } from './messages.service';
+import { Router } from '@angular/router';
 
 const baseUrl = `${environment.HOST}/api/order/`;
 
@@ -86,7 +86,7 @@ export class CartService {
       }
 
       this.cartIdList.forEach((x) => {
-        let orderItem = {item: x['id'], amount: x['amount']};
+        let orderItem = { item: x['id'], amount: x['amount'] };
         data.details.push(orderItem);
       });
 
@@ -95,20 +95,21 @@ export class CartService {
         return;
       }
 
-      this.http.post(baseUrl, data, {
-        observe: 'response',
-        responseType: 'json',
-        headers: this.loginService.getAuthHeader(),
-      }).subscribe(
-        (next) => {
-          this.snackBar.successMessage('Thanks for your order!');
-          this.router.navigate(['']);
-        },
-        (error) => {
-          this.snackBar.errorMessage(
-            'Error happened during order. Please contact support.');
-        }
-      );
+      this.http
+        .post(baseUrl, data, {
+          observe: 'response',
+          responseType: 'json',
+          headers: this.loginService.getAuthHeader(),
+        })
+        .subscribe(
+          (next) => {
+            this.snackBar.successMessage('Thanks for your order!');
+            this.router.navigate(['']);
+          },
+          (error) => {
+            this.snackBar.errorMessage('Error happened during order. Please contact support.');
+          }
+        );
     });
   }
 

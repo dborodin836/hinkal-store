@@ -1,11 +1,11 @@
-import {Component, OnInit, ViewContainerRef} from '@angular/core';
-import {DishService} from '../services/dish.service';
-import {Dish} from '../models/dish';
-import {HttpResponse} from '@angular/common/http';
-import {PageEvent} from '@angular/material/paginator';
-import {CartService} from '../services/cart.service';
-import {LoaderService} from "../services/loader.service";
-import {SnackBarMessagesService} from "../services/messages.service";
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { DishService } from '../services/dish.service';
+import { Dish } from '../models/dish';
+import { HttpResponse } from '@angular/common/http';
+import { PageEvent } from '@angular/material/paginator';
+import { CartService } from '../services/cart.service';
+import { LoaderService } from '../services/loader.service';
+import { SnackBarMessagesService } from '../services/messages.service';
 
 @Component({
   selector: 'app-store',
@@ -19,8 +19,7 @@ export class StoreComponent implements OnInit {
     private loaderService: LoaderService,
     private viewContainerRef: ViewContainerRef,
     private messagesService: SnackBarMessagesService
-  ) {
-  }
+  ) {}
 
   dishes?: Array<Dish>;
 
@@ -45,18 +44,17 @@ export class StoreComponent implements OnInit {
       event.pageSize = 25;
     }
 
-    this.dishService
-      .getList(event, this.keyword, this.ordering, this.filtered_category)
-      .subscribe(
-        (data: HttpResponse<any>) => {
-          this.dishes = data.body.results;
-          this.length = data.body.count;
-          this.loaderService.removeLoader();
-        },
-        (error) => {
-          this.messagesService.errorMessage("Error happened while loading data.");
-          this.loaderService.removeLoader();
-        });
+    this.dishService.getList(event, this.keyword, this.ordering, this.filtered_category).subscribe(
+      (data: HttpResponse<any>) => {
+        this.dishes = data.body.results;
+        this.length = data.body.count;
+        this.loaderService.removeLoader();
+      },
+      (error) => {
+        this.messagesService.errorMessage('Error happened while loading data.');
+        this.loaderService.removeLoader();
+      }
+    );
 
     return event;
   }
