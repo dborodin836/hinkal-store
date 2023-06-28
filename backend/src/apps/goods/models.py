@@ -1,3 +1,5 @@
+# mypy: disable-error-code="django-manager-missing"
+# Probably bugged django-mptt x mypy
 from django.contrib.auth.models import User
 from django.db import models
 from mptt.fields import TreeForeignKey
@@ -58,6 +60,7 @@ class Dish(TimeStampedAddedByModel):
         verbose_name_plural = "Dishes"
 
 
+# Probably bugged django-mptt x mypy
 class Comment(MPTTModel):
     """
     Reviews for the dish by Users and Vendors(replies).
