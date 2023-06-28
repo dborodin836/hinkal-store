@@ -25,6 +25,7 @@ import { RegisterComponent } from './register/register.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AccountActivationComponent } from './account-activation/account-activation.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { LoaderComponent } from './loader/loader.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent, title: 'Marketplace Hinkal' },
@@ -60,6 +61,7 @@ const appRoutes: Routes = [
     RegisterComponent,
     AccountActivationComponent,
     ForbiddenComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { DishService } from '../services/dish.service';
-import { Dish } from '../models/dish';
-import { HttpResponse } from '@angular/common/http';
-import { PageEvent } from '@angular/material/paginator';
-import { CartService } from '../services/cart.service';
+import {Component, OnInit, ViewContainerRef} from '@angular/core';
+import {DishService} from '../services/dish.service';
+import {Dish} from '../models/dish';
+import {HttpResponse} from '@angular/common/http';
+import {PageEvent} from '@angular/material/paginator';
+import {CartService} from '../services/cart.service';
+import {LoaderService} from "../services/loader.service";
+import {SnackBarMessagesService} from "../services/messages.service";
 
 @Component({
   selector: 'app-store',
@@ -11,19 +13,29 @@ import { CartService } from '../services/cart.service';
   styleUrls: ['./store.component.css'],
 })
 export class StoreComponent implements OnInit {
-  constructor(private dishService: DishService, private cartService: CartService) {}
+  constructor(
+    private dishService: DishService,
+    private cartService: CartService,
+    private loaderService: LoaderService,
+    private viewContainerRef: ViewContainerRef,
+    private messagesService: SnackBarMessagesService
+  ) {
+  }
 
-  dishes?: Dish[];
+  dishes?: Array<Dish>;
 
   pageIndex?: number;
   pageSize?: number;
   length?: number;
-  filtered_category = 'all';
-  ordering = 'popular';
-  keyword = '';
+
+  filtered_category: string = 'all';
+  ordering: string = 'popular';
+  keyword: string = '';
 
   ngOnInit(): void {
     this.getServerData();
+    this.loaderService.setRootViewContainerRef(this.viewContainerRef);
+    this.loaderService.addLoader();
   }
 
   getServerData(event?: PageEvent) {
@@ -35,10 +47,16 @@ export class StoreComponent implements OnInit {
 
     this.dishService
       .getList(event, this.keyword, this.ordering, this.filtered_category)
-      .subscribe((data: HttpResponse<any>) => {
-        this.dishes = data.body.results;
-        this.length = data.body.count;
-      });
+      .subscribe(
+        (data: HttpResponse<any>) => {
+          this.dishes = data.body.results;
+          this.length = data.body.count;
+          this.loaderService.removeLoader();
+        },
+        (error) => {
+          this.messagesService.errorMessage("Error happened while loading data.");
+          this.loaderService.removeLoader();
+        });
 
     return event;
   }

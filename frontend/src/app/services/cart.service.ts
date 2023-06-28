@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { DishService } from './dish.service';
-import { HttpClient } from '@angular/common/http';
-import { IUser, LoginService } from './login.service';
-import { environment } from '../../environments/environment';
-import { SnackBarService } from './snack-bar.service';
-import { Router } from '@angular/router';
+import {Injectable} from '@angular/core';
+import {DishService} from './dish.service';
+import {HttpClient} from '@angular/common/http';
+import {IUser, LoginService} from './login.service';
+import {environment} from '../../environments/environment';
+import {SnackBarMessagesService} from './messages.service';
+import {Router} from '@angular/router';
 
 const baseUrl = `${environment.HOST}/api/order/`;
 
@@ -28,7 +28,7 @@ export class CartService {
     private dishService: DishService,
     private http: HttpClient,
     private loginService: LoginService,
-    private snackBar: SnackBarService,
+    private snackBar: SnackBarMessagesService,
     private router: Router
   ) {
     let cartIDListStorage: string | null = localStorage.getItem('cartIdList');
@@ -70,7 +70,7 @@ export class CartService {
       let user = value?.body as IUser;
 
       if (user === null) {
-        this.snackBar.openSnackBar("Couldn't fetch user data! Please try again later.", undefined, undefined, 'error');
+        this.snackBar.errorMessage("Couldn't fetch user data! Please try again later.");
         return;
       }
       userID = user.id;
@@ -81,50 +81,34 @@ export class CartService {
       };
 
       if (this.cartIdList === undefined) {
-        this.snackBar.openSnackBar(
-          'Your cart is empty! Please add something and try again.',
-          undefined,
-          undefined,
-          'warning'
-        );
+        this.snackBar.warningMessage('Your cart is empty! Please add something and try again.');
         return;
       }
 
       this.cartIdList.forEach((x) => {
-        let orderItem = { item: x['id'], amount: x['amount'] };
+        let orderItem = {item: x['id'], amount: x['amount']};
         data.details.push(orderItem);
       });
 
       if (data.details.length === 0) {
-        this.snackBar.openSnackBar(
-          'Your cart is empty! Please add something and try again.',
-          undefined,
-          undefined,
-          'warning'
-        );
+        this.snackBar.warningMessage('Your cart is empty! Please add something and try again.');
         return;
       }
 
-      this.http
-        .post(baseUrl, data, {
-          observe: 'response',
-          responseType: 'json',
-          headers: this.loginService.getAuthHeader(),
-        })
-        .subscribe(
-          (next) => {
-            this.snackBar.openSnackBar('Thanks for your order!', undefined, undefined, 'success');
-            this.router.navigate(['']);
-          },
-          (error) => {
-            this.snackBar.openSnackBar(
-              'Error happened during order. Please contact support.',
-              undefined,
-              undefined,
-              'error'
-            );
-          }
-        );
+      this.http.post(baseUrl, data, {
+        observe: 'response',
+        responseType: 'json',
+        headers: this.loginService.getAuthHeader(),
+      }).subscribe(
+        (next) => {
+          this.snackBar.successMessage('Thanks for your order!');
+          this.router.navigate(['']);
+        },
+        (error) => {
+          this.snackBar.errorMessage(
+            'Error happened during order. Please contact support.');
+        }
+      );
     });
   }
 
