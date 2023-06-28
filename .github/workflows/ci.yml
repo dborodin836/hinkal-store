@@ -39,7 +39,7 @@ jobs:
       - name: Run Mypy
         run: |
           cd backend
-          mypy src --config-file setup.cfg --no-incremental
+          mypy src --no-incremental
 
   test-backend:
     name: Testing Database
