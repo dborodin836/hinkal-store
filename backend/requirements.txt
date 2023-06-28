@@ -5,13 +5,13 @@ django-cors-headers==4.1.0
 django-mptt~=0.14.0
 djangorestframework==3.13.1
 djoser==2.2.0
-drf-yasg==1.21.5
+drf-yasg==1.21.6
 factory-boy==3.2.1
 gunicorn==20.1.0
 python-dotenv==1.0.0
 Pillow==9.5.0
 psycopg2-binary==2.9.4
-pytz==2022.7.1
+pytz==2023.3
 setuptools==67.3.2
 sqlparse==0.4.3
-tzdata==2022.7
+tzdata==2023.3
