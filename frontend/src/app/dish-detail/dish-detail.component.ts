@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DishService } from '../services/dish.service';
-import { DishModel } from '../models/dish.model';
+import { Dish } from '../models/dish';
 import { Router } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
 import { CartService } from '../services/cart.service';
@@ -15,7 +15,7 @@ export class DishDetailComponent implements OnInit {
 
   public id?: string;
 
-  dish: DishModel = {
+  dish: Dish = {
     title: '...',
     description: '...',
     id: 'id',

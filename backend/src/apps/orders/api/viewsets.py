@@ -4,7 +4,7 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import (
     IsAdminUser,
     DjangoModelPermissions,
-    IsAuthenticated,
+    AllowAny,
 )
 from rest_framework.response import Response
 
@@ -46,7 +46,7 @@ class DiscountViewSet(viewsets.ModelViewSet):
 
 
 @api_view(["GET"])
-@permission_classes((IsAuthenticated,))
+@permission_classes((AllowAny,))
 def get_discount_by_name(request, code):
     """
     Get public discount data by discount word.

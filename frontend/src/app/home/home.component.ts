@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { DishModel } from '../models/dish.model';
+import { Dish } from '../models/dish';
 import { DishService } from '../services/dish.service';
 import { CartService } from '../services/cart.service';
 
@@ -10,7 +10,7 @@ import { CartService } from '../services/cart.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  bestSellingDishes?: DishModel[];
+  bestSellingDishes?: Dish[];
 
   constructor(private dishService: DishService, private cartService: CartService) {}
 

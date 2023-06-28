@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { LoginService } from '../services/login.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackBarService } from '../services/snack-bar.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: UntypedFormBuilder,
     private loginService: LoginService,
-    private snackBar: MatSnackBar
+    private snackBar: SnackBarService
   ) {}
 
   loginForm = this.formBuilder.group({
@@ -24,15 +24,9 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.loginForm.value.username.length === 0) {
-      this.snackBar.open('Enter username', 'X', {
-        duration: 7000,
-        horizontalPosition: 'end',
-      });
+      this.snackBar.openSnackBar('Enter username', undefined, undefined, 'error');
     } else if (this.loginForm.value.password.length === 0) {
-      this.snackBar.open('Enter password', 'X', {
-        duration: 7000,
-        horizontalPosition: 'end',
-      });
+      this.snackBar.openSnackBar('Enter password', undefined, undefined, 'error');
     } else {
       this.loginService.login(this.loginForm.value);
     }

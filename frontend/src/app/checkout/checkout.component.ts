@@ -3,10 +3,15 @@ import { CartService } from '../services/cart.service';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { environment } from '../../environments/environment';
+import { Dish } from '../models/dish';
+import { SnackBarService } from '../services/snack-bar.service';
 
-const baseUrl = `${environment.HOST}/api/`;
+interface Discount {
+  name: string;
+  description?: string;
+  discount_word: string;
+  discount_amount: number;
+}
 
 @Component({
   selector: 'app-checkout',
@@ -19,13 +24,13 @@ export class CheckoutComponent implements OnInit {
     private http: HttpClient,
     private loginService: LoginService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: SnackBarService
   ) {}
 
   discountCode: string = '';
-  discountCodeStatus: string = '';
+  discount?: Discount;
 
-  listDishes: any[] = [];
+  listDishes: Array<Dish> = [];
 
   ngOnInit(): void {
     if (this.cartService.isHaveData()) {
@@ -36,6 +41,8 @@ export class CheckoutComponent implements OnInit {
       dataObservable.subscribe((data: HttpResponse<any>) => {
         this.listDishes = data.body.results;
       });
+
+      this.discount = undefined;
     }
   }
 
@@ -50,9 +57,11 @@ export class CheckoutComponent implements OnInit {
   delItem(id: number) {
     this.cartService.deleteItem(id);
     let item = this.listDishes.find((x) => x['id'] == id);
-    let index = this.listDishes.indexOf(item);
-    if (index != -1) {
-      this.listDishes.splice(index, 1);
+    if (item) {
+      let index = this.listDishes.indexOf(item);
+      if (index != -1) {
+        this.listDishes.splice(index, 1);
+      }
     }
   }
 
@@ -63,19 +72,23 @@ export class CheckoutComponent implements OnInit {
   createOrder() {
     if (!this.loginService.isAuthorized()) {
       this.router.navigate(['login']);
-      this.snackBar.open('Please login or register.', 'X', {
-        duration: 7000,
-        horizontalPosition: 'end',
-      });
+      this.snackBar.openSnackBar('Please login or register.', undefined, undefined, 'warning');
     }
     this.cartService.createOrder();
   }
 
-  checkDiscountCode(event: any) {
-    let response = this.cartService.checkDiscountCode(event.target.value).subscribe((data: HttpResponse<any>) => {
-      // this.listDishes = data.body.results;
-      console.log(data.body.results);
-    });
+  async checkDiscountCode(event: any) {
+    let response = await this.cartService.checkDiscountCode(event.target.value);
+    response.subscribe(
+      (data: HttpResponse<any>) => {
+        if (data?.body) {
+          this.discount = data.body;
+        }
+      },
+      (error: Error) => {
+        this.snackBar.openSnackBar('Promo-code is not valid.', undefined, undefined, 'error');
+      }
+    );
   }
 
   getTotalPrice() {
@@ -86,6 +99,7 @@ export class CheckoutComponent implements OnInit {
 
   getSubPrice(id: number) {
     let item = this.listDishes.find((x) => x['id'] == id);
-    return item.price * this.cartService.getAmount(item.id);
+    if (item) return item.price * this.cartService.getAmount(item.id);
+    return -1;
   }
 }

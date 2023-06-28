@@ -27,7 +27,8 @@
               }}<a (click)="incAmount(item.id)" style="cursor: pointer">+</a>
             </div>
             <div class="col">
-              $ {{ getSubPrice(item.id) }} <span (click)="delItem(item.id)" class="close">&#10005;</span>
+              {{ getSubPrice(item.id) }} UAH
+              <span (click)="delItem(item.id)" class="close" style="cursor: pointer">&#10005;</span>
             </div>
           </div>
         </div>
@@ -48,7 +49,7 @@
       <hr />
       <div class="row">
         <div class="col" style="padding-left: 0">ITEMS {{ listDishes.length }}</div>
-        <div class="col text-right">$ {{ getTotalPrice() }}</div>
+        <div class="text-right">{{ getTotalPrice() }} UAH</div>
       </div>
       <form>
         <p>COMMENT</p>
@@ -61,12 +62,15 @@
           placeholder="Enter your code"
           name="discountCode"
         />
+        <div class="discount" *ngIf="this.discount !== undefined">
+          '{{ this.discount.name }}' Promo-code Applied ({{ this.discount.discount_amount }}% off)
+        </div>
       </form>
       <div class="row" style="border-top: 1px solid rgba(0, 0, 0, 0.1); padding: 2vh 0">
         <div class="col">TOTAL PRICE</div>
-        <div class="col text-right">$ {{ getTotalPrice() }}</div>
+        <div class="col text-right">{{ getTotalPrice() }} UAH</div>
       </div>
-      <button (click)="createOrder()" class="btn">CHECKOUT</button>
+      <button (click)="createOrder()" class="btn" style="cursor: pointer">CHECKOUT</button>
     </div>
   </div>
 </div>

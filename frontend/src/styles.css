@@ -1,9 +1,45 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --white-color: #fff;
+  --success-color: #198754;
+  --delete-color: #dc3545;
+  --background-color: #f2f2f2;
+}
+
+.mat-mdc-snack-bar-container .mdc-snackbar__label {
+  color: var(--white-color) !important;
+}
+
+.success-snackbar {
+  color: white;
+  --mdc-snackbar-container-color: var(--success-color);
+  --mat-mdc-snack-bar-button-color: var(--white-color);
+}
+
+.error-snackbar {
+  max-width: max-content !important;
+  color: white;
+  --mdc-snackbar-container-color: var(--delete-color);
+  border-color: #f5c6cb;
+  --mat-mdc-snack-bar-button-color: var(--white-color);
+}
+
+.nav-link {
+  padding-left: 1rem !important;
+}
+
+.warning-snackbar {
+  color: #721c24;
+  --mdc-snackbar-container-color: #d9d95f;
+  border-color: #d9d95f;
+  --mat-mdc-snack-bar-button-color: darkred;
+}
 
 html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;

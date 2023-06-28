@@ -1,16 +1,27 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { environment } from '../../environments/environment';
+import { SnackBarService } from './snack-bar.service';
 
 const baseUrl = `${environment.HOST}/auth/`;
+
+interface ICredentials {
+  username: string;
+  password: string;
+}
+
+export interface IUser {
+  email: string;
+  id: number;
+  username: string;
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
-  constructor(private http: HttpClient, private router: Router, private snackBar: MatSnackBar) {}
+  constructor(private http: HttpClient, private router: Router, private snackBar: SnackBarService) {}
 
   getToken(): string | null {
     return localStorage.getItem('auth_token');
@@ -30,32 +41,33 @@ export class LoginService {
             localStorage.removeItem('auth_token');
             localStorage.removeItem('user');
             this.router.navigate(['']);
-            this.openSnackBar('You are logged out.', 'X');
+            this.snackBar.openSnackBar('You are logged out.', undefined, undefined, 'success');
           },
           () => {
-            this.openSnackBar('Service unavailable. Try again later.', 'X');
+            this.snackBar.openSnackBar('Service unavailable. Try again later.', undefined, undefined, 'error');
           }
         );
     });
   }
 
-  login(data: { username: any; password: any }) {
+  login(credentials: ICredentials) {
     return new Promise<HttpResponse<any>>((resolve, reject) => {
       this.http
-        .post<any>(`${baseUrl}token/login/`, data)
+        .post<any>(`${baseUrl}token/login/`, credentials)
         .toPromise()
         .then(
           (res) => {
             localStorage.setItem('auth_token', res.auth_token);
             this.router.navigate(['dashboard/']);
+            this.snackBar.openSnackBar('You are logged in.', undefined, undefined, 'success');
           },
           (error) => {
             if (error.error.username) {
-              this.openSnackBar('User does not exists', 'X');
+              this.snackBar.openSnackBar('User does not exists', undefined, undefined, 'warning');
             } else if (error.error.password) {
-              this.openSnackBar('Wrong password', 'X');
+              this.snackBar.openSnackBar('Wrong password', undefined, undefined, 'warning');
             } else {
-              this.openSnackBar('Service unavailable. Try again later.', 'X');
+              this.snackBar.openSnackBar('Service unavailable. Try again later.', undefined, undefined, 'error');
             }
           }
         );
@@ -67,26 +79,17 @@ export class LoginService {
   }
 
   getUser() {
-    return new Promise<HttpResponse<any>>((resolve, reject) => {
-      let url = `${baseUrl}users/me/`;
-      this.http
-        .get(url, { observe: 'response', responseType: 'json', headers: this.getAuthHeader() })
-        .toPromise()
-        .then((res) => {
-          if (res?.body) localStorage.setItem('user', res.body.toString());
-        });
-    });
+    let url = `${baseUrl}users/me/`;
+    return this.http.get(url, { observe: 'response', responseType: 'json', headers: this.getAuthHeader() }).toPromise();
   }
 
-  getUserData() {
-    return localStorage.getItem('user');
-  }
+  getUserData(): IUser | null {
+    let userLocal: string | null = localStorage.getItem('user');
+    // @ts-ignore
+    console.log(userLocal.toString());
+    if (userLocal !== null) return JSON.parse(userLocal) as IUser;
 
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 7000,
-      horizontalPosition: 'end',
-    });
+    return null;
   }
 
   private register(username: string, password: string, email: string, apiUrl: string) {
@@ -104,18 +107,33 @@ export class LoginService {
         .toPromise()
         .then(
           () => {
-            this.openSnackBar('Success!', 'X');
+            this.snackBar.openSnackBar('Success!', undefined, undefined, 'success');
             this.router.navigate(['account-activation']);
           },
           (error) => {
             if (error.error.username && error.error.password) {
-              this.openSnackBar('User already exists and password is too weak or unacceptable symbols', 'X');
+              this.snackBar.openSnackBar(
+                'User already exists and password is too weak or unacceptable symbols',
+                undefined,
+                undefined,
+                'warning'
+              );
             } else if (error.error.password) {
-              this.openSnackBar('Password is too weak or unacceptable symbols', 'X');
+              this.snackBar.openSnackBar(
+                'Password is too weak or unacceptable symbols',
+                undefined,
+                undefined,
+                'warning'
+              );
             } else if (error.error.username || error.error.email) {
-              this.openSnackBar('User already exists or unacceptable symbols', 'X');
+              this.snackBar.openSnackBar(
+                'User already exists or unacceptable symbols',
+                undefined,
+                undefined,
+                'warning'
+              );
             } else {
-              this.openSnackBar('Service unavailable. Try again later.', 'X');
+              this.snackBar.openSnackBar('Service unavailable. Try again later.', undefined, undefined, 'error');
             }
           }
         );
