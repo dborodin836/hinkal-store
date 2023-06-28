@@ -1,21 +1,21 @@
-import {Injectable} from '@angular/core';
-import {DishService} from './dish.service';
-import {HttpClient} from '@angular/common/http';
-import {IUser, LoginService} from './login.service';
-import {environment} from '../../environments/environment';
-import {SnackBarService} from "./snack-bar.service";
-import {Router} from "@angular/router";
+import { Injectable } from '@angular/core';
+import { DishService } from './dish.service';
+import { HttpClient } from '@angular/common/http';
+import { IUser, LoginService } from './login.service';
+import { environment } from '../../environments/environment';
+import { SnackBarService } from './snack-bar.service';
+import { Router } from '@angular/router';
 
 const baseUrl = `${environment.HOST}/api/order/`;
 
 interface IOrderItem {
-  amount: number,
-  item: number
+  amount: number;
+  item: number;
 }
 
 interface ICartIDsList {
-  id: number,
-  amount: number
+  id: number;
+  amount: number;
 }
 
 @Injectable({
@@ -29,7 +29,7 @@ export class CartService {
     private http: HttpClient,
     private loginService: LoginService,
     private snackBar: SnackBarService,
-    private router: Router,
+    private router: Router
   ) {
     let cartIDListStorage: string | null = localStorage.getItem('cartIdList');
     if (cartIDListStorage != null) this.cartIdList = JSON.parse(cartIDListStorage);
@@ -66,15 +66,14 @@ export class CartService {
     let userID: number | undefined;
 
     // TODO: rewrite this piece of shit
-    this.loginService.getUser().then(
-      (value => {
-      let user = value?.body as IUser
+    this.loginService.getUser().then((value) => {
+      let user = value?.body as IUser;
 
       if (user === null) {
-        this.snackBar.openSnackBar("Couldn't fetch user data! Please try again later.", undefined, undefined, "error");
+        this.snackBar.openSnackBar("Couldn't fetch user data! Please try again later.", undefined, undefined, 'error');
         return;
       }
-      userID = user.id
+      userID = user.id;
 
       let data = {
         details: [] as Array<IOrderItem>,
@@ -82,41 +81,51 @@ export class CartService {
       };
 
       if (this.cartIdList === undefined) {
-        this.snackBar.openSnackBar("Your cart is empty! Please add something and try again.", undefined, undefined, "warning");
+        this.snackBar.openSnackBar(
+          'Your cart is empty! Please add something and try again.',
+          undefined,
+          undefined,
+          'warning'
+        );
         return;
       }
 
-      this.cartIdList.forEach(
-        (x) => {
-          let orderItem = {item: x['id'], amount: x['amount']};
-          data.details.push(orderItem);
-        }
-      );
+      this.cartIdList.forEach((x) => {
+        let orderItem = { item: x['id'], amount: x['amount'] };
+        data.details.push(orderItem);
+      });
 
       if (data.details.length === 0) {
-        this.snackBar.openSnackBar("Your cart is empty! Please add something and try again.", undefined, undefined, "warning");
+        this.snackBar.openSnackBar(
+          'Your cart is empty! Please add something and try again.',
+          undefined,
+          undefined,
+          'warning'
+        );
         return;
       }
 
       this.http
-        .post(
-          baseUrl, data, {
-            observe: 'response',
-            responseType: 'json',
-            headers: this.loginService.getAuthHeader()
-          }
-        )
+        .post(baseUrl, data, {
+          observe: 'response',
+          responseType: 'json',
+          headers: this.loginService.getAuthHeader(),
+        })
         .subscribe(
           (next) => {
-            this.snackBar.openSnackBar("Thanks for your order!", undefined, undefined, "success");
+            this.snackBar.openSnackBar('Thanks for your order!', undefined, undefined, 'success');
             this.router.navigate(['']);
           },
           (error) => {
-            this.snackBar.openSnackBar("Error happened during order. Please contact support.", undefined, undefined, "error");
+            this.snackBar.openSnackBar(
+              'Error happened during order. Please contact support.',
+              undefined,
+              undefined,
+              'error'
+            );
           }
         );
-    })
-    )
+    });
   }
 
   increaseAmount(id: number): void {

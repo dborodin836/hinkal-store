@@ -1,16 +1,16 @@
-import {Component, OnInit} from '@angular/core';
-import {CartService} from '../services/cart.service';
-import {HttpClient, HttpResponse} from '@angular/common/http';
-import {LoginService} from '../services/login.service';
-import {Router} from '@angular/router';
-import {Dish} from "../models/dish";
-import {SnackBarService} from "../services/snack-bar.service";
+import { Component, OnInit } from '@angular/core';
+import { CartService } from '../services/cart.service';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { LoginService } from '../services/login.service';
+import { Router } from '@angular/router';
+import { Dish } from '../models/dish';
+import { SnackBarService } from '../services/snack-bar.service';
 
 interface Discount {
-  name: string,
-  description?: string,
-  discount_word: string,
-  discount_amount: number
+  name: string;
+  description?: string;
+  discount_word: string;
+  discount_amount: number;
 }
 
 @Component({
@@ -25,8 +25,7 @@ export class CheckoutComponent implements OnInit {
     private loginService: LoginService,
     private router: Router,
     private snackBar: SnackBarService
-  ) {
-  }
+  ) {}
 
   discountCode: string = '';
   discount?: Discount;
@@ -73,7 +72,7 @@ export class CheckoutComponent implements OnInit {
   createOrder() {
     if (!this.loginService.isAuthorized()) {
       this.router.navigate(['login']);
-      this.snackBar.openSnackBar('Please login or register.', undefined, undefined, "warning");
+      this.snackBar.openSnackBar('Please login or register.', undefined, undefined, 'warning');
     }
     this.cartService.createOrder();
   }
@@ -87,9 +86,9 @@ export class CheckoutComponent implements OnInit {
         }
       },
       (error: Error) => {
-        this.snackBar.openSnackBar('Promo-code is not valid.', undefined, undefined, "error");
+        this.snackBar.openSnackBar('Promo-code is not valid.', undefined, undefined, 'error');
       }
-    )
+    );
   }
 
   getTotalPrice() {
@@ -101,6 +100,6 @@ export class CheckoutComponent implements OnInit {
   getSubPrice(id: number) {
     let item = this.listDishes.find((x) => x['id'] == id);
     if (item) return item.price * this.cartService.getAmount(item.id);
-    return -1
+    return -1;
   }
 }

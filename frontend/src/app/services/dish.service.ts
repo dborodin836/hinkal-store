@@ -27,7 +27,7 @@ export class DishService {
       return of(new HttpResponse<any>({ body: { count: 0, results: [] } }));
     }
 
-    let url = new URL(baseUrl)
+    let url = new URL(baseUrl);
     let offset = event.pageSize * event.pageIndex;
 
     url.searchParams.append('offset', offset.toString());
