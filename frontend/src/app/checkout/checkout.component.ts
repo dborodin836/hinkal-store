@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { CartService } from '../services/cart.service';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
 import { Dish } from '../models/dish';
-import { SnackBarService } from '../services/snack-bar.service';
+import { SnackBarMessagesService } from '../services/messages.service';
+import { LoaderService } from '../services/loader.service';
 
 interface Discount {
   name: string;
@@ -24,7 +25,9 @@ export class CheckoutComponent implements OnInit {
     private http: HttpClient,
     private loginService: LoginService,
     private router: Router,
-    private snackBar: SnackBarService
+    private snackBar: SnackBarMessagesService,
+    private viewContainerRef: ViewContainerRef,
+    private loaderService: LoaderService
   ) {}
 
   discountCode: string = '';
@@ -33,6 +36,9 @@ export class CheckoutComponent implements OnInit {
   listDishes: Array<Dish> = [];
 
   ngOnInit(): void {
+    this.loaderService.setRootViewContainerRef(this.viewContainerRef);
+    this.loaderService.addLoader();
+
     if (this.cartService.isHaveData()) {
       const dataObservable = this.cartService.getDataFromAPI();
 
@@ -44,6 +50,8 @@ export class CheckoutComponent implements OnInit {
 
       this.discount = undefined;
     }
+
+    this.loaderService.removeLoader();
   }
 
   decAmount(id: number) {
@@ -72,7 +80,7 @@ export class CheckoutComponent implements OnInit {
   createOrder() {
     if (!this.loginService.isAuthorized()) {
       this.router.navigate(['login']);
-      this.snackBar.openSnackBar('Please login or register.', undefined, undefined, 'warning');
+      this.snackBar.warningMessage('Please login or register.');
     }
     this.cartService.createOrder();
   }
@@ -86,7 +94,7 @@ export class CheckoutComponent implements OnInit {
         }
       },
       (error: Error) => {
-        this.snackBar.openSnackBar('Promo-code is not valid.', undefined, undefined, 'error');
+        this.snackBar.errorMessage('Promo-code is not valid.');
       }
     );
   }

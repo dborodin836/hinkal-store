@@ -6,6 +6,20 @@
   --background-color: #f2f2f2;
 }
 
+* {
+  user-select: none;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+.stop-scrolling {
+  height: unset;
+  overflow: hidden;
+}
+
 .mat-mdc-snack-bar-container .mdc-snackbar__label {
   color: var(--white-color) !important;
 }
@@ -33,11 +47,6 @@
   --mdc-snackbar-container-color: #d9d95f;
   border-color: #d9d95f;
   --mat-mdc-snack-bar-button-color: darkred;
-}
-
-html,
-body {
-  height: 100%;
 }
 
 body {

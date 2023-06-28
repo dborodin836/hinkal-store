@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
-import { SnackBarService } from './snack-bar.service';
+import { SnackBarMessagesService } from './messages.service';
 
 const baseUrl = `${environment.HOST}/auth/`;
 
@@ -21,7 +21,7 @@ export interface IUser {
   providedIn: 'root',
 })
 export class LoginService {
-  constructor(private http: HttpClient, private router: Router, private snackBar: SnackBarService) {}
+  constructor(private http: HttpClient, private router: Router, private snackBar: SnackBarMessagesService) {}
 
   getToken(): string | null {
     return localStorage.getItem('auth_token');
@@ -41,10 +41,10 @@ export class LoginService {
             localStorage.removeItem('auth_token');
             localStorage.removeItem('user');
             this.router.navigate(['']);
-            this.snackBar.openSnackBar('You are logged out.', undefined, undefined, 'success');
+            this.snackBar.successMessage('You are logged out.');
           },
           () => {
-            this.snackBar.openSnackBar('Service unavailable. Try again later.', undefined, undefined, 'error');
+            this.snackBar.errorMessage('Service unavailable. Try again later.');
           }
         );
     });
@@ -59,15 +59,15 @@ export class LoginService {
           (res) => {
             localStorage.setItem('auth_token', res.auth_token);
             this.router.navigate(['dashboard/']);
-            this.snackBar.openSnackBar('You are logged in.', undefined, undefined, 'success');
+            this.snackBar.successMessage('You are logged in.');
           },
           (error) => {
             if (error.error.username) {
-              this.snackBar.openSnackBar('User does not exists', undefined, undefined, 'warning');
+              this.snackBar.warningMessage('User does not exists');
             } else if (error.error.password) {
-              this.snackBar.openSnackBar('Wrong password', undefined, undefined, 'warning');
+              this.snackBar.warningMessage('Wrong password');
             } else {
-              this.snackBar.openSnackBar('Service unavailable. Try again later.', undefined, undefined, 'error');
+              this.snackBar.errorMessage('Service unavailable. Try again later.');
             }
           }
         );
@@ -107,33 +107,18 @@ export class LoginService {
         .toPromise()
         .then(
           () => {
-            this.snackBar.openSnackBar('Success!', undefined, undefined, 'success');
+            this.snackBar.successMessage('Success!');
             this.router.navigate(['account-activation']);
           },
           (error) => {
             if (error.error.username && error.error.password) {
-              this.snackBar.openSnackBar(
-                'User already exists and password is too weak or unacceptable symbols',
-                undefined,
-                undefined,
-                'warning'
-              );
+              this.snackBar.warningMessage('User already exists and password is too weak or unacceptable symbols');
             } else if (error.error.password) {
-              this.snackBar.openSnackBar(
-                'Password is too weak or unacceptable symbols',
-                undefined,
-                undefined,
-                'warning'
-              );
+              this.snackBar.warningMessage('Password is too weak or unacceptable symbols');
             } else if (error.error.username || error.error.email) {
-              this.snackBar.openSnackBar(
-                'User already exists or unacceptable symbols',
-                undefined,
-                undefined,
-                'warning'
-              );
+              this.snackBar.warningMessage('User already exists or unacceptable symbols');
             } else {
-              this.snackBar.openSnackBar('Service unavailable. Try again later.', undefined, undefined, 'error');
+              this.snackBar.errorMessage('Service unavailable. Try again later.');
             }
           }
         );
