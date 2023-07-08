@@ -30,7 +30,7 @@
     "npm-check-updates": "^16.10.13",
     "postcss-combine-duplicated-selectors": "^10.0.3",
     "postcss-discard-duplicates": "^6.0.0",
-    "postcss-preset-env": "^8.5.1",
+    "postcss-preset-env": "^9.0.0",
     "rxjs": "~7.8.1",
     "tslib": "^2.6.0",
     "zone.js": "~0.13.1"
