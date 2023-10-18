@@ -5,7 +5,7 @@ djet==0.3.0
 drf-yasg-stubs==0.1.4
 factory_boy==3.2.1
 flake8==6.0.0
-mypy==1.4.1
+mypy==1.6.1
 pre-commit==3.3.3
 pytest==7.4.0
 pytest-cov==4.1.0
